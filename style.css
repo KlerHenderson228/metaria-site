@@ -78,7 +78,7 @@ body {
 
   /* Smaller text on image stripe */
   .hero-text {
-    font-size: 1.4rem !important;
+    font-size: 1rem;
   }
 
   /* Smaller text on video section */
