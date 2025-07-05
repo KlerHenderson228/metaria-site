@@ -11,9 +11,39 @@
    <!-- Link to your CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
+<script>
+  // This function toggles the mobile menu
+  function toggleMenu() {
+    const nav = document.getElementById("navLinks");
+    nav.classList.toggle("active");
+  }
+</script>
+
+	
 <body>
 
+<!-- HEADER: Navigation bar with logo and links -->
+<header>
+  <nav class="navbar">
+    <!-- Logo section -->
+    <div class="logo">Metaria</div>
 
+    <!-- Hamburger icon for mobile toggle -->
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <!-- Navigation links -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="DTL.html">Dramaturgy of THeatre Leadership</a></li>
+      <li><a href="GC.html">Green Curtain</a></li>
+      <li><a href="EJ.html">Eurojob</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+	
    <!-- Hero image section -->
   <section class="hero-image">
     <img src="images/hero.jpg" alt="Hero Image">
