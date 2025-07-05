@@ -116,19 +116,21 @@ body {
 }
 
 .project-card {
-  display: flex;              /* enables flex layout */
-  align-items: center;        /* centers content vertically */
-  justify-content: center;    /* centers content horizontally */
-  flex: 1 1 0;                /* flexible layout */
-  min-width: 0;               /* fixes overflow issues */
+  display: flex;               /* enables Flexbox */
+  align-items: center;         /* centers content vertically */
+  justify-content: center;     /* centers content horizontally */
+  text-align: center;          /* centers multiline text horizontally */
+  
+  flex: 1 1 0;
+  min-width: 0;
+
   background: white;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  text-align: center;
-  height: 200px;              /* add a fixed height for vertical centering */
-}
 
+  height: 200px;               /* set fixed height */
+}
 
 
 .project-card {
