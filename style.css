@@ -109,17 +109,23 @@ body {
 }
 
 .project-grid {
-  display: flex;              /* makes children line up in a row */
+  display: flex; /* makes children line up in a row */
+  gap: 10px;
   justify-content: space-between;  /* spreads boxes evenly with space */
   flex-wrap: nowrap;          /* prevents wrapping to next line */
-  gap: 10px;                  /* optional space between boxes */
 }
 
 .project-card {
   flex: 1 1 0;               /* all cards take equal space */
   min-width: 0;              /* fixes overflow issues */
-  /* add your existing styles here */
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 200px;
+  text-align: center;
 }
+
 
 .project-card {
   /* existing styles */
