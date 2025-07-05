@@ -78,7 +78,10 @@ body {
 
   /* Smaller text on image stripe */
   .hero-text {
+    padding-left: 5px;   /* reduce left padding */
+    padding-right: 5px;  /* reduce right padding */
     font-size: 1rem;
+  
   }
 
   /* Smaller text on video section */
