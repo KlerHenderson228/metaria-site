@@ -38,6 +38,29 @@ body {
   white-space: normal;
 }
 
+/* ✅ Mobile responsiveness */
+@media (max-width: 600px) {
+  /* Stripe becomes shorter on mobile */
+  .hero-image {
+    height: 100px;
+  }
+
+  /* Smaller text on image stripe */
+  .hero-text {
+    font-size: 1.4rem;
+  }
+
+  /* Smaller text on video section */
+  .hero-video-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-video-text p {
+    font-size: 1rem;
+  }
+}
+
+
 /* ✅ Video section (full-screen) */
 .hero-video-section {
   position: relative;
@@ -101,25 +124,4 @@ footer {
   padding: 2rem;
   background: #e0ded9;
   font-size: 0.9rem;
-}
-/* ✅ Mobile responsiveness */
-@media (max-width: 600px) {
-  /* Stripe becomes shorter on mobile */
-  .hero-image {
-    height: 100px;
-  }
-
-  /* Smaller text on image stripe */
-  .hero-text {
-    font-size: 1.4rem;
-  }
-
-  /* Smaller text on video section */
-  .hero-video-text h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-video-text p {
-    font-size: 1rem;
-  }
 }
