@@ -110,29 +110,29 @@ body {
 
 .project-grid {
   display: flex; /* makes children line up in a row */
-  gap: 10px;
+  gap: irem;
   justify-content: space-between;  /* spreads boxes evenly with space */
   flex-wrap: nowrap;          /* prevents wrapping to next line */
 }
 
 
 .project-card {
-  display: flex;                 /* Enable flexbox */
-  flex-direction: column;        /* Stack content vertically */
-  justify-content: center;       /* Center content vertically */
-  align-items: center;           /* Center content horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;      /* vertically center */
+  align-items: center;          /* horizontally center */
 
+  flex: 1 1 0;
   background: white;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   text-align: center;
 
-  flex: 1 1 0;
-  min-width: 0;
-  min-height: 100px;             /* Ensure some height for centering */
+  min-height: 100px;            /* 🔑 Force cards to same height */
   box-sizing: border-box;
 }
+
 
 .project-card {
   /* existing styles */
