@@ -4,6 +4,78 @@ body {
   font-family: Arial, sans-serif;
 }
 
+/* --- NAVIGATION STYLES --- */
+
+.navbar {
+  display: flex; /* arrange items side-by-side */
+  justify-content: space-between; /* space between logo and links */
+  align-items: center; /* vertically center */
+  background: #ffffff; /* background color */
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle shadow */
+  position: sticky; /* keeps nav on top while scrolling */
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo text */
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Navigation links */
+.nav-links {
+  list-style: none;
+  display: flex; /* side-by-side items */
+  gap: 1.5rem; /* space between links */
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #007bff; /* hover color */
+}
+
+/* HAMBURGER icon hidden by default (only visible on mobile) */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* --- MOBILE STYLES --- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* show hamburger */
+  }
+
+  .nav-links {
+    flex-direction: column; /* stack links vertically */
+    background: white;
+    position: absolute;
+    top: 70px; /* below navbar */
+    right: 0;
+    width: 200px;
+    display: none; /* hidden by default */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    padding: 1rem;
+  }
+
+  .nav-links.active {
+    display: flex; /* shown when menu is toggled */
+  }
+}
+
+
 /* ✅ Image stripe section (hero) */
 .hero-image {
   position: relative;
