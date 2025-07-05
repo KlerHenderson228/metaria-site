@@ -32,34 +32,35 @@ body {
 }
 
 /* Navigation links - hidden by default, stacked vertically */
-/* Navigation links - hidden by default, stacked vertically */
+/* Hidden by default, styled for animation */
 .nav-links {
   list-style: none;
-  max-height: 0;                /* collapsed by default */
-  overflow: hidden;             /* hide overflowing content */
-  flex-direction: column;       /* stack links vertically */
-  gap: 1rem;                    /* space between links */
+  max-height: 0;
+  overflow: hidden;
+  flex-direction: column;
+  gap: 1rem;
   margin: 0;
-  padding: 0 1rem;              /* only horizontal padding initially */
-  position: absolute;           /* position dropdown */
-  top: 70px;                    /* just below navbar */
-  right: 2rem;                  /* align right with padding */
+  padding: 0 1rem;  /* only horizontal padding at start */
+  position: absolute;
+  top: 70px;
+  right: 2rem;
   background: white;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   border-radius: 8px;
   width: 200px;
   z-index: 1001;
-  opacity: 0;                   /* fully transparent initially */
+  opacity: 0;
   transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
-  display: flex;                /* always use flex for layout */
+  display: flex;
 }
 
-/* Show menu with slide-down animation */
+/* When menu is active (hamburger toggled) */
 .nav-links.active {
-  max-height: 500px;            /* enough space for full menu */
-  opacity: 1;                   /* make visible */
-  padding: 1rem;                /* restore full padding */
+  max-height: 500px;
+  opacity: 1;
+  padding: 1rem;
 }
+
 
 
 .nav-links.active {
