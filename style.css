@@ -123,6 +123,18 @@ body {
   width: 200px;
   text-align: center;
 }
+.project-card {
+  /* existing styles */
+  display: block; /* make <a> fill the box */
+  color: inherit; /* keep text color */
+  text-decoration: none; /* remove underline */
+  cursor: pointer;
+}
+.project-card:hover {
+  /* optional hover effect */
+  background-color: #eee;
+}
+
 
 footer {
   text-align: center;
