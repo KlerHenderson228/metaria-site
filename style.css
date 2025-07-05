@@ -110,7 +110,7 @@ body {
 
 .project-grid {
   display: flex; /* makes children line up in a row */
-  gap: irem;
+  gap: 10px;
   justify-content: space-between;  /* spreads boxes evenly with space */
   flex-wrap: nowrap;          /* prevents wrapping to next line */
 }
