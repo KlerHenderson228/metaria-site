@@ -8,7 +8,7 @@ body {
 
 .navbar {
   display: flex; /* arrange items side-by-side */
-  justify-content: space-between; /* space between logo and links */
+  justify-content: space-between; /* space between logo and hamburger */
   align-items: center; /* vertically center */
   background: #ffffff; /* background color */
   padding: 1rem 2rem;
@@ -18,7 +18,7 @@ body {
   z-index: 1000;
 }
 
-/* Logo text */
+/* Logo text or image */
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -31,33 +31,50 @@ body {
   display: block;
 }
 
-
-/* Navigation links */
+/* Navigation links - hidden by default, stacked vertically */
 .nav-links {
   list-style: none;
-  display: flex; /* side-by-side items */
-  gap: 1.5rem; /* space between links */
+  display: none;           /* HIDE by default */
+  flex-direction: column;  /* stack links vertically */
+  gap: 1rem;               /* space between links */
   margin: 0;
-  padding: 0;
+  padding: 1rem;
+  position: absolute;      /* position dropdown */
+  top: 70px;               /* just below navbar */
+  right: 2rem;             /* align right with padding */
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  width: 200px;
+  z-index: 1001;
 }
 
+.nav-links.active {
+  display: flex;           /* SHOW when active */
+}
+
+/* Nav link styles */
 .nav-links li a {
   text-decoration: none;
   color: #333;
   font-weight: 500;
   transition: color 0.3s ease;
+  padding: 0.5rem 0;
+  display: block;
 }
 
 .nav-links li a:hover {
   color: #007bff; /* hover color */
 }
 
-/* HAMBURGER icon hidden by default (only visible on mobile) */
+/* Hamburger icon - ALWAYS visible */
 .menu-toggle {
-  display: none;
+  display: block;          /* show hamburger always */
   font-size: 2rem;
   cursor: pointer;
+  user-select: none;       /* prevent text selection on click */
 }
+
 
 /* --- MOBILE STYLES --- */
 @media (max-width: 768px) {
