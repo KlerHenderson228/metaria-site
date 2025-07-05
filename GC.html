@@ -6,7 +6,41 @@
   <title>Green Curtain</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
+<script>
+  function toggleMenu() {
+    const nav = document.getElementById("navLinks");
+    nav.classList.toggle("active");
+  }
+</script>
+  
 <body>
+
+  <!-- HEADER: Navigation bar with logo and links -->
+<header>
+  <nav class="navbar">
+    <!-- Logo section -->
+    <div class="logo">
+  <a href="index.html">
+    <img src="images/logo.jpg" alt="Metaria logo" />
+  </a>
+</div>
+
+
+    <!-- Hamburger icon for mobile toggle -->
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <!-- Navigation links -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="DTL.html">Dramaturgy of Theatre Leadership</a></li>
+      <li><a href="GC.html">Green Curtain</a></li>
+      <li><a href="EJ.html">Eurojob</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+  
   <h1>Green Curtain Project</h1>
   <p>This is the Green Curtain project page.</p>
   <a href="index.html">Back to Home</a>
