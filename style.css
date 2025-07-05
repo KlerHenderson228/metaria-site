@@ -141,6 +141,18 @@ body {
   background-color: #eee;
 }
 
+@media (max-width: 600px) {
+  .project-grid {
+    flex-wrap: wrap;         /* allow wrapping */
+    gap: 10px;
+  }
+  
+  .project-card {
+    flex: 1 1 100%;          /* full width on small screens */
+    max-width: 100%;
+  }
+}
+
 
 footer {
   text-align: center;
