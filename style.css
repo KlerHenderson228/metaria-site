@@ -116,17 +116,19 @@ body {
 }
 
 .project-card {
-  flex: 1 1 0;               /* all cards take equal space */
-  min-width: 0;              /* fixes overflow issues */
+  display: flex;              /* enables flex layout */
+  align-items: center;        /* centers content vertically */
+  justify-content: center;    /* centers content horizontally */
+  flex: 1 1 0;                /* flexible layout */
+  min-width: 0;               /* fixes overflow issues */
   background: white;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  width: 200px;
   text-align: center;
-  align-items: center;        /* vertical center */
-  justify-content: center;    /* horizontal center */
+  height: 200px;              /* add a fixed height for vertical centering */
 }
+
 
 
 .project-card {
