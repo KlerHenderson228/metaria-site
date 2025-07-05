@@ -25,6 +25,13 @@ body {
   color: #333;
 }
 
+.logo img {
+  height: 40px;   /* adjust size as needed */
+  width: auto;
+  display: block;
+}
+
+
 /* Navigation links */
 .nav-links {
   list-style: none;
