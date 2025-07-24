@@ -110,15 +110,7 @@ body::before {
   position: relative;
 }
 
-/* Grid container for images */
-.box-NW .image-ej,
-.box-NW .image-t {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 images per row */
-  gap: 10px;
-  width: 100%;      /* make sure container fills the box */
-  box-sizing: border-box; /* include padding/border in size */
-}
+
 
 /* Images styling */
 .box-NW .image-ej img,
