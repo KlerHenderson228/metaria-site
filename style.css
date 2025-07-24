@@ -85,7 +85,7 @@ body::before {
 
 /* Grid container for images */
 .box-SPA .image-gc,
-.box-SPA .image-c {
+ {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 images per row */
   gap: 10px;
