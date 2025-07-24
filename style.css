@@ -77,31 +77,6 @@ body::before {
   color: #0056b3;
 }
 
-/* Target all images inside elements with the class 'box' */
-.box img {
-  width: 100%;              /* Make the image take full width of its container (the box) */
-  height: auto;             /* Maintain the original aspect ratio of the image */
-  object-fit: contain;      /* Ensure the whole image fits inside without cropping */
-  display: block;           /* Remove inline spacing below image */
-  margin: 0 auto;           /* Center the image horizontally */
-}
-
-/* Style the box to set a fixed height and center its content */
-.box {
-  height: 200px;            /* Set a fixed height for the box */
-  display: flex;            /* Use Flexbox for alignment */
-  justify-content: center; /* Center content horizontally */
-  align-items: center;     /* Center content vertically */
-  padding: 10px;            /* Optional: Add some inner spacing */
-}
-
-/* Style all images inside boxes */
-.box img {
-  max-width: 100%;          /* Prevent image from overflowing box width */
-  max-height: 100%;         /* Prevent image from overflowing box height */
-  object-fit: contain;      /* Keep the entire image visible, no cropping */
-}
-
 
 
 
