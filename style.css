@@ -104,6 +104,33 @@ body::before {
   border-radius: 6px; /* optional */
 }
 
+/* Ensure the box limits the content */
+.box-NW {
+  overflow: hidden; /* hide anything outside */
+  position: relative;
+}
+
+/* Grid container for images */
+.box-NW .image-ej,
+.box-NW .image-t {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+  gap: 10px;
+  width: 100%;      /* make sure container fills the box */
+  box-sizing: border-box; /* include padding/border in size */
+}
+
+/* Images styling */
+.box-NW .image-ej img,
+.box-NW .image-t img {
+  width: 100%;       /* make image fill grid cell width */
+  height: auto;      /* keep aspect ratio */
+  max-height: 150px; /* limit max height if needed */
+  object-fit: contain; /* fit entire image inside without cropping */
+  display: block;
+  border-radius: 6px; /* optional */
+}
+
 
 .image-gallery {
   display: flex;
