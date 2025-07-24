@@ -55,3 +55,24 @@ body::before {
   border-radius: 10px;
   backdrop-filter: blur(3px);
 }
+
+.content-box h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #222;
+}
+
+.content-box p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.content-box a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.content-box a:hover {
+  color: #0056b3;
+}
