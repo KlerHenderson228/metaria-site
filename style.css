@@ -103,9 +103,4 @@ img {
   display: inline-block;
   vertical-align: top;
 }
-.logo-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
+
