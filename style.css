@@ -76,3 +76,20 @@ body::before {
 .content-box a:hover {
   color: #0056b3;
 }
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center; /* or space-between */
+  margin-top: 1rem;
+}
+
+.image-gallery img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
