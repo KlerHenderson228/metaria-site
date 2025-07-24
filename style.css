@@ -77,24 +77,31 @@ body::before {
   color: #0056b3;
 }
 
+/* Ensure the box limits the content */
+.box-SPA {
+  overflow: hidden; /* hide anything outside */
+  position: relative;
+}
 
-
-/* Apply grid layout to both image containers inside .box-SPA */
+/* Grid container for images */
 .box-SPA .image-gc,
 .box-SPA .image-c {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 images per row */
   gap: 10px;
+  width: 100%;      /* make sure container fills the box */
+  box-sizing: border-box; /* include padding/border in size */
 }
 
-/* Style images inside both containers */
+/* Images styling */
 .box-SPA .image-gc img,
 .box-SPA .image-c img {
-  width: 100%;
-  height: auto;
-  object-fit: cover; /* crop nicely inside grid cell */
+  width: 100%;       /* make image fill grid cell width */
+  height: auto;      /* keep aspect ratio */
+  max-height: 150px; /* limit max height if needed */
+  object-fit: contain; /* fit entire image inside without cropping */
   display: block;
-  border-radius: 6px; /* optional rounded corners */
+  border-radius: 6px; /* optional */
 }
 
 
