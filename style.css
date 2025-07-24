@@ -79,6 +79,24 @@ body::before {
 
 
 
+/* Apply grid layout to both image containers inside .box-SPA */
+.box-SPA .image-gc,
+.box-SPA .image-c {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+  gap: 10px;
+}
+
+/* Style images inside both containers */
+.box-SPA .image-gc img,
+.box-SPA .image-c img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* crop nicely inside grid cell */
+  display: block;
+  border-radius: 6px; /* optional rounded corners */
+}
+
 
 .image-gallery {
   display: flex;
