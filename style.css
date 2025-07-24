@@ -90,10 +90,10 @@ body::before {
   width: auto;            /* Automatically scale width to preserve aspect ratio */
   display: block;
 }
-img {
-  width: 150px; /* Set consistent box size */
+.image-gallery img {
+  width: 150px;
   height: 150px;
-  object-fit: contain; /* Ensures the image scales inside */
+  object-fit: contain;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -104,3 +104,9 @@ img {
   vertical-align: top;
 }
 
+.image gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
