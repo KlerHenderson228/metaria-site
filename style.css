@@ -102,20 +102,7 @@ body::before {
   object-fit: contain;      /* Keep the entire image visible, no cropping */
 }
 
-.image-c {
-  display: grid;                          /* Grid layout only for this group */
-  grid-template-columns: repeat(3, 1fr);  /* 3 columns */
-  gap: 10px;
-  max-width: 100%;
-}
 
-.image-c img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 4px;
-  display: block;
-}
 
 
 .image-gallery {
