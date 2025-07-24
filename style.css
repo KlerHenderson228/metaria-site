@@ -86,10 +86,12 @@ body::before {
 }
 
 .image-gallery img {
-  width: 200px;
-  height: auto;
+  width: 150px;         /* Set fixed width */
+  height: 100px;        /* Set fixed height */
+  object-fit: contain;  /* Maintain aspect ratio without cropping */
   border-radius: 8px;
-  object-fit: cover;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background: white;    /* Optional: background color for transparent logos */
+  padding: 0.5rem;      /* Optional: spacing inside the image box */
 }
 
