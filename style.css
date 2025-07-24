@@ -102,6 +102,21 @@ body::before {
   object-fit: contain;      /* Keep the entire image visible, no cropping */
 }
 
+.image-c {
+  display: grid;              /* Use CSS Grid layout */
+  grid-template-columns: repeat(3, 1fr);  /* 3 columns */
+  gap: 10px;                  /* Space between images */
+  max-width: 100%;            /* Fit container */
+}
+
+.image-c img {
+  width: 100%;                /* Image fills the grid cell */
+  height: auto;               /* Maintain aspect ratio */
+  object-fit: cover;          /* Crop slightly to fill cell */
+  border-radius: 4px;         /* Optional: rounded corners */
+  display: block;
+}
+
 
 .image-gallery {
   display: flex;
