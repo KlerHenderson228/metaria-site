@@ -86,6 +86,21 @@ body::before {
   margin: 0 auto;           /* Center the image horizontally */
 }
 
+/* Style the box to set a fixed height and center its content */
+.box {
+  height: 200px;            /* Set a fixed height for the box */
+  display: flex;            /* Use Flexbox for alignment */
+  justify-content: center; /* Center content horizontally */
+  align-items: center;     /* Center content vertically */
+  padding: 10px;            /* Optional: Add some inner spacing */
+}
+
+/* Style all images inside boxes */
+.box img {
+  max-width: 100%;          /* Prevent image from overflowing box width */
+  max-height: 100%;         /* Prevent image from overflowing box height */
+  object-fit: contain;      /* Keep the entire image visible, no cropping */
+}
 
 
 .image-gallery {
