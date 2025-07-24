@@ -103,17 +103,17 @@ body::before {
 }
 
 .image-c {
-  display: grid;              /* Use CSS Grid layout */
+  display: grid;                          /* Grid layout only for this group */
   grid-template-columns: repeat(3, 1fr);  /* 3 columns */
-  gap: 10px;                  /* Space between images */
-  max-width: 100%;            /* Fit container */
+  gap: 10px;
+  max-width: 100%;
 }
 
 .image-c img {
-  width: 100%;                /* Image fills the grid cell */
-  height: auto;               /* Maintain aspect ratio */
-  object-fit: cover;          /* Crop slightly to fill cell */
-  border-radius: 4px;         /* Optional: rounded corners */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
   display: block;
 }
 
