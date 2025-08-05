@@ -23,6 +23,13 @@ html, body {
 
   font-size: 100%; /* allows user scaling */
 }
+
+	  @media (max-width: 600px) {
+  .blob-container {
+    max-width: 200px;
+  }
+}
+
 @font-face {
   font-family: 'Misto';
   src: url('fonts/Misto.woff2') format('woff2');
@@ -46,8 +53,8 @@ a {
   position: relative;
   width: 100vw;
   height: 100vh;
+  margin: 0 auto;
 }
-
 .blob {
   position: absolute;
   width: 500px;
@@ -55,9 +62,8 @@ a {
   /* Optional: prevent blobs from overflowing */
   
   pointer-events: none; /* disable rectangle clicks */
+  aspect-ratio: 1 / 1;
 }
-
-
 
 .blob-shape {
   cursor: pointer;
@@ -70,7 +76,17 @@ a {
   fill: rgba(255, 255, 255, 0.5); /* hover effect */
 }
 
+.blob svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
+.blob video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
 
 
 /* Adjusted positions so blobs stay fully inside viewport */
@@ -282,8 +298,9 @@ z-index: 1000;
 
 <canvas id="binaryCanvas"></canvas>
 
+	<div class="blob-container">
 <div class="blob blob1" data-modal="modal1">
-  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <!-- Define the actual blob shape with an ID -->
       <clipPath id="blob1">
@@ -300,6 +317,9 @@ z-index: 1000;
     </foreignObject>
   </svg> 
 </div>
+	</div>	
+		
+
 
 
 
@@ -813,4 +833,5 @@ container.style.textAlign = 'center';
 
 </body>
 </html>
+
 
