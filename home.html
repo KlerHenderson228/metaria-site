@@ -276,21 +276,26 @@ a {
   color: black;
 }
 
-
-/* Words inside modal */
+/* Words inside modal — absolutely centered */
 .modal-content .word1,
 .modal-content .word2 {
-  white-space: nowrap;           /* default no wrap */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
   text-align: center;
-  width: 100%;
+  width: auto;
+  max-width: 90%;  /* prevent overflow on small screens */
 }
 
-/* Wrap on small screens */
+/* Wrap word2 on small screens */
 @media (max-width: 768px) {
-  .modal-content .word1,
   .modal-content .word2 {
-    white-space: normal;         
+    white-space: normal;
     word-wrap: break-word;
+    width: 80%;
   }
 }
 
@@ -887,6 +892,7 @@ container.style.textAlign = 'center';
 
 </body>
 </html>
+
 
 
 
