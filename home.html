@@ -173,31 +173,29 @@ a {
 
 
 
+/* Keep existing modal properties */
 .modal {
   display: none;
   position: fixed;
   z-index: 999;
- 
-   top: 0;
+
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   overflow: hidden;
   background: rgba(0,0,0,0.5);
-  
+
   align-items: center;
   justify-content: center;
-  
-   
 }
 
-
+/* Keep existing modal-content properties */
 .modal-content {
-z-index: 1000;
-  
+  z-index: 1000;
   margin: 5% auto;
   padding: 2rem;
-    width: 900px;
+  width: 900px;
   height: 550px;
   border-radius: 5px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -205,8 +203,27 @@ z-index: 1000;
   position: relative;
   overflow-y: auto;
 
-  background-color: #2b2b2b; /* ensure modal content matches */
+  background-color: #2b2b2b;
   color: #fdf5e6;
+}
+
+/* Add responsive scaling for smaller screens */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90vw;       /* scale width to viewport */
+    height: 70vh;      /* scale height to viewport */
+    margin: 5vh auto;  /* vertical spacing */
+    padding: 1rem;     /* smaller padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 95vw;
+    height: 80vh;
+    padding: 0.5rem;
+    margin: 2vh auto;
+  }
 }
 
 .modal-content,
@@ -862,6 +879,7 @@ container.style.textAlign = 'center';
 
 </body>
 </html>
+
 
 
 
