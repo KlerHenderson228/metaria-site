@@ -244,10 +244,10 @@ a {
 }
 
 .modal-content .close {
-  position: sticky;
+  position: absolute;
   top: 0;
   right: 0;
-  float: right;
+  float: none;
   z-index: 10;
   font-size: 28px;
   font-weight: bold;
@@ -284,7 +284,22 @@ a {
   text-align: center;
 }
 
+/* Specific rules for word2 wrapping on small screens */
+.word2 {
+  white-space: nowrap;       /* default: no wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
 
+@media (max-width: 768px) {
+  .word2 {
+    white-space: normal;      /* allow wrapping */
+    overflow: visible;
+    text-overflow: clip;
+    word-wrap: break-word;
+  }
+}
 
 .image-gallery {
   display: flex;
@@ -879,6 +894,7 @@ container.style.textAlign = 'center';
 
 </body>
 </html>
+
 
 
 
