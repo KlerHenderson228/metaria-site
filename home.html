@@ -273,33 +273,29 @@ a {
 }
 
 
-.word1,
-.word2 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.modal-content .word1,
+.modal-content .word2 {
+  position: relative;           /* relative to modal-content */
   opacity: 0;
   transition: opacity 1s ease-in-out;
   text-align: center;
+  width: 100%;                  /* fill modal-content width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;           /* desktop: no wrap */
 }
 
-/* Specific rules for word2 wrapping on small screens */
-.word2 {
-  white-space: nowrap;       /* default: no wrapping */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-}
-
+/* Allow wrapping on small screens */
 @media (max-width: 768px) {
-  .word2 {
-    white-space: normal;      /* allow wrapping */
-    overflow: visible;
-    text-overflow: clip;
+  .modal-content .word1,
+  .modal-content .word2 {
+    white-space: normal;         /* allow wrap */
     word-wrap: break-word;
   }
 }
+
+
 
 .image-gallery {
   display: flex;
@@ -736,8 +732,7 @@ function playWordFadeSequence(modal) {
   word2.style.textAlign = 'center';
   word2.style.display = 'flex';
 word2.style.justifyContent = 'center';
-word2.style.alignItems = 'center';
-word2.style.whiteSpace = 'nowrap';        // ❗ Prevent line breaks
+word2.style.alignItems = 'center';       
 word2.style.overflow = 'hidden';          // Optional: hide overflow
 word2.style.textOverflow = 'ellipsis';    // Optional: show "..." if clipped
 word2.style.width = '100%';               // Ensure it spans the modal
@@ -894,6 +889,7 @@ container.style.textAlign = 'center';
 
 </body>
 </html>
+
 
 
 
