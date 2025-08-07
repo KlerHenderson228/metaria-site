@@ -1,10 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+	
   <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>METARIA = art + digital + science</title>
+
+  
+ 
+<!-- Cookie banner -->
+<div id="cookie-banner" style="
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #eee;
+  padding: 10px;
+  text-align: center;
+  z-index: 9999;
+">
+  This site uses cookies and Google Analytics to improve your experience.
+  <button id="accept-cookies-btn">Accept</button>
+  <button id="reject-cookies-btn">Reject</button>
+</div>
+
+<script>
+  // Generate or get visitor ID
+  function generateVisitorID() {
+    return 'visitor-' + Math.random().toString(36).substr(2, 9);
+  }
+
+  function getVisitorID() {
+    let id = localStorage.getItem('visitorID');
+    if (!id) {
+      id = generateVisitorID();
+      localStorage.setItem('visitorID', id);
+    }
+    return id;
+  }
+
+  // Load GA script dynamically
+  function loadGAScript() {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-836SRJ0HHH'; // Replace with your GA ID
+      script.async = true;
+      script.onload = resolve;
+      document.head.appendChild(script);
+    });
+  }
+
+  // Initialize GA and set visitor ID as user property
+  function initGAWithVisitorID() {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-836SRJ0HHH'); // Replace with your GA ID
+
+    // Set visitor ID as user property
+    const visitorID = getVisitorID();
+    gtag('set', { 'user_properties': { 'visitor_id': visitorID } });
+  }
+
+  // Handle accept
+  async function onUserAcceptCookies() {
+    localStorage.setItem('cookiesAccepted', 'true');
+    cookieBanner.style.display = 'none';
+    await loadGAScript();
+    initGAWithVisitorID();
+  }
+
+  // Handle reject
+  function onUserRejectCookies() {
+    localStorage.setItem('cookiesAccepted', 'false');
+    cookieBanner.style.display = 'none';
+    // Do not load GA
+  }
+
+  // Setup buttons and banner visibility on page load
+  const cookieBanner = document.getElementById('cookie-banner');
+  const acceptBtn = document.getElementById('accept-cookies-btn');
+  const rejectBtn = document.getElementById('reject-cookies-btn');
+
+  acceptBtn.addEventListener('click', onUserAcceptCookies);
+  rejectBtn.addEventListener('click', onUserRejectCookies);
+
+  window.addEventListener('load', async () => {
+    const consent = localStorage.getItem('cookiesAccepted');
+    if (consent === 'true') {
+      cookieBanner.style.display = 'none';
+      await loadGAScript();
+      initGAWithVisitorID();
+    } else if (consent === 'false') {
+      cookieBanner.style.display = 'none';
+      // GA not loaded
+    } else {
+      cookieBanner.style.display = 'block';
+    }
+  });
+</script>
+
+
+	
   <style>
     body {
       margin: 0;
@@ -918,6 +1017,7 @@ container.style.textAlign = 'center';
 
 </body>
 </html>
+
 
 
 
