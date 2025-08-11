@@ -122,6 +122,7 @@
 	  font-family: inter, sans-serif;
     }
 html, body {
+	 background: black;
   margin: 0;
   padding: 0;
   height: 100%; /* ensures body fills viewport */
@@ -249,10 +250,10 @@ a {
 	  
 	/* Mobile positions (vh / vw) */
 @media (max-width: 768px) {
-  .blob1 { top: 400px; left: 35vw;} /* colab */
+  .blob1 { top: 420px; left: 38vw;} /* colab */
 .blob2 { top: -100px; left: -70vw;  } /* d */
 .blob3 { top: 100px; left: 10vw;  } /* s */
-.blob4 { top: 200px;  left: -15vw; } /* us */
+.blob4 { top: 210px;  left: -15vw; } /* us */
 .blob5 { top: 300px;  left: 50vw; } /* contact */
 .blob6 { top: 350px;  left: -30vw; } /* nw */
   
@@ -282,6 +283,8 @@ a {
   background: white; /* base background before drawing starts */
   pointer-events: none; /* lets clicks pass through to content */
   display: block; /* removes inline spacing around canvas */
+	 height: calc(100vh + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
 }
 
 
@@ -1439,6 +1442,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
