@@ -312,7 +312,7 @@ a {
   
   z-index: 1000;
   margin: 5% auto;
-  padding: 7rem;
+  padding: 2rem;
 	padding-top: 2rem; /* keep some padding at top */
   width: 900px;
   height: 550px;
@@ -415,20 +415,14 @@ a {
 }
 
 .modal-annot {
-	 margin-top: 10rem; /* pushes annotation down a bit */
-  padding-top: 0;
-  position: relative; /* prevent absolute positioning issues */
-  max-width: 100%;
-  padding: 10px;
-  margin: 10px;
-  line-height: 1.5;
-  white-space: normal;
-  overflow-wrap: break-word;
-  text-align: justify;   /* justification */
-  font-style: italic;    /* italic text */
-	 
-
+  position: static !important;
+  margin-top: 0 !important;
+  top: auto !important;
+  transform: none !important;
+  border: 1px solid red; /* visualize boundaries */
+  background: #fff; /* ensure background */
 }
+
 
 
 @media (max-width: 600px) {
@@ -1499,6 +1493,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
