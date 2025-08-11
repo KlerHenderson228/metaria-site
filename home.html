@@ -1011,24 +1011,24 @@ const htmlIds = [
   "previous-link", 
   "board-title", 
   "members-title",
-  "translucence-annot",         // <-- add these annotation modal ids here
+  "translucence-annot",
   "eurojob-annot",
-	"fa-annot"
+  "fa-annot"
 ];
 
+keys.forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  // Use the outer htmlIds here
+  if (htmlIds.includes(id)) {
+    el.innerHTML = translations[lang][id];
+  } else {
+    el.textContent = translations[lang][id];
+  }
+});
+
 	
-  keys.forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return; // skip missing elements
-
-    const htmlIds = ["cookie-text", "cookie-policy-link", "about-description", "previous-link", "board-title", "members-title"];
-    if (htmlIds.includes(id)) {
-      el.innerHTML = translations[lang][id];
-    } else {
-      el.textContent = translations[lang][id];
-    }	
-
-  });
 updateModalAnnotationLanguage('modal3');
 updateModalAnnotationLanguage('modal6');
 
@@ -1497,6 +1497,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
