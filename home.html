@@ -253,8 +253,8 @@ a {
   .blob1 { top: 380px; left: 38vw;} /* colab */
 .blob2 { top: -100px; left: -70vw;  } /* d */
 .blob3 { top: 100px; left: 10vw;  } /* s */
-.blob4 { top: 210px;  left: -15vw; } /* us */
-.blob5 { top: 330px;  left: 50vw; } /* contact */
+.blob4 { top: 220px;  left: -15vw; } /* us */
+.blob5 { top: 310px;  left: 50vw; } /* contact */
 .blob6 { top: 350px;  left: -30vw; } /* nw */
   
   /* Reduce size for mobile */
@@ -277,14 +277,12 @@ a {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 0; /* stays behind everything else */
+  z-index: 0;
   width: 100vw;
-  height: 100vh;
-  background: white; /* base background before drawing starts */
-  pointer-events: none; /* lets clicks pass through to content */
-  display: block; /* removes inline spacing around canvas */
-	 height: calc(100vh + env(safe-area-inset-top));
-  padding-top: env(safe-area-inset-top);
+  height: calc(100vh + env(safe-area-inset-top));
+  background: white;
+  pointer-events: none;
+  display: block;
 }
 
 
@@ -1442,6 +1440,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
