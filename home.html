@@ -1397,9 +1397,10 @@ function playSequenceFromData(modalId) {
   el.style.textAlign = "justify";
 
   // Conditionally apply mobile-specific styles
-  if (window.innerWidth <= 600) {
+  if (window.innerWidth <= 780) {
     el.style.fontSize = "16px";
     el.style.padding = "12px";
+	   el.style.marginTop = "20px";
     el.style.margin = "10px 0";
   } else {
     el.style.fontSize = "20px";  // or whatever for desktop
@@ -1498,6 +1499,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
