@@ -1003,6 +1003,19 @@ function switchLanguage(lang) {
   currentLang = lang; 
   // Update page text content based on selected language
   const keys = Object.keys(translations[lang]);
+
+const htmlIds = [
+  "cookie-text", 
+  "cookie-policy-link", 
+  "about-description", 
+  "previous-link", 
+  "board-title", 
+  "members-title",
+  "modal3",         // <-- add these annotation modal ids here
+  "modal6"
+];
+
+	
   keys.forEach(id => {
     const el = document.getElementById(id);
     if (!el) return; // skip missing elements
@@ -1012,13 +1025,13 @@ function switchLanguage(lang) {
       el.innerHTML = translations[lang][id];
     } else {
       el.textContent = translations[lang][id];
-    }
-	
-	updateModalAnnotationLanguage('modal3');
-updateModalAnnotationLanguage('modal6');
+    }	
 
   });
+updateModalAnnotationLanguage('modal3');
+updateModalAnnotationLanguage('modal6');
 
+	
   // Update language switcher UI to highlight selected language
   document.querySelectorAll('#language-switcher .lang-option').forEach(el => {
     el.classList.remove('selected');
@@ -1483,6 +1496,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
