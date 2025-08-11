@@ -413,6 +413,22 @@ a {
   }
 }
 
+	  .modal-annot {
+  max-width: 100%;      /* make sure it doesn't overflow horizontally */
+  box-sizing: border-box;
+  padding: 10px;        /* optional, for spacing */
+  line-height: 1.4;     /* better readability on mobile */
+  white-space: normal;  /* wrap text normally */
+  overflow-wrap: break-word; /* break long words if needed */
+}
+
+	  @media (max-width: 600px) {
+  .modal-annot {
+    font-size: 16px; /* smaller for mobile */
+    padding: 8px;
+  }
+}
+
 
 .image-gallery {
   display: flex;
@@ -1349,10 +1365,7 @@ function playSequenceFromData(modalId) {
     if (item.type === "annot") {
 	  el.textContent = translations[currentLang][item.id] || item.text || "No text available";
       el.classList.add("modal-annot");
-      el.style.fontSize = '20px';
-      el.style.fontStyle = 'italic';
-      el.style.marginTop = '10px';
-	  
+      
 	  modal.currentAnnotElement = el;
   modal.currentAnnotId = item.id;
     }
@@ -1440,6 +1453,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
