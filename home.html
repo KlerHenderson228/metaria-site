@@ -415,12 +415,17 @@ a {
 }
 
 .modal-annot {
-  position: static !important;
-  margin-top: 0 !important;
-  top: auto !important;
-  transform: none !important;
-  border: 1px solid red; /* visualize boundaries */
-  background: #fff; /* ensure background */
+ 	 margin-top: 10rem; /* pushes annotation down a bit */
+  padding-top: 0;
+  position: relative; /* prevent absolute positioning issues */
+  max-width: 100%;
+  padding: 10px;
+  margin: 10px;
+  line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-align: justify;   /* justification */
+  font-style: italic;    /* italic text */
 }
 
 
@@ -431,7 +436,7 @@ a {
   }
   .modal-annot {
     font-size: 16px;
-    padding: 12px;
+    padding-top: 20px;
     margin: 10px 0;  /* vertical margin only */
   }
 }
@@ -1493,6 +1498,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
