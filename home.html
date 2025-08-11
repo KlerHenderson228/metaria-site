@@ -307,15 +307,14 @@ a {
 }
 
 /* Keep existing modal-content properties */
-.modal-content {
-	
-  
+.modal-content {  
   z-index: 1000;
   margin: 5% auto;
   padding: 2rem;
 	padding-top: 2rem; /* keep some padding at top */
   width: 900px;
   height: 550px;
+	max-height: 80vh;
   border-radius: 5px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
   box-sizing: border-box;
@@ -417,7 +416,7 @@ a {
 .modal-annot {
  	 margin-top: 10rem; /* pushes annotation down a bit */
   padding-top: 0;
-  position: relative; /* prevent absolute positioning issues */
+ position: relative !important;  /* prevent absolute positioning issues */
   max-width: 100%;
   padding: 10px;
   margin: 10px;
@@ -432,7 +431,8 @@ a {
 
 @media (max-width: 600px) {
   .modal-content {
-    margin: 20px;  /* adds outer spacing on mobile */
+    margin: 20px; 
+	  padding-top: 40px;/* adds outer spacing on mobile */
   }
   .modal-annot {
     font-size: 16px;
@@ -440,6 +440,7 @@ a {
     margin: 10px 0;  /* vertical margin only */
   }
 }
+	
 
 
 .image-gallery {
@@ -1499,6 +1500,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
