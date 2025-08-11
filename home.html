@@ -1460,7 +1460,9 @@ function updateModalAnnotationLanguage(modalId) {
   const id = modal.currentAnnotId;
 
   if (el && id) {
-    el.textContent = translations[currentLang][id] || "No text available";
+    
+	  el.innerHTML = translations[currentLang][id] || "No text available";
+
   }
 }
 
@@ -1497,6 +1499,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
