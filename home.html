@@ -413,16 +413,19 @@ a {
   }
 }
 
-	  .modal-annot {
-  max-width: 100%;      /* make sure it doesn't overflow horizontally */
+	.modal-annot {
+  max-width: 100%;
   box-sizing: border-box;
-  padding: 10px;        /* optional, for spacing */
-  line-height: 1.4;     /* better readability on mobile */
-  white-space: normal;  /* wrap text normally */
-  overflow-wrap: break-word; /* break long words if needed */
-		  text-align: justify;     /* makes edges straight */
-    line-height: 1.5;        /* better readability */
+  padding: 10px;
+  margin: 10px;  /* add margin to see spacing */
+  line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-align: justify;
+  background-color: rgba(255, 255, 255, 0.1); /* light highlight */
+  border: 1px solid rgba(255,255,255,0.3);  /* border to visualize */
 }
+
 
 	  @media (max-width: 600px) {
   .modal-annot {
@@ -1459,6 +1462,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
