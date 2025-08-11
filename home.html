@@ -125,7 +125,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%; /* ensures body fills viewport */
-  overflow-x: visible; /* prevent horizontal scroll */
+  overflow-x: hidden; /* prevent horizontal scroll */
   overflow-y: visible; /* Hide scrollbars */
   position: relative;
 
@@ -239,14 +239,21 @@ a {
   }
 }
 
+@media (max-width: 768px) {
+  .blob-container {
+    width: 100vw;
+    height: 100vh;
+  }
+}
+	  
 	/* Mobile positions (vh / vw) */
 @media (max-width: 768px) {
-  .blob1 { top: 400px; left: 100px;} /* colab */
-.blob2 { top: -100px; left: -10px;  } /* d */
-.blob3 { top: 200px; left: 50px;  } /* s */
-.blob4 { top: 200px;  left: 100px; } /* us */
-.blob5 { top: 200px;  left: 100px; } /* contact */
-.blob6 { top: 200px;  left: 100px; } /* nw */
+  .blob1 { top: 400px; left: 10vw;} /* colab */
+.blob2 { top: -100px; left: 0;  } /* d */
+.blob3 { top: 200px; left: 5vw;  } /* s */
+.blob4 { top: 200px;  left: 10vw; } /* us */
+.blob5 { top: 200px;  left: 10vw; } /* contact */
+.blob6 { top: 200px;  left: 10vw; } /* nw */
   
   /* Reduce size for mobile */
   .blob { width: 150px; height: 150px; }
@@ -1431,6 +1438,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
