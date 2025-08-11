@@ -420,12 +420,16 @@ a {
   line-height: 1.4;     /* better readability on mobile */
   white-space: normal;  /* wrap text normally */
   overflow-wrap: break-word; /* break long words if needed */
+		  text-align: justify;     /* makes edges straight */
+    line-height: 1.5;        /* better readability */
 }
 
 	  @media (max-width: 600px) {
   .modal-annot {
     font-size: 16px; /* smaller for mobile */
     padding: 8px;
+	   padding: 12px;           /* space inside the text area */
+    margin: 10px;            /* space around the annotation box */
   }
 }
 
@@ -1453,6 +1457,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
