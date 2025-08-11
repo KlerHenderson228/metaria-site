@@ -313,6 +313,7 @@ a {
   z-index: 1000;
   margin: 5% auto;
   padding: 2rem;
+	padding-top: 2rem; /* keep some padding at top */
   width: 900px;
   height: 550px;
   border-radius: 5px;
@@ -414,6 +415,9 @@ a {
 }
 
 .modal-annot {
+	 margin-top: 1rem; /* pushes annotation down a bit */
+  padding-top: 0;
+  position: relative; /* prevent absolute positioning issues */
   max-width: 100%;
   padding: 10px;
   margin: 10px;
@@ -1376,9 +1380,24 @@ function playSequenceFromData(modalId) {
 		el.innerHTML = translations[currentLang][item.id] || item.text || "No text available";
 
       el.classList.add("modal-annot");
-      
-	  modal.currentAnnotElement = el;
+		 el.style.fontStyle = "italic";
+  el.style.textAlign = "justify";
+
+  // Conditionally apply mobile-specific styles
+  if (window.innerWidth <= 600) {
+    el.style.fontSize = "16px";
+    el.style.padding = "12px";
+    el.style.margin = "10px 0";
+  } else {
+    el.style.fontSize = "20px";  // or whatever for desktop
+    el.style.padding = "10px";
+    el.style.margin = "10px";
+  }
+
+  modal.currentAnnotElement = el;
   modal.currentAnnotId = item.id;
+      
+	  
     }
 
     container.appendChild(el);
@@ -1464,6 +1483,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
