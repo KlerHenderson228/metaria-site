@@ -1172,6 +1172,24 @@ const modalContent = {
   ]
 };
 
+// Function to preload an image
+const preloadImage = src => {
+  const img = new Image();
+  img.src = src;
+};
+
+// Preload images for two modals
+["modal3", "modal6"].forEach(modalKey => {
+  if (modalContent[modalKey]) {
+    modalContent[modalKey].forEach(item => {
+      if (item.type === "image") {
+        preloadImage(item.src);
+      }
+    });
+  }
+});
+
+	
 // === Modal Open/Close ===
 const blobs = document.querySelectorAll('.blob');
 const modals = document.querySelectorAll('.modal');
@@ -1504,6 +1522,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
