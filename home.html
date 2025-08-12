@@ -425,6 +425,11 @@ a {
 }
 
 .modal-annot {
+	  display: flex;
+  flex-direction: column;   /* stack children vertically */
+  justify-content: center;  /* vertical centering */
+  align-items: center;      /* horizontal centering if needed */
+  text-align: center;       /* center text inside */
  	 margin-top: 1rem; /* pushes annotation down a bit */
   padding-top: 0;
  position: relative !important;  /* prevent absolute positioning issues */
@@ -1544,6 +1549,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
