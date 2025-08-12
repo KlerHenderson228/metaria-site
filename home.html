@@ -564,8 +564,10 @@ a {
 @media (max-width: 768px) {
   #language-switcher {
     display: flex !important;
-	   top: 5px;
-  right: 5px;
+	top: 5px;
+ 	right: 5px;
+	font-size: 12px;
+	gap: 7px;
   }
 }
 
@@ -944,8 +946,9 @@ const translations = {
     "previous-link": `<a href="https://www.metaria.fi" target="_blank"><b>Previous works</b></a><br>`,
     "board-title": `<b>Board of Directors 2024-2025</b><br>`,
     "members-title": `<b>Members</b><br>`,
-
-    "contact-title": "Contact",
+	"contact-title": "Contact",
+	"bc-annot": "Breath of Carbon is an XR interactive solo performance that merges science and art to engage online audiences. Using motion capture and digital technologies, it visualizes the carbon cycle and highlights sustainable CO₂ capture’s impact on agriculture, employment, and future generations. The project advances brand development and image creation by showcasing innovative art-tech collaboration that makes complex science accessible and inspiring.",
+	"gc-annot": "Green Curtain is an innovative environmental project developing lignin-based filters and wipes to prevent harmful chemicals from cosmetics, decorations, and costume washing from entering theatre wastewater. By using bio-based and biodegradable materials, Green Curtain helps protect vulnerable ecosystems, promotes cleaner water, and repurposes large industrial by-products, supporting the circular economy.",
     "modal3-final": "Science on Stage confronts the schism between science and performing arts. Science on Stage makes cutting-edge research relatable, emotional, and unforgettable.",
   "translucence-annot": "In a fractured future where Earth’s stability has long since crumbled, exiled scientist Dr. Mara Solberg rediscovers a forgotten innovation capable of sustaining life in the harshest of worlds. Her pursuit of this breakthrough draws the attention of powerful forces determined to erase it from history. Fleeing across the void to a remote settlement on an uncharted world, Mara must adapt to an alien environment, evade those who would see her silenced, and confront the shadow of her own ambition.<br><br> Translucence fuses live performance with real-time digital scenography, layered soundscapes, and cinematic world-building — where the physical stage merges seamlessly with a living, virtual environment that evolves with the story.",
 	"eurojob-annot": "An online-born stage drama about pride, distance, and the fight to be heard.<br><br>A father. A son. One phone call. Six hours until eviction. In a bedsit, a once-charismatic hustler whose quick wit and bravado now barely conceal his exhaustion and loneliness dials the number he’s avoided for years. What begins as a plea for help becomes a fierce duel over who has forgiven who the most—a raw, funny, and devastating argument that strips away decades of silence.<br><br>Written for one actor to deliver a virtuoso, multifaceted performance, the play demands every shade of the actor’s craft: shifting from razor-sharp comedy to aching vulnerability in the space of a breath.<br><br>Born in the digital space through live-streamed readings and virtual rehearsals across borders, Eurojob is a one-act monologue to be staged in theatres and online. The piece fuses the intimacy of a video call with the immediacy of live performance, inviting audiences into a room where love, pride, and stubbornness collide.",
@@ -970,8 +973,9 @@ const translations = {
     "previous-link": `<a href="https://www.metaria.fi" target="_blank"><b>Aiempia töitä</b></a><br>`,
     "board-title": `<b>Hallitus 2024-2025</b><br>`,
     "members-title": `<b>Jäsenet</b><br>`,
-
     "contact-title": "Yhteystiedot",
+	"bc-annot": "Breath of Carbon on XR-interaktiivinen yksinäyttämöesitys, joka yhdistää tieteen ja taiteen tavoittaakseen verkkoyleisön. Liikkeenkaappaus- ja digitaalisia teknologioita hyödyntäen se havainnollistaa hiilen kiertokulkua ja korostaa kestävän hiilidioksidin talteenoton merkitystä maataloudelle, työllisyydelle ja tuleville sukupolville. Projekti edistää brändin kehitystä ja imagon rakentamista näyttämällä innovatiivisen taide- ja teknologiayhteistyön, joka tekee monimutkaisesta tieteestä saavutettavaa ja innostavaa.",
+	"gc-annot": "Green Curtain on innovatiivinen ympäristöprojekti, joka kehittää ligniinipohjaisia suodattimia ja pyyhkeitä estämään haitallisten kosmetiikka-, koristelu- ja pukujen pesussa käytettävien kemikaalien pääsyn teatterin jätevesiin. Biopohjaisten ja biohajoavien materiaalien avulla Green Curtain suojaa haavoittuvia ekosysteemejä, edistää puhtaampaa vettä ja hyödyntää teollisuuden sivuvirtoja kiertotalouden edistämiseksi.",
     "modal3-final": "Science on Stage kohtaa tieteen ja esittävien taiteiden kuilun. Science on Stage tekee huippututkimuksesta samaistuttavaa, tunteikasta ja unohtumatonta.",
     "translucence-annot": "Murtuneessa tulevaisuudessa, jossa Maan vakaus on jo kauan sitten murentunut, karkotettu tiedemies tohtori Mara Solberg löytää uudelleen unohdetun innovaation, joka kykenee ylläpitämään elämää kaikkein karuimmillakin maailmoilla. Hänen pyrkimyksensä tämän läpimurron saavuttamiseksi herättää voimakkaiden tahojen huomion, jotka haluavat poistaa sen historiasta. Paeten tyhjiön halki kartoittamattomalle planeetalle syrjäiseen asutukseen, Maran on sopeuduttava vieraaseen ympäristöön, vältettävä hiljaiseksi haluavia ja kohdattava oman kunnianhimonsa varjo. <br><br>Translucence yhdistää live-esityksen reaaliaikaiseen digitaaliseen lavastukseen, moniulotteisiin äänimaisemiin ja elokuvamaiseen maailman rakentamiseen — fyysinen lava sulautuu saumattomasti elävään, virtuaaliseen ympäristöön, joka kehittyy tarinan mukana.",
 	"eurojob-annot": "Verkossa syntynyt näyttämödraama ylpeydestä, etäisyydestä ja taistelusta tulla kuulluksi.<br>Isä. Poika. Yksi puhelu. Kuusi tuntia pois­muuttoon.<br>Yksiö­asunnossa entinen karismaattinen konna, jonka nopea äly ja räiskyvä itsevarmuus nyt tuskin peittävät hänen uupumustaan ja yksinäisyyttään, valitsee numeron, jota on välttänyt vuosia. Se, mikä alkaa avunpyynnöstä, muuttuu kiivaaksi kaksintaisteluksi siitä, kuka on antanut eniten anteeksi — raaka, hauska ja musertava riita, joka repii pois vuosikymmeniä hiljaisuutta.<br><br>Näytelmä on kirjoitettu yhdelle näyttelijälle, joka esittää virtuoosimaisen monipuolisen roolin. Näytelmä vaatii näyttelijältä kaiken taidon kirjon: terävästä komiikasta sydäntä särkevään haavoittuvuuteen hengähdyksen sisällä.<br><br>Digitaalisessa tilassa syntynyt, suoratoistettujen lukujen ja virtuaaliharjoitusten kautta rajat ylittävä Eurojob on yhden näytöksen monologi, joka esitetään teattereissa ja verkossa. Teos yhdistää videopuhelun intiimiyden ja live-esiintymisen välittömyyden kutsuen yleisön huoneeseen, jossa rakkaus, ylpeys ja itsepäisyys törmäävät.",
@@ -995,8 +999,9 @@ const translations = {
     "previous-link": `<a href="https://www.metaria.fi" target="_blank"><b>Tidigare arbeten</b></a><br>`,
     "board-title": `<b>Styrelsen 2024-2025</b><br>`,
     "members-title": `<b>Medlemmar</b><br>`,
-
     "contact-title": "Kontakt",
+	"bc-annot": "Breath of Carbon är en XR-interaktiv soloföreställning som förenar vetenskap och konst för att nå en onlinepublik. Genom rörelsefångst och digital teknik visualiserar den kolcykeln och lyfter fram hållbar koldioxidinfångnings betydelse för jordbruk, sysselsättning och kommande generationer. Projektet främjar varumärkesutveckling och imagebyggande genom att visa innovativt samarbete mellan konst och teknik som gör komplex vetenskap tillgänglig och inspirerande.",
+	"gc-annot": "Green Curtain är ett innovativt miljöprojekt som utvecklar ligninbaserade filter och våtservetter för att förhindra att skadliga kemikalier från kosmetika, dekorationer och kostymtvätt hamnar i teaterns avloppsvatten. Genom att använda biobaserade och biologiskt nedbrytbara material hjälper Green Curtain till att skydda känsliga ekosystem, främja renare vatten och återanvända stora industrins biprodukter för att stödja en cirkulär ekonomi.",
     "modal3-final": "Science on Stage konfronterar klyftan mellan vetenskap och scenkonst. Science on Stage gör banbrytande forskning relaterbar, känslosam och oförglömlig.",
     "translucence-annot": "I en splittrad framtid där Jordens stabilitet sedan länge har fallit samman, återupptäcker den landsförvisade vetenskapskvinnan Dr. Mara Solberg en bortglömd innovation som kan upprätthålla liv i de hårdaste världarna. Hennes strävan efter detta genombrott väcker uppmärksamhet hos mäktiga krafter som är fast beslutna att radera den från historien. På flykt över tomrummet till en avlägsen bosättning på en okänd värld, måste Mara anpassa sig till en främmande miljö, undvika dem som vill tysta henne och konfrontera skuggan av sin egen ambition. <br><br>Translucence förenar liveframträdande med realtids digital scenografi, lager av ljudlandskap och filmisk världsskapande — där den fysiska scenen smälter samman sömlöst med en levande, virtuell miljö som utvecklas med berättelsen.",
 	"eurojob-annot": "Ett online-fött sceniskt drama om stolthet, distans och kampen för att bli hörd.<br><br>En far. En son. Ett telefonsamtal. Sex timmar till vräkning.<br>I en enrummare ringer en en gång karismatisk bluffmakare, vars kvicka sinne och bravur nu knappt döljer hans utmattning och ensamhet, numret han undvikit i åratal. Det som börjar som en hjälpförfrågan blir en häftig duell om vem som har förlåtit mest – ett rått, roligt och förödande gräl som sliter bort årtionden av tystnad.<br><br>Skriven för en skådespelare som ska leverera en virtuos, mångfacetterad prestation, kräver pjäsen alla skiftningar i skådespelarens hantverk: från knivskarp komedi till smärtsam sårbarhet på ett andetag.<br><br>Född i den digitala världen genom livesända läsningar och virtuella repetition över gränser är Eurojob en monolog i ett akt att spelas på teater och online. Pjäsen förenar intimiteten i ett videosamtal med liveframträdandets omedelbarhet och bjuder in publiken till ett rum där kärlek, stolthet och envishet kolliderar.",
@@ -1022,6 +1027,8 @@ const htmlIds = [
   "previous-link", 
   "board-title", 
   "members-title",
+	"gc-annot",
+	"bc-annot",
   "translucence-annot",
   "eurojob-annot",
   "fa-annot"
@@ -1161,10 +1168,10 @@ document.querySelectorAll('.blob').forEach(blob => {
 const modalContent = {
   modal3: [
     { type: "word",  text: "Science on Stage" },
-    { type: "image", src: "images/bc.png", title: "Breath of Carbon" },
+    { type: "image", src: "images/bc.png", title: "Breath of Carbon is an XR interactive solo performance that merges science and art to engage online audiences. Using motion capture and digital technologies, it visualizes the carbon cycle and highlights sustainable CO₂ capture’s impact on agriculture, employment, and future generations. The project advances brand development and image creation by showcasing innovative art-tech collaboration that makes complex science accessible and inspiring." },
 	{ type: "annot", id: "bc-annot",text: "This is an annotation about the image." },
     { type: "image", src: "images/gc.png", title: "Green Curtain" },
-	{ type: "annot", id: "gc-annot",text: "This is an annotation about the image." },
+	{ type: "annot", id: "gc-annot",text: "Green Curtain is an innovative environmental project developing lignin-based filters and wipes to prevent harmful chemicals from cosmetics, decorations, and costume washing from entering theatre wastewater. By using bio-based and biodegradable materials, Green Curtain helps protect vulnerable ecosystems, promotes cleaner water, and repurposes large industrial by-products, supporting the circular economy." },
     { type: "final", id: "modal3-final", text: "Science on Stage confronts the schism between science and performing arts. Science on Stage makes cutting-edge research relatable, emotional, and unforgettable." }
   ],
   modal6: [
@@ -1526,6 +1533,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
