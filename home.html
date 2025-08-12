@@ -314,6 +314,11 @@ a {
 
 /* Keep existing modal-content properties */
 .modal-content {  
+display: flex;
+	flex-direction: column;   /* stack children vertically */
+  justify-content: center;  /* vertical centering */
+  align-items: center;      /* horizontal centering if needed */
+  text-align: center;       /* center text inside */
   z-index: 1000;
   margin: 5% auto;
   padding: 2rem;
@@ -564,8 +569,8 @@ a {
 @media (max-width: 768px) {
   #language-switcher {
     display: flex !important;
-	top: 1px;
- 	right: 1px;
+	top: 1px !important;
+ 	right: 1px !important;
 	font-size: 12px;
 	gap: 7px;
   }
@@ -1175,8 +1180,8 @@ document.querySelectorAll('.blob').forEach(blob => {
 const modalContent = {
   modal3: [
     { type: "word",  text: "Science on Stage" },
-    { type: "image", src: "images/bc.png", title: "Breath of Carbon is an XR interactive solo performance that merges science and art to engage online audiences. Using motion capture and digital technologies, it visualizes the carbon cycle and highlights sustainable CO₂ capture’s impact on agriculture, employment, and future generations. The project advances brand development and image creation by showcasing innovative art-tech collaboration that makes complex science accessible and inspiring." },
-	{ type: "annot", id: "bc-annot",text: "This is an annotation about the image." },
+    { type: "image", src: "images/bc.png", title: "Breath of Carbon" },
+	{ type: "annot", id: "bc-annot",text: "Breath of Carbon is an XR interactive solo performance that merges science and art to engage online audiences. Using motion capture and digital technologies, it visualizes the carbon cycle and highlights sustainable CO₂ capture’s impact on agriculture, employment, and future generations. The project advances brand development and image creation by showcasing innovative art-tech collaboration that makes complex science accessible and inspiring." },
     { type: "image", src: "images/gc.png", title: "Green Curtain" },
 	{ type: "annot", id: "gc-annot",text: "Green Curtain is an innovative environmental project developing lignin-based filters and wipes to prevent harmful chemicals from cosmetics, decorations, and costume washing from entering theatre wastewater. By using bio-based and biodegradable materials, Green Curtain helps protect vulnerable ecosystems, promotes cleaner water, and repurposes large industrial by-products, supporting the circular economy." },
     { type: "final", id: "modal3-final", text: "Science on Stage confronts the schism between science and performing arts. Science on Stage makes cutting-edge research relatable, emotional, and unforgettable." }
@@ -1541,6 +1546,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
