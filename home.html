@@ -114,7 +114,14 @@
         type="font/woff2" 
         crossorigin="anonymous" />
 
-	
+	  <link rel="preload" href="images/bc.png" as="image" />
+  <link rel="preload" href="images/gc.png" as="image" />
+	  <link rel="preload" href="images/translucence.jpeg" as="image" />
+  <link rel="preload" href="images/eurojob.jpeg" as="image" />
+	  <link rel="preload" href="images/fa.jpg" as="image" />
+  
+
+  
   <style>
     body {
 		min-height: 100vh;
@@ -873,6 +880,19 @@ document.addEventListener('keydown', e => {
   }
 });
 
+	const imagesToPreload = [
+  "images/bc.png",
+  "images/gc.png",
+  "images/translucence.jpeg"
+		"images/eurojob.jpeg"
+	"images/fa.jpg"
+];
+
+imagesToPreload.forEach(src => {
+  const img = new Image();
+  img.src = src;
+});
+
 
 // === Binary Pop-up with Original Background ===
 // === Binary Pop-up with Fade In + Fade Out ===
@@ -1573,6 +1593,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
