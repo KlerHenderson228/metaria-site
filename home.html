@@ -324,11 +324,13 @@ a {
   overflow: hidden;
   background: rgba(0,0,0,0.5);
 
-  display: flex;       /* <<< add this */
+}
+.modal.show {
+  display: flex;
   align-items: center;
   justify-content: center;
 }
-
+ 
 
 /* Keep existing modal-content properties */
 .modal-content {  
@@ -1596,6 +1598,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
