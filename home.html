@@ -314,11 +314,7 @@ a {
 
 /* Keep existing modal-content properties */
 .modal-content {  
-display: flex;
-	flex-direction: column;   /* stack children vertically */
-  justify-content: center;  /* vertical centering */
-  align-items: center;      /* horizontal centering if needed */
-  text-align: center;       /* center text inside */
+
   z-index: 1000;
   margin: 5% auto;
   padding: 2rem;
@@ -1043,7 +1039,9 @@ const htmlIds = [
 	"bc-annot",
   "translucence-annot",
   "eurojob-annot",
-  "fa-annot"
+  "fa-annot", 
+	"modal3-final",
+	"modal6-final"
 ];
 
 keys.forEach(id => {
@@ -1546,6 +1544,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
