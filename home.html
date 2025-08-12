@@ -313,7 +313,7 @@ a {
 
 /* Keep existing modal properties */
 .modal {
-  display: none;
+  display: none;  /* keep hidden initially */
   position: fixed;
   z-index: 999;
 
@@ -324,10 +324,11 @@ a {
   overflow: hidden;
   background: rgba(0,0,0,0.5);
 
+  display: flex;       /* <<< add this */
   align-items: center;
   justify-content: center;
-	
 }
+
 
 /* Keep existing modal-content properties */
 .modal-content {  
@@ -354,6 +355,7 @@ a {
   .modal-content {
     width: 80vw;       /* scale width to viewport */
 	   max-width: 90vw;     /* limit max width to 90% of viewport */
+	  max-height: 90vh;
     margin: 0 auto;      /* center horizontally */
     box-sizing: border-box; /* include padding in width */
     padding: 15px;       /* adjust padding if needed */
@@ -367,6 +369,7 @@ a {
   .modal-content {
     width: 95vw;
     height: 80vh;
+	  max-height: 90vh;
     padding: 0.5rem;
     margin: 2vh auto;
   }
@@ -1593,6 +1596,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
