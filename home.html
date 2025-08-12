@@ -1380,25 +1380,31 @@ function playSequenceFromData(modalId) {
 
     const item = sequence[index];
 
-    if (item.type === "final") {
-      const finalMessage = document.createElement('div');
-      finalMessage.textContent = translations[currentLang][item.id] || item.text || "Thank you!";
-      finalMessage.className = item.class;
-      finalMessage.style.opacity = 0;
-      finalMessage.style.transition = 'opacity 1s ease';
-      finalMessage.style.fontSize = '24px';
-      finalMessage.style.marginTop = '30px';
-      finalMessage.style.display = 'flex';
-      finalMessage.style.justifyContent = 'center';
-      finalMessage.style.alignItems = 'center';
-      finalMessage.style.height = '100%';
+   if (item.type === "final") {
+  const finalMessage = document.createElement('div');
+  finalMessage.textContent = translations[currentLang][item.id] || item.text || "Thank you!";
+  finalMessage.className = item.class;
+  finalMessage.style.opacity = 0;
+  finalMessage.style.transition = 'opacity 1s ease';
+  finalMessage.style.fontSize = '24px';
+  finalMessage.style.marginTop = '30px';
+  finalMessage.style.display = 'flex';
+  finalMessage.style.justifyContent = 'center';
+  finalMessage.style.alignItems = 'center';
+  finalMessage.style.height = '100%';
 
-      container.appendChild(finalMessage);
-      requestAnimationFrame(() => {
-        finalMessage.style.opacity = 1;
-      });
-      return;
-    }
+  container.appendChild(finalMessage);
+
+  // Store ref on modal object for later updates
+  modal.currentFinalElement = finalMessage;
+  modal.currentFinalId = item.id;
+
+  requestAnimationFrame(() => {
+    finalMessage.style.opacity = 1;
+  });
+  return;
+}
+
 
     const el = document.createElement('div');
     el.style.opacity = 0;
@@ -1506,13 +1512,18 @@ function updateModalAnnotationLanguage(modalId) {
   const modal = document.getElementById(modalId);
   if (!modal) return;
 
+  // Update annotation element
   const el = modal.currentAnnotElement;
   const id = modal.currentAnnotId;
-
   if (el && id) {
-    
-	  el.innerHTML = translations[currentLang][id] || "No text available";
+    el.innerHTML = translations[currentLang][id] || "No text available";
+  }
 
+  // Update final message element
+  const finalEl = modal.currentFinalElement;
+  const finalId = modal.currentFinalId;
+  if (finalEl && finalId) {
+    finalEl.textContent = translations[currentLang][finalId] || "Thank you!";
   }
 }
 
@@ -1549,6 +1560,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
