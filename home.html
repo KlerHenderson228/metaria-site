@@ -878,6 +878,18 @@ document.addEventListener('keydown', e => {
 });
 
 
+const imagesToPreload = [
+  "images/bc.png",
+  "images/gc.png",
+  "images/translucence.jpeg"
+		"images/eurojob.jpeg"
+	"images/fa.jpg"
+];
+
+imagesToPreload.forEach(src => {
+  const img = new Image();
+  img.src = src;
+});
 // === Binary Pop-up with Original Background ===
 // === Binary Pop-up with Fade In + Fade Out ===
 const canvas = document.getElementById("binaryCanvas");
@@ -1577,6 +1589,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
