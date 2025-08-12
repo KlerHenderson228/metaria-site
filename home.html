@@ -1303,12 +1303,9 @@ word2.style.width = '100%';               // Ensure it spans the modal
 
   const link = document.createElement('a');
   link.href = 'https://www.youtube.com/@theatreleadership';
-  link.target = '_blank';
- 
-  link.style.fontSize = '28px';
-  
+  link.target = '_blank'; 
+  link.style.fontSize = '28px';  
   link.textContent = 'Dramaturgy of Theatre Leadership';
-
   word2.appendChild(link);
 
   // Add to container
@@ -1341,9 +1338,7 @@ function playSequenceFromData(modalId) {
     modal.sequenceTimeouts.forEach(tid => clearTimeout(tid));
   }
   modal.sequenceTimeouts = [];
-
   container.innerHTML = '';
-
   container.style.display = 'flex';
   container.style.justifyContent = 'center';
   container.style.alignItems = 'center';
@@ -1414,17 +1409,16 @@ function playSequenceFromData(modalId) {
 
     if (item.type === "annot") {
 	  
-		el.innerHTML = translations[currentLang][item.id] || item.text || "No text available";
-
-      el.classList.add("modal-annot");
-		 el.style.fontStyle = "italic";
-  el.style.textAlign = "justify";
+	el.innerHTML = translations[currentLang][item.id] || item.text || "No text available";
+	el.classList.add("modal-annot");
+	el.style.fontStyle = "italic";
+  	el.style.textAlign = "justify";
 
   // Conditionally apply mobile-specific styles
   if (window.innerWidth <= 780) {
-    el.style.fontSize = "16px";
+    el.style.fontSize = "12px";
     el.style.padding = "12px";
-	   el.style.marginTop = "20px";
+	el.style.marginTop = "20px";
     el.style.margin = "10px 0";
   } else {
     el.style.fontSize = "20px";  // or whatever for desktop
@@ -1523,6 +1517,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
