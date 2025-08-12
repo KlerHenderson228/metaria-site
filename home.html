@@ -117,12 +117,14 @@
 	
   <style>
     body {
+		min-height: 100vh;
+  /* You can add this to force the browser to resize correctly */
+  height: 100dvh;  /* dynamic viewport height unit (newer browsers) */
       margin: 0;
       background: #f0f0f0;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
 	  font-family: inter, sans-serif;
     }
 html, body {
@@ -130,18 +132,29 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%; /* ensures body fills viewport */
-  overflow-x: visible; /* prevent horizontal scroll */
+  overflow-x: hidden; /* prevent horizontal scroll */
   overflow-y: visible; /* Hide scrollbars */
   position: relative;
 
   font-size: 100%; /* allows user scaling */
 }
 
-	  @media (max-width: 600px) {
+	  @media (max-width: 780px) {
   .blob-container {
     max-width: 200px;
   }
 }
+	  @media (max-width: 768px) and (orientation: landscape) {
+  .modal-content {
+    max-height: 90vh;     /* slightly larger max height */
+    height: auto;
+    overflow-y: auto;
+  }
+  body, html {
+    overflow-y: auto;     /* make sure scrolling is enabled */
+  }
+}
+
 
 
 @font-face {
@@ -1560,6 +1573,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
