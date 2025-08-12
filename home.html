@@ -108,7 +108,11 @@
   });
 </script>
 
-
+	   <link rel="preload" 
+        href="fonts/Misto.woff2" 
+        as="font" 
+        type="font/woff2" 
+        crossorigin="anonymous" />
 
 	
   <style>
@@ -138,6 +142,7 @@ html, body {
     max-width: 200px;
   }
 }
+
 
 @font-face {
   font-family: 'Misto';
@@ -1414,6 +1419,7 @@ function playSequenceFromData(modalId) {
 	el.style.fontStyle = "italic";
   	el.style.textAlign = "justify";
 	el.style.height = '100%';
+	el.style.alignItems = 'center';
 
   // Conditionally apply mobile-specific styles
   if (window.innerWidth <= 780) {
@@ -1518,6 +1524,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
