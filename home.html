@@ -72,8 +72,6 @@
 </div>
 
 <script>
- 
-
   const cookieBanner = document.getElementById('cookie-banner');
   const cookieOverlay = document.getElementById('cookie-overlay');
   const acceptBtn = document.getElementById('accept-cookies-btn');
@@ -83,9 +81,30 @@
     cookieBanner.style.display = 'block';
     cookieOverlay.style.display = 'block';
   }
+
   function hideCookieConsent() {
     cookieBanner.style.display = 'none';
     cookieOverlay.style.display = 'none';
+  }
+
+  async function loadGAScript() {
+    if (!document.getElementById('ga-script')) {
+      const script = document.createElement('script');
+      script.id = 'ga-script';
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-836SRJ0HHH";
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-836SRJ0HHH');
+    }
+  }
+
+  function initGAWithVisitorID() {
+    console.log("GA initialized with visitor ID");
   }
 
   acceptBtn.addEventListener('click', async () => {
@@ -108,12 +127,12 @@
       initGAWithVisitorID();
     } else if (consent === 'false') {
       hideCookieConsent();
-      // GA not loaded
     } else {
       showCookieConsent();
     }
   });
 </script>
+
 
 	   <link rel="preload" 
         href="fonts/Misto.woff2" 
@@ -1725,6 +1744,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
