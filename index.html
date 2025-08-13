@@ -9,7 +9,7 @@
   
   
 <!-- Cookie Consent -->
-<div id="cookie-consent" style="color: #fdf5e6;">
+<div id="cookie-consent" style="color: #fdf5e6; display:none;">
   <span id="cookie-text">
     This site uses cookies and Google Analytics to improve your experience.
   </span>  
@@ -41,19 +41,16 @@
 </div>
 
 <script>
-  const cookieBanner = document.getElementById('cookie-banner');
-  const cookieOverlay = document.getElementById('cookie-overlay');
+  const cookieConsent = document.getElementById('cookie-consent');
   const acceptBtn = document.getElementById('accept-cookies-btn');
   const rejectBtn = document.getElementById('reject-cookies-btn');
 
   function showCookieConsent() {
-    cookieBanner.style.display = 'block';
-    cookieOverlay.style.display = 'block';
+    cookieConsent.style.display = 'block';
   }
 
   function hideCookieConsent() {
-    cookieBanner.style.display = 'none';
-    cookieOverlay.style.display = 'none';
+    cookieConsent.style.display = 'none';
   }
 
   async function loadGAScript() {
