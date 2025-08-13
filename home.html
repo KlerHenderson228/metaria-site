@@ -1530,7 +1530,7 @@ function playSequenceFromData(modalId) {
 
    if (item.type === "final") {
   const finalMessage = document.createElement('div');
-  finalMessage.textContent = translations[currentLang][item.id] || item.text || "Thank you!";
+  finalMessage.innerHTML = translations[currentLang][item.id] || item.text || "Thank you!";
   finalMessage.className = item.class;
   finalMessage.style.opacity = 0;
   finalMessage.style.transition = 'opacity 1s ease';
@@ -1689,7 +1689,7 @@ function updateModalAnnotationLanguage(modalId) {
   const finalEl = modal.currentFinalElement;
   const finalId = modal.currentFinalId;
   if (finalEl && finalId) {
-    finalEl.textContent = translations[currentLang][finalId] || "Thank you!";
+    finalEl.innerHTML = translations[currentLang][finalId] || "Thank you!";
   }
 }
 
@@ -1726,6 +1726,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
