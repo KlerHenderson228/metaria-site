@@ -1542,8 +1542,16 @@ finalMessage.style.textAlign = "justify";
   finalMessage.style.alignItems = 'center';
   finalMessage.style.height = '100%';
 
-	   finalMessage.style.backgroundColor = '#f0f0f0';  // example light gray
-finalMessage.style.padding = '1rem';            // optional, adds spacing inside
+	// Square frame
+finalMessage.style.display = 'flex';
+finalMessage.style.justifyContent = 'center';
+finalMessage.style.alignItems = 'center';
+finalMessage.style.width = '200px';   // square width
+finalMessage.style.height = '200px';  // same as width for square
+finalMessage.style.border = '2px solid #000';  // frame border
+finalMessage.style.padding = '10px';  // inner spacing
+finalMessage.style.boxSizing = 'border-box'; // include padding in size
+finalMessage.style.borderRadius = '8px'; // optional: rounded corners
 
   container.appendChild(finalMessage);
 
@@ -1716,6 +1724,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
