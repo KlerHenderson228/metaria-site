@@ -8,6 +8,13 @@
 
   <title>METARIA = art + digital + science</title>
 
+	<link rel="preload" href="videos/vid2.mp4" as="video" type="video/mp4">
+<link rel="preload" href="videos/vid4.mp4" as="video" type="video/mp4">
+	<link rel="preload" href="videos/vid5.mp4" as="video" type="video/mp4">
+<link rel="preload" href="videos/vid6.mp4" as="video" type="video/mp4">
+	<link rel="preload" href="videos/vid7.mp4" as="video" type="video/mp4">
+<link rel="preload" href="videos/vid8.mp4" as="video" type="video/mp4">
+
 <!-- Cookie banner with overlay -->
 <div id="cookie-overlay" style="
   display: none;
@@ -892,7 +899,18 @@ document.addEventListener('keydown', e => {
   }
 });
 
-
+document.addEventListener("DOMContentLoaded", () => {
+  // Preload blob videos
+  document.querySelectorAll(".blob[data-video]").forEach(blob => {
+    const src = blob.getAttribute("data-video");
+    if (src) {
+      const video = document.createElement("video");
+      video.src = src;
+      video.preload = "auto";
+      video.muted = true; // important for autoplay on mobile
+      video.load();
+    }
+  });
 
 const imagesToPreload = [
   "images/bc.png",
@@ -1608,6 +1626,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
