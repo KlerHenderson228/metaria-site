@@ -172,34 +172,36 @@ body, html {
 	
 	/* Base animation + timing shared on all devices */
 #pulse-dot{
-  --r-min: 15;
-  --r-max: 25;
-
   opacity: 0;
   animation-name: pulse;
   animation-duration: 1.5s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  animation-delay: 5.5s;
-  animation-fill-mode: forwards;
+  animation-delay: 5.5s;          /* keep your original delay */
+  animation-fill-mode: forwards;  /* keep fill mode */
 }
 
-/* Single keyframes uses variables */
+/* desktop+mobile share the same JS timing now */
 @keyframes pulse{
-  0%   { opacity: 1; r: var(--r-min); }
-  50%  { opacity: .5; r: var(--r-max); }
-  100% { opacity: 1; r: var(--r-min); }
+  0%   { opacity: 1; r: 15; }
+  50%  { opacity: .5; r: 25; }
+  100% { opacity: 1; r: 15; }
 }
 
-/* Mobile just changes the radii; timing stays identical */
 @media (max-width:1024px){
+  /* Use the shorthand ONLY if you repeat the delay & fill-mode,
+     otherwise they reset */
   #pulse-dot{
-    --r-min: 10;
-    --r-max: 18;
+    animation: pulse-mobile 1.5s ease-in-out 5.5s infinite normal forwards;
+  }
+  @keyframes pulse-mobile{
+    0%   { opacity: 1; r: 10; }
+    50%  { opacity: .5; r: 18; }
+    100% { opacity: 1; r: 10; }
   }
 }
 
-/* optional: make .visible actually affect opacity */
+/* optional: make the JS 'visible' class actually do something */
 #pulse-dot.visible { opacity: 1; }
 
 	  
