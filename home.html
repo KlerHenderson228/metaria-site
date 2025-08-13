@@ -395,7 +395,7 @@ a {
 @media (max-width: 1024px) { /* covers iPhone Max landscape */
   .modal-content {
     width: 100vw !important;
-    height: 100vh !important;
+    height: 100dvh !important;
     margin: 0 !important;
     padding: 1rem !important;
     border-radius: 0 !important;
@@ -1039,17 +1039,6 @@ loop();
 
 
 
-function setModalHeight() {
-  const modalContent = document.querySelector('.modal-content');
-  if(modalContent){
-    modalContent.style.height = window.innerHeight + 'px';
-  }
-}
-
-window.addEventListener('resize', setModalHeight);
-window.addEventListener('orientationchange', setModalHeight);
-setModalHeight(); // initial call
-
 
 	
 
@@ -1688,6 +1677,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
