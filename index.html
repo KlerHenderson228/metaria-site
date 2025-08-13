@@ -170,34 +170,39 @@ body, html {
       }
     }
 	
-	/* Base animation + timing shared on all devices */
-/* Variables for dot radius */
-:root {
-  --r-min: 15;
-  --r-max: 25;
+	#pulse-dot{
+  opacity: 0;
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-delay: 5.5s;          /* keep your original delay */
+  animation-fill-mode: forwards;  /* keep fill mode */
 }
 
-@media (max-width: 1024px) {
-  :root {
-    --r-min: 60;
-    --r-max: 100;
+/* desktop+mobile share the same JS timing now */
+@keyframes pulse{
+  0%   { opacity: 1; r: 15; }
+  50%  { opacity: .5; r: 25; }
+  100% { opacity: 1; r: 15; }
+}
+
+@media (max-width:1024px){
+  /* Use the shorthand ONLY if you repeat the delay & fill-mode,
+     otherwise they reset */
+  #pulse-dot{
+    animation: pulse-mobile 1.5s ease-in-out 5.5s infinite normal forwards;
+  }
+  @keyframes pulse-mobile{
+    0%   { opacity: 1; r: 60; }
+    50%  { opacity: .5; r: 100; }
+    100% { opacity: 1; r: 60; }
   }
 }
 
-/* Pulse dot animation */
-#pulse-dot {
-  opacity: 0;
-  animation: pulse 1.5s ease-in-out 5.5s infinite forwards;
-}
-
-@keyframes pulse {
-  0%   { opacity: 1; r: var(--r-min); }
-  50%  { opacity: .5; r: var(--r-max); }
-  100% { opacity: 1; r: var(--r-min); }
-}
-
-/* Optional: visible class from JS */
+/* optional: make the JS 'visible' class actually do something */
 #pulse-dot.visible { opacity: 1; }
+
 
 	  
 .footer {
@@ -411,15 +416,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
   
-  window.addEventListener('DOMContentLoaded', () => {
-    const dot = document.getElementById('pulse-dot');
-    const zoomGroup = document.querySelector('.zoom-group');
+ window.addEventListener('DOMContentLoaded', () => {
+  const dot = document.getElementById('pulse-dot');
+  
+  if (window.innerWidth <= 1024) {
+    dot.setAttribute('r', 60);
+  } else {
+    dot.setAttribute('r', 15);
+  }
+  
+  setTimeout(() => {
+    dot.classList.add('visible');
+  }, 4000);
+});
 
-    // Match the zoom-out delay + duration (e.g. 2s delay + 2s animation = 4s)
-    setTimeout(() => {
-      dot.classList.add('visible');
-    }, 4000);
-  });
 
 	  
 </script>
