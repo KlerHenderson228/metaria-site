@@ -180,18 +180,30 @@ body, html {
 @keyframes pulse {
   0% {
     opacity: 1;
-    r: 60;
+    r: 15;
   }
   50% {
     opacity: 0.5;
-    r: 100;
+    r: 25;
   }
   100% {
     opacity: 1;
-    r: 60;
+    r: 15;
   }
 }
 
+@media (max-width: 1024px) {
+  @keyframes pulse-mobile {
+    0% { opacity: 1; r: 60; }
+    50% { opacity: 0.5; r: 100; }
+    100% { opacity: 1; r: 60; }
+  }
+
+  #pulse-dot {
+    animation: pulse-mobile 1.5s infinite ease-in-out;
+  }
+}
+	  
 .footer {
   position: fixed;
   bottom: 0;
@@ -329,7 +341,7 @@ body, html {
 	
 	
 	<a xlink:href="home.html">
-	<circle id="pulse-dot" cx="323" cy="165" r="60" fill="red" opacity="0" />
+	<circle id="pulse-dot" cx="323" cy="165" r="15" fill="red" opacity="0" />
 </a>
    </g>
   </svg>
@@ -411,6 +423,8 @@ window.addEventListener('DOMContentLoaded', () => {
       dot.classList.add('visible');
     }, 4000);
   });
+
+	  
 </script>
 
 <footer class="footer" style="color: #fdf5e6;">
