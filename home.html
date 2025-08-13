@@ -396,7 +396,8 @@ a {
 @media (max-width: 1024px) { /* covers iPhone Max landscape */
   .modal-content {
     width: 100vw !important;
-    height: 100dvh !important;
+	  height: auto !important;       /* let it shrink if needed */
+    max-height: 100vh;             /* never taller than viewport */
     margin: 0 !important;
     padding: 1rem !important;
     border-radius: 0 !important;
@@ -404,6 +405,14 @@ a {
     max-height: 100vh;
 	    overflow-y: auto; /* allow vertical scrolling */
     -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+  }
+
+	 .modal-content img,
+  .modal-content video,
+  .modal-content canvas {
+    max-width: 95vw;               /* fit screen width */
+    max-height: 90vh;              /* fit screen height */
+    object-fit: contain;           /* scale down to fit */
   }
 	 /* Lower close button on mobile */
   .modal-content .close {
@@ -1693,6 +1702,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
