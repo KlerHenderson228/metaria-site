@@ -401,6 +401,8 @@ a {
     border-radius: 0 !important;
     max-width: 100vw;
     max-height: 100vh;
+	    overflow-y: auto; /* allow vertical scrolling */
+    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
   }
 	 /* Lower close button on mobile */
   .modal-content .close {
@@ -1686,6 +1688,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
