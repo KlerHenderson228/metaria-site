@@ -1403,6 +1403,17 @@ if (modal.sequenceTimeouts) {
 
 
 
+	document.addEventListener('click', () => {
+  document.querySelectorAll('.blob video').forEach(video => {
+    if (video.paused) {
+      video.play().catch(() => {});
+    }
+  });
+}, { once: true }); // only need first tap
+
+
+
+
 	
 
 // === Word Animation for Modal 1 ===
@@ -1667,6 +1678,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
