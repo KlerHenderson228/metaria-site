@@ -170,39 +170,38 @@ body, html {
       }
     }
 	
-	#pulse-dot {
+	/* Base animation + timing shared on all devices */
+#pulse-dot{
+  --r-min: 15;
+  --r-max: 25;
+
   opacity: 0;
-  animation: pulse 1.5s infinite ease-in-out;
-  animation-delay: 5.5s; /* Adjust depending on when your zoom ends */
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-delay: 5.5s;
   animation-fill-mode: forwards;
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 1;
-    r: 15;
-  }
-  50% {
-    opacity: 0.5;
-    r: 25;
-  }
-  100% {
-    opacity: 1;
-    r: 15;
+/* Single keyframes uses variables */
+@keyframes pulse{
+  0%   { opacity: 1; r: var(--r-min); }
+  50%  { opacity: .5; r: var(--r-max); }
+  100% { opacity: 1; r: var(--r-min); }
+}
+
+/* Mobile just changes the radii; timing stays identical */
+@media (max-width:1024px){
+  #pulse-dot{
+    --r-min: 10;
+    --r-max: 18;
   }
 }
 
-@media (max-width: 1024px) {
-  @keyframes pulse-mobile {
-    0% { opacity: 1; r: 60; }
-    50% { opacity: 0.5; r: 100; }
-    100% { opacity: 1; r: 60; }
-  }
+/* optional: make .visible actually affect opacity */
+#pulse-dot.visible { opacity: 1; }
 
-  #pulse-dot {
-    animation: pulse-mobile 1.5s infinite ease-in-out;
-  }
-}
 	  
 .footer {
   position: fixed;
