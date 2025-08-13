@@ -1231,6 +1231,13 @@ document.querySelectorAll('.blob').forEach(blob => {
 
   const originalPath = new Path2D(pathD);
 
+  let videoReady = false;
+
+  video.addEventListener('canplay', () => {
+    videoReady = true;
+    video.play().catch(() => {});
+  });
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
@@ -1243,7 +1250,7 @@ document.querySelectorAll('.blob').forEach(blob => {
     ctx.clip(originalPath);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-    if (video.readyState >= 2) {
+    if (videoReady) {
       // draw video
       const videoScale = Math.max(width / video.videoWidth, height / video.videoHeight);
       const videoWidthScaled = video.videoWidth * videoScale;
@@ -1252,7 +1259,7 @@ document.querySelectorAll('.blob').forEach(blob => {
       const videoY = (height - videoHeightScaled) / 2;
       ctx.drawImage(video, videoX, videoY, videoWidthScaled, videoHeightScaled);
     } else if (thumb.complete) {
-      // draw thumbnail using same scaling logic
+      // draw thumbnail only if video not ready
       const thumbScale = Math.max(width / thumb.naturalWidth, height / thumb.naturalHeight);
       const thumbWidthScaled = thumb.naturalWidth * thumbScale;
       const thumbHeightScaled = thumb.naturalHeight * thumbScale;
@@ -1265,9 +1272,7 @@ document.querySelectorAll('.blob').forEach(blob => {
     requestAnimationFrame(draw);
   }
 
-  video.addEventListener('canplay', () => draw());
-  if (thumb.complete) draw();
-  video.play().catch(() => {});
+  draw();
 });
 
 
@@ -1662,6 +1667,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
