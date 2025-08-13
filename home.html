@@ -1202,85 +1202,64 @@ document.querySelectorAll('.blob').forEach(blob => {
   canvas.width = width;
   canvas.height = height;
 
+  const thumb = blob.querySelector('img');
   const videoSrc = blob.getAttribute('data-video');
+
   const video = document.createElement('video');
   video.src = videoSrc;
   video.autoplay = true;
   video.loop = true;
   video.muted = true;
   video.playsInline = true;
-  video.style.display = 'none';
-  document.body.appendChild(video);
+  document.body.appendChild(video); // hidden, used only as source
 
   const pathEl = blob.querySelector('.blob-shape');
   const pathD = pathEl.getAttribute('d');
-
-  // Parse SVG viewBox from parent <svg>
   const svg = blob.querySelector('svg');
   const viewBoxAttr = svg.getAttribute('viewBox');
-  let viewBox = [0, 0, width, height]; // fallback to blob size
-  if (viewBoxAttr) {
-    viewBox = viewBoxAttr.split(' ').map(Number);
-  }
+  let viewBox = viewBoxAttr ? viewBoxAttr.split(' ').map(Number) : [0, 0, width, height];
 
-  // Parse transform translate from path (e.g. translate(100 100))
   const transform = pathEl.getAttribute('transform') || '';
   const translateMatch = transform.match(/translate\(([^)]+)\)/);
-  let translateX = 0;
-  let translateY = 0;
-  if (translateMatch) {
-    const parts = translateMatch[1].split(/[\s,]+/).map(Number);
-    translateX = parts[0];
-    translateY = parts[1] || 0;
-  }
+  const translateX = translateMatch ? Number(translateMatch[1].split(/[\s,]+/)[0]) : 0;
+  const translateY = translateMatch ? Number(translateMatch[1].split(/[\s,]+/)[1] || 0) : 0;
 
-  // Create Path2D from pathD
   const originalPath = new Path2D(pathD);
 
   function draw() {
-    if (video.readyState >= 2) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.save();
+    ctx.clearRect(0, 0, width, height);
+    ctx.save();
 
-      // Calculate scale factors to map SVG viewBox to canvas size
-      const scaleX = width / viewBox[2];
-      const scaleY = height / viewBox[3];
+    const scaleX = width / viewBox[2];
+    const scaleY = height / viewBox[3];
 
-      // Build a transformed Path2D for clipping
-      // Since Path2D doesn't have direct transform, we transform the context instead
-      ctx.translate(translateX * scaleX, translateY * scaleY);
-      ctx.scale(scaleX, scaleY);
+    ctx.translate(translateX * scaleX, translateY * scaleY);
+    ctx.scale(scaleX, scaleY);
+    ctx.clip(originalPath);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-      // Clip to blob shape
-      ctx.clip(originalPath);
+    const source = (video.readyState >= 2) ? video : thumb;
 
-      // Undo transform to draw video in canvas coordinates
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (source) {
+      const srcWidth = source.videoWidth || source.naturalWidth;
+      const srcHeight = source.videoHeight || source.naturalHeight;
 
-      // Now calculate how to scale and position video so it fills the canvas fully
-      const videoScaleX = width / video.videoWidth;
-      const videoScaleY = height / video.videoHeight;
-      const videoScale = Math.max(videoScaleX, videoScaleY);
+      const scale = Math.max(width / srcWidth, height / srcHeight);
+      const drawWidth = srcWidth * scale;
+      const drawHeight = srcHeight * scale;
+      const x = (width - drawWidth) / 2;
+      const y = (height - drawHeight) / 2;
 
-      const videoWidthScaled = video.videoWidth * videoScale;
-      const videoHeightScaled = video.videoHeight * videoScale;
-
-      const videoX = (width - videoWidthScaled) / 2;
-      const videoY = (height - videoHeightScaled) / 2;
-
-      ctx.drawImage(video, videoX, videoY, videoWidthScaled, videoHeightScaled);
-
-      ctx.restore();
+      ctx.drawImage(source, x, y, drawWidth, drawHeight);
     }
+
+    ctx.restore();
     requestAnimationFrame(draw);
   }
 
-  video.addEventListener('canplay', () => draw());
-  video.play().catch(() => {});
+  draw();
+  video.addEventListener('canplay', () => video.play().catch(() => {}));
 });
-
-
-
 
 
 
@@ -1668,6 +1647,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
