@@ -316,6 +316,16 @@ a {
       width: 100%;
       height: 100%;
     }
+.blob img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* make image fill the blob */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* allow clicks to go through to blob for modal */
+}
 
 
 #binaryCanvas {
@@ -698,6 +708,7 @@ a {
 	<div class="blob-container">
 	
 <div class="blob blob1" data-modal="modal1" data-video="videos/vid7.mp4" style="width:300px; height:300px; position: absolute;">
+	<img src="thumbnails/vid7.jpg" alt="Video 1">
   <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
   <svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
     <path class="blob-shape" fill="rgba(255,255,255,0.01)"
@@ -707,6 +718,7 @@ a {
 </div>
 
 <div class="blob blob2" data-modal="modal2" data-video="videos/vid2.mp4" style="width:1000px; height:1000px; position: absolute;">
+	<img src="thumbnails/vid2.jpg" alt="Video 1">
   <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
   <svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
     <path class="blob-shape" fill="rgba(255,255,255,0.01)"
@@ -716,6 +728,7 @@ a {
 </div>
 
 <div class="blob blob3" data-modal="modal3" data-video="videos/vid8.mp4" style="width:600px; height:600px; position: relative;">
+	<img src="thumbnails/vid8.jpg" alt="Video 1">
   <!-- Canvas for video -->
   <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
 
@@ -730,6 +743,7 @@ a {
 </div>
 
 	<div class="blob blob4" data-modal="modal4" data-video="videos/vid4.mp4" style="width:350px; height:350px; position: absolute;">
+		<img src="thumbnails/vid4.jpg" alt="Video 1">
   <!-- Canvas for video -->
   <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
 
@@ -744,6 +758,7 @@ a {
 </div>
 
 <div class="blob blob5" data-modal="modal5" data-video="videos/vid5.mp4" style="width:200px; height:200px; position: absolute;">
+	<img src="thumbnails/vid5.jpg" alt="Video 1">
   <!-- Canvas for video -->
   <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
 
@@ -758,6 +773,7 @@ a {
 </div>
 
 <div class="blob blob6" data-modal="modal6" data-video="videos/vid6.mp4" style="width:600px; height:600px; position: absolute;">
+	<img src="thumbnails/vid6.jpg" alt="Video 1">
   <!-- Canvas for video -->
   <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
 
@@ -912,47 +928,77 @@ Showcasing innovative tech-driven performance art nationally and internationally
 
 	document.addEventListener("DOMContentLoaded", () => {
   const blobs = document.querySelectorAll(".blob[data-video]");
+  const thumbnails = [];
   const videos = [];
 
-  blobs.forEach(blob => {
-    const src = blob.getAttribute("data-video");
-    if (src) {
+  // 1️⃣ Preload thumbnails
+  let thumbLoadedCount = 0;
+  const totalThumbs = blobs.length;
+
+  blobs.forEach((blob, index) => {
+    const thumbSrc = blob.querySelector("img")?.src;
+    const videoSrc = blob.getAttribute("data-video");
+
+    // Create video elements (autoplay muted later)
+    if (videoSrc) {
       const video = document.createElement("video");
-      video.src = src;
+      video.src = videoSrc;
       video.preload = "auto";
-      video.muted = true;        // required for autoplay on mobile
-      video.playsInline = true;  // required for inline playback on iOS
+      video.muted = true;
+      video.playsInline = true;
       videos.push(video);
+      blob.dataset.videoElement = index; // store index for later use
+    }
+
+    if (thumbSrc) {
+      const img = new Image();
+      img.src = thumbSrc;
+      img.onload = () => {
+        thumbLoadedCount++;
+        if (thumbLoadedCount === totalThumbs) {
+          showPageAndPlayVideos();
+        }
+      };
+    } else {
+      // No thumbnail, count as loaded
+      thumbLoadedCount++;
     }
   });
 
-  let loadedCount = 0;
-  const totalVideos = videos.length;
-
-  if (totalVideos === 0) {
-    // No videos, just show page immediately
-    finishLoading();
-    return;
-  }
-
-  videos.forEach(video => {
-    video.addEventListener("canplaythrough", () => {
-      loadedCount++;
-      if (loadedCount === totalVideos) {
-        finishLoading();
-      }
-    }, { once: true });
-
-    // Start loading the video
-    video.load();
-  });
-
-  function finishLoading() {
+  function showPageAndPlayVideos() {
+    // Remove loader
     document.body.classList.remove("loading");
     const loader = document.getElementById("loading-screen");
     if (loader) loader.remove();
+
+    // Show blobs and start videos
+    blobs.forEach((blob, index) => {
+      const video = videos[index];
+      if (video) {
+        video.autoplay = true;
+        video.loop = true;
+        video.style.position = "absolute";
+        video.style.width = "100%";
+        video.style.height = "100%";
+        video.style.top = 0;
+        video.style.left = 0;
+        video.style.objectFit = "cover";
+
+        blob.appendChild(video);
+        video.play().catch(() => {
+          // autoplay might fail on some mobile browsers
+        });
+
+        // Hide the thumbnail once video starts playing
+        video.addEventListener("playing", () => {
+          const img = blob.querySelector("img");
+          if (img) img.style.display = "none";
+        }, { once: true });
+      }
+    });
   }
 });
+
 
 	document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
@@ -1695,6 +1741,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
