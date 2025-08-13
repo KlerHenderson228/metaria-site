@@ -407,17 +407,20 @@ a {
     -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
   }
 
-	 .modal-content img,
+	  .modal-content img,
   .modal-content video,
   .modal-content canvas {
-    max-width: 95vw;               /* fit screen width */
-    max-height: 90vh;              /* fit screen height */
-    object-fit: contain;           /* scale down to fit */
+    width: 100%;        /* always fill modal width */
+    height: 100%;       /* always fill modal height */
+    object-fit: contain; /* scale proportionally */
+    display: block;
+  }
+
   }
 	 /* Lower close button on mobile */
   .modal-content .close {
     top: 0.5rem !important;  /* move down from top */
-    right: 0.1rem !important;
+    right: 0.05rem !important;
     font-size: 24px !important;
   }
 }
@@ -1702,6 +1705,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
