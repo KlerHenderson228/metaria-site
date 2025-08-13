@@ -127,6 +127,21 @@
 	  <link rel="preload" href="images/fa.jpg" as="image" />
 	
   <style>
+
+	   body.loading {
+    overflow: hidden; /* prevent scroll while loading */
+  }
+  #loading-screen {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 9999;
+  }
     body {
 		min-height: 100vh;
   /* You can add this to force the browser to resize correctly */
@@ -666,8 +681,10 @@ a {
   </style>
 </head>
 
-<body>
+<body class="loading">
 
+<div id="loading-screen">Loading...</div>
+	
 <canvas id="binaryCanvas"></canvas>
 
 <div id="language-switcher" style="position: fixed; top: 10px; right: 10px; z-index: 10000;">
@@ -891,6 +908,50 @@ Showcasing innovative tech-driven performance art nationally and internationally
   
 
 <script>
+
+	document.addEventListener("DOMContentLoaded", () => {
+  const blobs = document.querySelectorAll(".blob[data-video]");
+  const videos = [];
+
+  blobs.forEach(blob => {
+    const src = blob.getAttribute("data-video");
+    if (src) {
+      const video = document.createElement("video");
+      video.src = src;
+      video.preload = "auto";
+      video.muted = true;        // required for autoplay on mobile
+      video.playsInline = true;  // required for inline playback on iOS
+      videos.push(video);
+    }
+  });
+
+  let loadedCount = 0;
+  const totalVideos = videos.length;
+
+  if (totalVideos === 0) {
+    // No videos, just show page immediately
+    finishLoading();
+    return;
+  }
+
+  videos.forEach(video => {
+    video.addEventListener("canplaythrough", () => {
+      loadedCount++;
+      if (loadedCount === totalVideos) {
+        finishLoading();
+      }
+    }, { once: true });
+
+    // Start loading the video
+    video.load();
+  });
+
+  function finishLoading() {
+    document.body.classList.remove("loading");
+    const loader = document.getElementById("loading-screen");
+    if (loader) loader.remove();
+  }
+});
 
 	document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
@@ -1630,6 +1691,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
