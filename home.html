@@ -1361,7 +1361,7 @@ blobs.forEach(blob => {
     const modalId = blob.getAttribute('data-modal');
     const modal = document.getElementById(modalId);
     if (modal) {
-      modal.classList.add('show'); // ✅ use class instead of inline style
+      modal.style.display = "block";
 
       if (modalId === "modal2") {
         playWordFadeSequence(modal);
@@ -1375,32 +1375,18 @@ blobs.forEach(blob => {
 closeButtons.forEach(btn => {
   btn.addEventListener('click', (e) => {
     const modal = e.target.closest('.modal');
-    closeModal(modal);
-  });
-});
-
-// ✅ Close modal when clicking outside modal-content (works on mobile)
-modals.forEach(modal => {
-  modal.addEventListener('click', (e) => {
-    if (!e.target.closest('.modal-content')) {
-      closeModal(modal);
-    }
-  });
-});
-
-// Helper to close modal + stop timers
-function closeModal(modal) {
-  modal.classList.remove('show');
-
-  if (modal.sequenceTimeouts) {
-    modal.sequenceTimeouts.forEach(tid => clearTimeout(tid));
-    modal.sequenceTimeouts = [];
-  }
-  clearTimeout(modal.wordTimer1);
-  clearTimeout(modal.wordTimer2);
-  modal.wordTimer1 = null;
-  modal.wordTimer2 = null;
+    modal.style.display = "none";
+	
+// When closing modal:
+if (modal.sequenceTimeouts) {
+  modal.sequenceTimeouts.forEach(tid => clearTimeout(tid));
+  modal.sequenceTimeouts = [];
 }
+
+clearTimeout(modal.wordTimer1);
+clearTimeout(modal.wordTimer2);
+modal.wordTimer1 = null;
+modal.wordTimer2 = null;
 
     // Reset word1/word2
     const word1 = modal.querySelector('.word1');
@@ -1442,6 +1428,10 @@ if (modal.sequenceTimeouts) {
     }
   });
 });
+
+
+
+	
 
 // === Word Animation for Modal 1 ===
 function playWordFadeSequence(modal) {
@@ -1705,6 +1695,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
