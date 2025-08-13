@@ -41,63 +41,65 @@
 </div>
 
 <script>
-function setCookie(name, value, days) {
-  const date = new Date();
-  date.setTime(date.getTime() + (days*24*60*60*1000));
-  document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
-}
+  const cookieBanner = document.getElementById('cookie-banner');
+  const cookieOverlay = document.getElementById('cookie-overlay');
+  const acceptBtn = document.getElementById('accept-cookies-btn');
+  const rejectBtn = document.getElementById('reject-cookies-btn');
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
+  function showCookieConsent() {
+    cookieBanner.style.display = 'block';
+    cookieOverlay.style.display = 'block';
+  }
 
-const cookieConsent = document.getElementById('cookie-consent');
-const acceptBtn = document.getElementById('accept-cookies-btn');
-const rejectBtn = document.getElementById('reject-cookies-btn');
+  function hideCookieConsent() {
+    cookieBanner.style.display = 'none';
+    cookieOverlay.style.display = 'none';
+  }
 
-function showCookieConsent() {
-  cookieConsent.style.display = 'block';
-}
+  async function loadGAScript() {
+    if (!document.getElementById('ga-script')) {
+      const script = document.createElement('script');
+      script.id = 'ga-script';
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-836SRJ0HHH";
+      document.head.appendChild(script);
 
-function hideCookieConsent() {
-  cookieConsent.style.display = 'none';
-}
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-836SRJ0HHH');
+    }
+  }
 
-acceptBtn.addEventListener('click', async () => {
-  setCookie('cookiesAccepted', 'true', 365);
-  hideCookieConsent();
-  await loadGAScript();
-  initGAWithVisitorID();
-});
+  function initGAWithVisitorID() {
+    console.log("GA initialized with visitor ID");
+  }
 
-rejectBtn.addEventListener('click', () => {
-  setCookie('cookiesAccepted', 'false', 365);
-  hideCookieConsent();
-});
-
-window.addEventListener('load', async () => {
-  const consent = getCookie('cookiesAccepted');
-  if (consent === 'true') {
+  acceptBtn.addEventListener('click', async () => {
+    localStorage.setItem('cookiesAccepted', 'true');
     hideCookieConsent();
     await loadGAScript();
     initGAWithVisitorID();
-  } else if (consent === 'false') {
+  });
+
+  rejectBtn.addEventListener('click', () => {
+    localStorage.setItem('cookiesAccepted', 'false');
     hideCookieConsent();
-  } else {
-    showCookieConsent();
-  }
-});
+  });
 
-// Stub functions
-async function loadGAScript() {
-  console.log("GA script would be loaded here.");
-}
-
-function initGAWithVisitorID() {
-  console.log("GA initialized.");
-}
+  window.addEventListener('load', async () => {
+    const consent = localStorage.getItem('cookiesAccepted');
+    if (consent === 'true') {
+      hideCookieConsent();
+      await loadGAScript();
+      initGAWithVisitorID();
+    } else if (consent === 'false') {
+      hideCookieConsent();
+    } else {
+      showCookieConsent();
+    }
+  });
 </script>
 
   
