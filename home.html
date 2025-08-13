@@ -1191,43 +1191,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
 document.querySelectorAll('.blob').forEach(blob => {
   const canvas = blob.querySelector('.blob-canvas');
   const ctx = canvas.getContext('2d');
 
-  // Get blob container size
   const width = blob.offsetWidth;
   const height = blob.offsetHeight;
   canvas.width = width;
   canvas.height = height;
 
-  const thumb = blob.querySelector('img');
   const videoSrc = blob.getAttribute('data-video');
-
   const video = document.createElement('video');
   video.src = videoSrc;
   video.autoplay = true;
   video.loop = true;
   video.muted = true;
   video.playsInline = true;
-  document.body.appendChild(video); // hidden, used only as source
+  video.style.display = 'none';
+  document.body.appendChild(video);
+
+  const thumb = blob.querySelector('img'); // get thumbnail
+  if (thumb) {
+    thumb.style.width = '100%';
+    thumb.style.height = '100%';
+    thumb.style.objectFit = 'cover'; // make it behave like video scaling
+  }
 
   const pathEl = blob.querySelector('.blob-shape');
   const pathD = pathEl.getAttribute('d');
   const svg = blob.querySelector('svg');
   const viewBoxAttr = svg.getAttribute('viewBox');
-  let viewBox = viewBoxAttr ? viewBoxAttr.split(' ').map(Number) : [0, 0, width, height];
+  let viewBox = [0, 0, width, height];
+  if (viewBoxAttr) viewBox = viewBoxAttr.split(' ').map(Number);
 
   const transform = pathEl.getAttribute('transform') || '';
   const translateMatch = transform.match(/translate\(([^)]+)\)/);
-  const translateX = translateMatch ? Number(translateMatch[1].split(/[\s,]+/)[0]) : 0;
-  const translateY = translateMatch ? Number(translateMatch[1].split(/[\s,]+/)[1] || 0) : 0;
+  let translateX = 0, translateY = 0;
+  if (translateMatch) {
+    const parts = translateMatch[1].split(/[\s,]+/).map(Number);
+    translateX = parts[0];
+    translateY = parts[1] || 0;
+  }
 
   const originalPath = new Path2D(pathD);
 
   function draw() {
-    ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
 
     const scaleX = width / viewBox[2];
@@ -1238,31 +1247,43 @@ document.querySelectorAll('.blob').forEach(blob => {
     ctx.clip(originalPath);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-    const source = (video.readyState >= 2) ? video : thumb;
+    if (video.readyState >= 2) {
+      // draw video
+      const videoScaleX = width / video.videoWidth;
+      const videoScaleY = height / video.videoHeight;
+      const videoScale = Math.max(videoScaleX, videoScaleY);
 
-    if (source) {
-      const srcWidth = source.videoWidth || source.naturalWidth;
-      const srcHeight = source.videoHeight || source.naturalHeight;
+      const videoWidthScaled = video.videoWidth * videoScale;
+      const videoHeightScaled = video.videoHeight * videoScale;
 
-      const scale = Math.max(width / srcWidth, height / srcHeight);
-      const drawWidth = srcWidth * scale;
-      const drawHeight = srcHeight * scale;
-      const x = (width - drawWidth) / 2;
-      const y = (height - drawHeight) / 2;
+      const videoX = (width - videoWidthScaled) / 2;
+      const videoY = (height - videoHeightScaled) / 2;
 
-      ctx.drawImage(source, x, y, drawWidth, drawHeight);
+      ctx.drawImage(video, videoX, videoY, videoWidthScaled, videoHeightScaled);
+
+      // hide thumbnail when video is ready
+      if (thumb) thumb.style.display = 'none';
+    } else if (thumb) {
+      // draw thumbnail in same blob
+      ctx.drawImage(thumb, 0, 0, width, height);
     }
 
     ctx.restore();
     requestAnimationFrame(draw);
   }
 
-  draw();
-  video.addEventListener('canplay', () => video.play().catch(() => {}));
+  video.addEventListener('canplay', () => draw());
+  draw(); // start drawing immediately to show thumbnail
+  video.play().catch(() => {});
 });
 
 
 
+
+
+
+
+	
 // === Modal Content Data ===
 const modalContent = {
   modal3: [
@@ -1647,6 +1668,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
