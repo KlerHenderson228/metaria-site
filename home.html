@@ -1587,18 +1587,15 @@ function playSequenceFromData(modalId) {
 	el.style.height = '100%';
 	el.style.alignItems = 'center';
 	el.classList.add('nocopy');
+	el.style.fontSize = "12px";
 
   // Conditionally apply mobile-specific styles
-  if (window.innerWidth <= 780) {
-    el.style.fontSize = "12px";
+  if (window.innerWidth <= 1024) {
+    el.style.fontSize = "9px";
     el.style.padding = "12px";
 	el.style.marginTop = "20px";
     el.style.margin = "10px 0";
-  } else {
-    el.style.fontSize = "20px";  // or whatever for desktop
-    el.style.padding = "10px";
-    el.style.margin = "10px";
-  }
+  } 
 
   modal.currentAnnotElement = el;
   modal.currentAnnotId = item.id;
@@ -1696,6 +1693,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
