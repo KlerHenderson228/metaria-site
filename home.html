@@ -925,48 +925,58 @@ Showcasing innovative tech-driven performance art nationally and internationally
   
 
 <script>
-
-	document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const blobs = document.querySelectorAll(".blob[data-video]");
   let loadedThumbs = 0;
 
-  // 1️⃣ Preload thumbnails
+  function showPageAndLoadVideos() {
+    document.body.classList.remove("loading");
+    const loader = document.getElementById("loading-screen");
+    if (loader) loader.remove();
+
+    blobs.forEach(blob => {
+      const src = blob.getAttribute("data-video");
+      if (!src) return;
+
+      const video = document.createElement("video");
+      video.src = src;
+      video.muted = true;
+      video.autoplay = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.style.width = "100%";
+      video.style.height = "100%";
+      video.style.position = "absolute";
+      video.style.top = "0";
+      video.style.left = "0";
+      video.style.zIndex = 0;
+
+      blob.appendChild(video); // append first
+      video.oncanplay = () => {
+        const thumb = blob.querySelector("img");
+        if (thumb) thumb.style.display = "none";
+        video.play();
+      };
+    });
+  }
+
   blobs.forEach(blob => {
     const img = blob.querySelector("img");
     if (!img) return;
-    img.onload = () => {
+
+    function checkLoaded() {
       loadedThumbs++;
       if (loadedThumbs === blobs.length) {
-        // 2️⃣ Show page as soon as thumbnails loaded
-        document.body.classList.remove("loading");
-        const loader = document.getElementById("loading-screen");
-        if (loader) loader.remove();
-
-        // 3️⃣ Load videos asynchronously
-        blobs.forEach(blob => {
-          const src = blob.getAttribute("data-video");
-          if (!src) return;
-          const video = document.createElement("video");
-          video.src = src;
-          video.muted = true;
-          video.autoplay = true;
-          video.loop = true;
-          video.playsInline = true;
-          video.style.width = "100%";
-          video.style.height = "100%";
-          video.style.position = "absolute";
-          video.style.top = "0";
-          video.style.left = "0";
-          video.oncanplay = () => {
-            // hide thumbnail when video is ready
-            const thumb = blob.querySelector("img");
-            if (thumb) thumb.style.display = "none";
-            blob.appendChild(video);
-            video.play();
-          };
-        });
+        showPageAndLoadVideos();
       }
-    };
+    }
+
+    if (img.complete) {
+      checkLoaded();
+    } else {
+      img.onload = checkLoaded;
+      img.onerror = checkLoaded;
+    }
   });
 });
 
@@ -1712,6 +1722,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
