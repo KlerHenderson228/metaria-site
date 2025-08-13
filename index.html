@@ -41,51 +41,63 @@
 </div>
 
 <script>
-  const cookieConsent = document.getElementById('cookie-consent');
-  const acceptBtn = document.getElementById('accept-cookies-btn');
-  const rejectBtn = document.getElementById('reject-cookies-btn');
+function setCookie(name, value, days) {
+  const date = new Date();
+  date.setTime(date.getTime() + (days*24*60*60*1000));
+  document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+}
 
-  function showCookieConsent() {
-    cookieConsent.style.display = 'block';
-  }
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
-  function hideCookieConsent() {
-    cookieConsent.style.display = 'none';
-  }
+const cookieConsent = document.getElementById('cookie-consent');
+const acceptBtn = document.getElementById('accept-cookies-btn');
+const rejectBtn = document.getElementById('reject-cookies-btn');
 
-  acceptBtn.addEventListener('click', async () => {
-    localStorage.setItem('cookiesAccepted', 'true');
+function showCookieConsent() {
+  cookieConsent.style.display = 'block';
+}
+
+function hideCookieConsent() {
+  cookieConsent.style.display = 'none';
+}
+
+acceptBtn.addEventListener('click', async () => {
+  setCookie('cookiesAccepted', 'true', 365);
+  hideCookieConsent();
+  await loadGAScript();
+  initGAWithVisitorID();
+});
+
+rejectBtn.addEventListener('click', () => {
+  setCookie('cookiesAccepted', 'false', 365);
+  hideCookieConsent();
+});
+
+window.addEventListener('load', async () => {
+  const consent = getCookie('cookiesAccepted');
+  if (consent === 'true') {
     hideCookieConsent();
     await loadGAScript();
     initGAWithVisitorID();
-  });
-
-  rejectBtn.addEventListener('click', () => {
-    localStorage.setItem('cookiesAccepted', 'false');
+  } else if (consent === 'false') {
     hideCookieConsent();
-  });
-
-  window.addEventListener('load', async () => {
-    const consent = localStorage.getItem('cookiesAccepted');
-    if (consent === 'true') {
-      hideCookieConsent();
-      await loadGAScript();
-      initGAWithVisitorID();
-    } else if (consent === 'false') {
-      hideCookieConsent();
-    } else {
-      showCookieConsent();
-    }
-  });
-
-  // Stub functions for GA (you can replace them with actual logic)
-  async function loadGAScript() {
-    console.log("GA script would be loaded here.");
+  } else {
+    showCookieConsent();
   }
+});
 
-  function initGAWithVisitorID() {
-    console.log("GA initialized.");
-  }
+// Stub functions
+async function loadGAScript() {
+  console.log("GA script would be loaded here.");
+}
+
+function initGAWithVisitorID() {
+  console.log("GA initialized.");
+}
 </script>
 
   
