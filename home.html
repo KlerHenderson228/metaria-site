@@ -1570,25 +1570,32 @@ function playSequenceFromData(modalId) {
       el.style.alignItems = 'center';
     }
 
-    if (item.type === "image") {
-      const img = document.createElement('img');
-      img.src = item.src;
-      img.alt = item.title;
-      img.style.maxWidth = '100%';
-      img.style.maxHeight = '';
-		img.loading = "eager";
-      img.style.objectFit = 'contain';
-      img.style.borderRadius = '1px';
-      img.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
-      img.style.marginBottom = '10px';
+  if (item.type === "image") {
+  const img = document.createElement('img');
+  img.src = item.src;
+  img.alt = item.title;
+  img.style.maxWidth = '100%';
+  img.style.objectFit = 'contain';
+  img.style.borderRadius = '1px';
+  img.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
+  img.style.marginBottom = '10px';
+  img.loading = "eager";
 
-      const caption = document.createElement('div');
-      caption.textContent = item.title;
-      caption.style.fontSize = '18px';
+  // Adjust maxHeight for mobile
+  if (window.innerWidth <= 1024) {  // mobile or iPad landscape
+    img.style.maxHeight = (window.innerHeight - 40) + "px"; // fit modal height with some padding
+  } else {
+    img.style.maxHeight = "400px"; // desktop
+  }
 
-      el.appendChild(img);
-      el.appendChild(caption);
-    }
+  const caption = document.createElement('div');
+  caption.textContent = item.title;
+  caption.style.fontSize = '18px';
+
+  el.appendChild(img);
+  el.appendChild(caption);
+}
+
 
     if (item.type === "annot") {
 	  
@@ -1705,6 +1712,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
