@@ -1191,91 +1191,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-document.querySelectorAll('.blob').forEach(blob => {
-  const canvas = blob.querySelector('.blob-canvas');
-  const ctx = canvas.getContext('2d');
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
 
-  const width = blob.offsetWidth;
-  const height = blob.offsetHeight;
-  canvas.width = width;
-  canvas.height = height;
+  const scaleX = width / viewBox[2];
+  const scaleY = height / viewBox[3];
 
-  const videoSrc = blob.getAttribute('data-video');
-  const video = document.createElement('video');
-  video.src = videoSrc;
-  video.autoplay = true;
-  video.loop = true;
-  video.muted = true;
-  video.playsInline = true;
-  video.style.display = 'none';
-  document.body.appendChild(video);
+  // Apply clipping transform
+  ctx.translate(translateX * scaleX, translateY * scaleY);
+  ctx.scale(scaleX, scaleY);
+  ctx.clip(originalPath);
 
-  const thumb = blob.querySelector('img'); // get thumbnail
-  if (thumb) {
-    thumb.style.width = '100%';
-    thumb.style.height = '100%';
-    thumb.style.objectFit = 'cover'; // make it behave like video scaling
+  // Undo transform for drawing
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+  if (video.readyState >= 2) {
+    // draw video
+    const videoScaleX = width / video.videoWidth;
+    const videoScaleY = height / video.videoHeight;
+    const videoScale = Math.max(videoScaleX, videoScaleY);
+
+    const videoWidthScaled = video.videoWidth * videoScale;
+    const videoHeightScaled = video.videoHeight * videoScale;
+
+    const videoX = (width - videoWidthScaled) / 2;
+    const videoY = (height - videoHeightScaled) / 2;
+
+    ctx.drawImage(video, videoX, videoY, videoWidthScaled, videoHeightScaled);
+
+    if (thumb) thumb.style.display = 'none';
+  } else if (thumb) {
+    // draw thumbnail with same scaling logic
+    const thumbScaleX = width / thumb.naturalWidth;
+    const thumbScaleY = height / thumb.naturalHeight;
+    const thumbScale = Math.max(thumbScaleX, thumbScaleY);
+
+    const thumbWidthScaled = thumb.naturalWidth * thumbScale;
+    const thumbHeightScaled = thumb.naturalHeight * thumbScale;
+
+    const thumbX = (width - thumbWidthScaled) / 2;
+    const thumbY = (height - thumbHeightScaled) / 2;
+
+    ctx.drawImage(thumb, thumbX, thumbY, thumbWidthScaled, thumbHeightScaled);
   }
 
-  const pathEl = blob.querySelector('.blob-shape');
-  const pathD = pathEl.getAttribute('d');
-  const svg = blob.querySelector('svg');
-  const viewBoxAttr = svg.getAttribute('viewBox');
-  let viewBox = [0, 0, width, height];
-  if (viewBoxAttr) viewBox = viewBoxAttr.split(' ').map(Number);
+  ctx.restore();
+  requestAnimationFrame(draw);
+}
 
-  const transform = pathEl.getAttribute('transform') || '';
-  const translateMatch = transform.match(/translate\(([^)]+)\)/);
-  let translateX = 0, translateY = 0;
-  if (translateMatch) {
-    const parts = translateMatch[1].split(/[\s,]+/).map(Number);
-    translateX = parts[0];
-    translateY = parts[1] || 0;
-  }
-
-  const originalPath = new Path2D(pathD);
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-
-    const scaleX = width / viewBox[2];
-    const scaleY = height / viewBox[3];
-
-    ctx.translate(translateX * scaleX, translateY * scaleY);
-    ctx.scale(scaleX, scaleY);
-    ctx.clip(originalPath);
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-
-    if (video.readyState >= 2) {
-      // draw video
-      const videoScaleX = width / video.videoWidth;
-      const videoScaleY = height / video.videoHeight;
-      const videoScale = Math.max(videoScaleX, videoScaleY);
-
-      const videoWidthScaled = video.videoWidth * videoScale;
-      const videoHeightScaled = video.videoHeight * videoScale;
-
-      const videoX = (width - videoWidthScaled) / 2;
-      const videoY = (height - videoHeightScaled) / 2;
-
-      ctx.drawImage(video, videoX, videoY, videoWidthScaled, videoHeightScaled);
-
-      // hide thumbnail when video is ready
-      if (thumb) thumb.style.display = 'none';
-    } else if (thumb) {
-      // draw thumbnail in same blob
-      ctx.drawImage(thumb, 0, 0, width, height);
-    }
-
-    ctx.restore();
-    requestAnimationFrame(draw);
-  }
-
-  video.addEventListener('canplay', () => draw());
-  draw(); // start drawing immediately to show thumbnail
-  video.play().catch(() => {});
-});
 
 
 
@@ -1668,6 +1632,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
