@@ -410,7 +410,7 @@ a {
 	  .modal-content img,
   .modal-content video,
   .modal-content canvas {
-        height: 80vh;
+        
     object-fit: contain; /* scale proportionally */
     display: block;
   }
@@ -1596,7 +1596,7 @@ finalMessage.style.boxSizing = 'border-box';
 
   // Adjust maxHeight for mobile
   if (window.innerWidth <= 1024) {  // mobile or iPad landscape
-    img.style.maxHeight = (window.innerHeight - 1000) + "px"; // fit modal height with some padding
+    img.style.maxHeight = "50vh"; // fit modal height with some padding
   } else {
     img.style.maxHeight = "400px"; // desktop
   }
@@ -1725,6 +1725,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
