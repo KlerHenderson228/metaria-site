@@ -220,6 +220,7 @@ a {
   aspect-ratio: 1 / 1;
    transform-origin: top left;
 	
+  overflow: visible;   /* ensure canvas isn’t clipped */
 }
 
 .blob-shape {
@@ -1208,10 +1209,11 @@ document.querySelectorAll('.blob').forEach(blob => {
   const canvas = blob.querySelector('.blob-canvas');
   const ctx = canvas.getContext('2d');
 
-  const width = blob.offsetWidth;
-  const height = blob.offsetHeight;
-  canvas.width = width;
-  canvas.height = height;
+  const width = blob.scrollWidth;   // instead of offsetWidth
+const height = blob.scrollHeight; // instead of offsetHeight
+canvas.width = width;
+canvas.height = height;
+
 
   const videoSrc = blob.getAttribute('data-video');
   const video = document.createElement('video');
@@ -1694,6 +1696,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
