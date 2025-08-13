@@ -1642,7 +1642,7 @@ let timeoutId;
     } else {
       const prevItem = sequence[index - 1];
       const isImageAnnotation = item.type === "annot" && prevItem?.type === "image";
-      const delay = isImageAnnotation ? 15500 : 2500;
+      const delay = isImageAnnotation ? 1000 : 2500;
 
       timeoutId = setTimeout(() => {
         el.style.opacity = 0;
@@ -1712,6 +1712,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
