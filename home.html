@@ -928,75 +928,46 @@ Showcasing innovative tech-driven performance art nationally and internationally
 
 	document.addEventListener("DOMContentLoaded", () => {
   const blobs = document.querySelectorAll(".blob[data-video]");
-  const thumbnails = [];
-  const videos = [];
+  let loadedThumbs = 0;
 
   // 1️⃣ Preload thumbnails
-  let thumbLoadedCount = 0;
-  const totalThumbs = blobs.length;
+  blobs.forEach(blob => {
+    const img = blob.querySelector("img");
+    if (!img) return;
+    img.onload = () => {
+      loadedThumbs++;
+      if (loadedThumbs === blobs.length) {
+        // 2️⃣ Show page as soon as thumbnails loaded
+        document.body.classList.remove("loading");
+        const loader = document.getElementById("loading-screen");
+        if (loader) loader.remove();
 
-  blobs.forEach((blob, index) => {
-    const thumbSrc = blob.querySelector("img")?.src;
-    const videoSrc = blob.getAttribute("data-video");
-
-    // Create video elements (autoplay muted later)
-    if (videoSrc) {
-      const video = document.createElement("video");
-      video.src = videoSrc;
-      video.preload = "auto";
-      video.muted = true;
-      video.playsInline = true;
-      videos.push(video);
-      blob.dataset.videoElement = index; // store index for later use
-    }
-
-    if (thumbSrc) {
-      const img = new Image();
-      img.src = thumbSrc;
-      img.onload = () => {
-        thumbLoadedCount++;
-        if (thumbLoadedCount === totalThumbs) {
-          showPageAndPlayVideos();
-        }
-      };
-    } else {
-      // No thumbnail, count as loaded
-      thumbLoadedCount++;
-    }
-  });
-
-  function showPageAndPlayVideos() {
-    // Remove loader
-    document.body.classList.remove("loading");
-    const loader = document.getElementById("loading-screen");
-    if (loader) loader.remove();
-
-    // Show blobs and start videos
-    blobs.forEach((blob, index) => {
-      const video = videos[index];
-      if (video) {
-        video.autoplay = true;
-        video.loop = true;
-        video.style.position = "absolute";
-        video.style.width = "100%";
-        video.style.height = "100%";
-        video.style.top = 0;
-        video.style.left = 0;
-        video.style.objectFit = "cover";
-
-        blob.appendChild(video);
-        video.play().catch(() => {
-          // autoplay might fail on some mobile browsers
+        // 3️⃣ Load videos asynchronously
+        blobs.forEach(blob => {
+          const src = blob.getAttribute("data-video");
+          if (!src) return;
+          const video = document.createElement("video");
+          video.src = src;
+          video.muted = true;
+          video.autoplay = true;
+          video.loop = true;
+          video.playsInline = true;
+          video.style.width = "100%";
+          video.style.height = "100%";
+          video.style.position = "absolute";
+          video.style.top = "0";
+          video.style.left = "0";
+          video.oncanplay = () => {
+            // hide thumbnail when video is ready
+            const thumb = blob.querySelector("img");
+            if (thumb) thumb.style.display = "none";
+            blob.appendChild(video);
+            video.play();
+          };
         });
-
-        // Hide the thumbnail once video starts playing
-        video.addEventListener("playing", () => {
-          const img = blob.querySelector("img");
-          if (img) img.style.display = "none";
-        }, { once: true });
       }
-    });
-  }
+    };
+  });
 });
 
 
@@ -1741,6 +1712,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
