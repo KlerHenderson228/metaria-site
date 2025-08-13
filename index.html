@@ -102,6 +102,11 @@ function initGAWithVisitorID() {
 
   
   <style>
+
+	  #cookie-consent {
+  display: none; /* hide by default */
+}
+
 body, html {
   margin: 0;
   padding: 0;
@@ -361,6 +366,15 @@ body, html {
   </svg>
   
   <script>
+
+	  function showCookieConsent() {
+  cookieConsent.style.display = 'block';
+}
+
+function hideCookieConsent() {
+  cookieConsent.style.display = 'none';
+}
+
   
 const translations = {
   en: {
