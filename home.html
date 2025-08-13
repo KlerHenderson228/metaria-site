@@ -1535,11 +1535,15 @@ function playSequenceFromData(modalId) {
   finalMessage.style.opacity = 0;
   finalMessage.style.transition = 'opacity 1s ease';
   finalMessage.style.fontSize = '18px';
+finalMessage.style.textAlign = "justify";
   finalMessage.style.marginTop = '30px';
   finalMessage.style.display = 'flex';
   finalMessage.style.justifyContent = 'center';
   finalMessage.style.alignItems = 'center';
   finalMessage.style.height = '100%';
+
+	   finalMessage.style.backgroundColor = '#f0f0f0';  // example light gray
+finalMessage.style.padding = '1rem';            // optional, adds spacing inside
 
   container.appendChild(finalMessage);
 
@@ -1712,6 +1716,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
