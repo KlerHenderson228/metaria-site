@@ -1209,6 +1209,9 @@ document.querySelectorAll('.blob').forEach(blob => {
   video.style.display = 'none';
   document.body.appendChild(video);
 
+	video.autoplay = true;     // ensure autoplay is set
+video.play().catch(() => {}); 
+
   const thumb = blob.querySelector('img');
   thumb.style.display = 'none'; // hide the img element
 
@@ -1678,6 +1681,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
