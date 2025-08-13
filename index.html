@@ -180,15 +180,15 @@ body, html {
 @keyframes pulse {
   0% {
     opacity: 1;
-    r: 6;
+    r: 60;
   }
   50% {
     opacity: 0.5;
-    r: 10;
+    r: 100;
   }
   100% {
     opacity: 1;
-    r: 6;
+    r: 60;
   }
 }
 
@@ -233,12 +233,15 @@ body, html {
   top: 10px;
   right: 10px;
   z-index: 10000;
-  font-size: 14px;
+  font-size: 18px;
   color: #555;
   display: flex;
   gap: 15px;
-  font-family: inter;
+  font-family: inherit;
   cursor: default;
+  font-weight: 900; /* make text fatter */
+  -webkit-text-stroke: 0.5px #fdf5e6; /* white contour */
+  text-stroke: 0.5px #fdf5e6; /* fallback */
 }
 
 #language-switcher .lang-option:hover {
@@ -247,15 +250,22 @@ body, html {
 
 #language-switcher .lang-option {
   cursor: pointer;
-  color: #555;
+  color: #555; /* same as footer text color */
   padding: 0 10px;
-  font-weight: normal;
+  font-weight: 900; /* make letters fatter here too */
   user-select: none;
+  -webkit-text-stroke: 0.5px #fdf5e6; /* white contour */
+  text-stroke: 0.5px #fdf5e6; /* fallback */
 }
 
 #language-switcher .lang-option.selected {
-  font-weight: bold;
+  font-weight: 2000; /* extra bold for selected */
+  text-decoration: underline; /* underline the selected language */
+  -webkit-text-stroke: 0.5px #fdf5e6; /* keep white contour */
+  text-stroke: 0.5px #fdf5e6;
 }
+
+
 
 	
 #cookie-consent {
