@@ -1522,7 +1522,7 @@ function playSequenceFromData(modalId) {
   finalMessage.className = item.class;
   finalMessage.style.opacity = 0;
   finalMessage.style.transition = 'opacity 1s ease';
-  finalMessage.style.fontSize = '24px';
+  finalMessage.style.fontSize = '18px';
   finalMessage.style.marginTop = '30px';
   finalMessage.style.display = 'flex';
   finalMessage.style.justifyContent = 'center';
@@ -1587,11 +1587,11 @@ function playSequenceFromData(modalId) {
 	el.style.height = '100%';
 	el.style.alignItems = 'center';
 	el.classList.add('nocopy');
-	el.style.fontSize = "12px";
+	
 
   // Conditionally apply mobile-specific styles
   if (window.innerWidth <= 1024) {
-    el.style.fontSize = "9px";
+    el.style.fontSize = "12px";
     el.style.padding = "12px";
 	el.style.marginTop = "20px";
     el.style.margin = "10px 0";
@@ -1693,6 +1693,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
+
 
 
 
