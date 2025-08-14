@@ -225,6 +225,11 @@ a {
   text-decoration: none;
 }
 
+
+.blob-wrapper {
+  position: static; /* ensures no parent interference */
+}
+	  
 .blob-container {
   position: relative;
   width: 100%;         /* fixed typo */
@@ -798,7 +803,7 @@ a {
   <span class="lang-option" data-lang="sv" onclick="switchLanguage('sv')">SV</span>
 </div>
 
-
+<div class="blob-wrapper">
 	<div class="blob-container">
 	 <div class="blob-inner">
 	
@@ -1059,7 +1064,7 @@ Showcasing innovative tech-driven performance art nationally and internationally
 	   </div>
 	   
 	   
-	   
+	   </div>
   </div>
 </div>
 </div>
@@ -1870,6 +1875,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
