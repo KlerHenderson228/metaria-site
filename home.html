@@ -1839,20 +1839,17 @@ function updateModalAnnotationLanguage(modalId) {
 
 
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const modalIds = ["modal3", "modal6"];
 
     modalIds.forEach(modalId => {
         const modal = document.getElementById(modalId);
         const closeBtn = modal.querySelector(".close");
-
-        // Track timers and hidden status for each container separately
         const containers = modal.querySelectorAll(".collapsible-gallery");
 
+        // For each container, track timer and hidden state
         containers.forEach(container => {
-            let hideTimer;
+            let hideTimer = null;
             let imagesHidden = false;
             const images = container.querySelectorAll("img");
 
@@ -1866,6 +1863,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagesHidden = false;
             };
 
+            // Start 5-second hide timer when container is clicked
             container.addEventListener("click", () => {
                 if (!imagesHidden) {
                     clearTimeout(hideTimer);
@@ -1880,15 +1878,12 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
 
-        // Optional: fully reset all imagesHidden flags when modal closes
+        // Ensure modal can be closed (your existing logic)
         closeBtn.addEventListener("click", () => {
-            containers.forEach(container => {
-                container.querySelectorAll("img").forEach(img => img.style.display = "block");
-            });
+            modal.style.display = "none";
         });
     });
 });
-
 
 
 
@@ -1937,6 +1932,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
