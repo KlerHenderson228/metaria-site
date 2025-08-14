@@ -1848,37 +1848,34 @@ document.addEventListener("DOMContentLoaded", function () {
         const galleries = modal.querySelectorAll(".collapsible-gallery img");
 
         let hideTimer;
+        let imagesHidden = false; // Track if images have been hidden
 
-        // Function to hide images
         const hideImages = () => {
-            galleries.forEach(img => img.style.visibility = "hidden");
+            galleries.forEach(img => img.style.display = "none");
+            imagesHidden = true;
         };
 
-        // Function to show images
         const showImages = () => {
-            galleries.forEach(img => img.style.visibility = "visible");
+            galleries.forEach(img => img.style.display = "block");
+            imagesHidden = false;
         };
 
-        // Trigger when modal opens
-        modal.addEventListener("click", function openModalHandler(e) {
-            // Only start timer if clicking inside modal content, not the close button
-            if (!e.target.classList.contains("close")) {
-                // Show images in case they were hidden
-                showImages();
-
-                // Clear existing timer
-                clearTimeout(hideTimer);
-
-                // Hide images after 5 seconds
-                hideTimer = setTimeout(hideImages, 5000);
-            }
+        // When a container is clicked
+        modal.querySelectorAll(".collapsible-gallery").forEach(container => {
+            container.addEventListener("click", () => {
+                if (!imagesHidden) {
+                    // Start 5-second timer only if images are not already hidden
+                    clearTimeout(hideTimer);
+                    hideTimer = setTimeout(hideImages, 5000);
+                }
+            });
         });
 
-        // Reset when modal closes
+        // Reset images when modal closes
         closeBtn.addEventListener("click", () => {
             clearTimeout(hideTimer);
-            showImages();
-            modal.style.display = "none"; // or your existing close logic
+            showImages(); // Reset so they are visible next time modal opens
+            modal.style.display = "none"; // your modal close logic
         });
     });
 });
@@ -1932,6 +1929,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
