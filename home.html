@@ -139,10 +139,10 @@
         as="font" 
         type="font/woff2" 
         crossorigin="anonymous" />
-<link rel="preload" href="images/bc.png" as="image" />
-  <link rel="preload" href="images/gc.png" as="image" />
+	<link rel="preload" href="images/bc.png" as="image" />
+		<link rel="preload" href="images/gc.png" as="image" />
 	  <link rel="preload" href="images/translucence.jpeg" as="image" />
-  <link rel="preload" href="images/eurojob.jpeg" as="image" />
+		<link rel="preload" href="images/eurojob.jpeg" as="image" />
 	  <link rel="preload" href="images/fa.jpg" as="image" />
 	
   <style>
@@ -150,6 +150,7 @@
 	   body.loading {
     overflow: hidden; /* prevent scroll while loading */
   }
+	  
   #loading-screen {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -162,6 +163,7 @@
     font-size: 1.2rem;
     z-index: 10001;
   }
+	  
     body {
 		min-height: 100vh;
   /* You can add this to force the browser to resize correctly */
@@ -173,6 +175,11 @@
       align-items: center;
 	  font-family: inter, sans-serif;
     }
+	  
+html {
+  -webkit-text-size-adjust: 100%;
+}
+	  
 html, body {
 	 background: black;
   margin: 0;
@@ -260,7 +267,7 @@ a {
 
 
 .blob {
-  position: absolute;
+  position: relative;
   width: 500px;
   height: 500px;
   /* Optional: prevent blobs from overflowing */
@@ -1863,6 +1870,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
