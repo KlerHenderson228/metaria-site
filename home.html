@@ -236,7 +236,24 @@ a {
   height: 0;
 }
 
+@media (max-width: 1024px) {
+  .blob-container {
+    width: 1000px;
+    height: 800px;
+    --scale: calc(min(100vw / 1000, 100vh / 800));
+    transform: scale(var(--scale));
+    transform-origin: top left;
+  }
+}
 
+
+
+
+
+
+
+
+	  
 
 
 .blob {
@@ -1814,6 +1831,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
