@@ -228,6 +228,11 @@ a {
 
 .blob-wrapper {
   position: static; /* ensures no parent interference */
+	  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  overflow: visible; /* make sure nothing gets clipped */
 }
 	  
 .blob-container {
@@ -1875,6 +1880,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
