@@ -1846,43 +1846,43 @@ document.addEventListener("DOMContentLoaded", function () {
     modalIds.forEach(modalId => {
         const modal = document.getElementById(modalId);
         const closeBtn = modal.querySelector(".close");
+        const galleries = modal.querySelectorAll(".collapsible-gallery img");
 
-        // Loop through each container separately
-        const containers = modal.querySelectorAll(".collapsible-gallery");
+        let hideTimer;
+        let imagesHidden = false; // track if images are already hidden
 
-        containers.forEach(container => {
-            let hideTimer;
-            let imagesHidden = false;
-            const images = container.querySelectorAll("img");
+        // Function to hide images and collapse layout
+        const hideImages = () => {
+            galleries.forEach(img => img.style.display = "none");
+            imagesHidden = true;
+        };
 
-            const hideImages = () => {
-                images.forEach(img => img.style.display = "none");
-                imagesHidden = true;
-            };
+        // Function to show images
+        const showImages = () => {
+            galleries.forEach(img => img.style.display = "block");
+            imagesHidden = false;
+        };
 
-            const showImages = () => {
-                images.forEach(img => img.style.display = "block");
-                imagesHidden = false;
-            };
-
-            // When container is clicked
-            container.addEventListener("click", () => {
-                if (!imagesHidden) {
-                    clearTimeout(hideTimer);
-                    hideTimer = setTimeout(hideImages, 5000);
-                }
-            });
-
-            // Reset this container's images when modal closes
-            closeBtn.addEventListener("click", () => {
-                clearTimeout(hideTimer);
-                showImages();
-            });
+        // When modal opens, reset imagesHidden flag
+        modal.addEventListener("show", () => { 
+            imagesHidden = false;
+            showImages();
         });
 
-        // Modal close logic
+        // Click anywhere inside the modal content (but not the close button)
+        modal.querySelector(".modal-content").addEventListener("click", (e) => {
+            if (!imagesHidden && !e.target.classList.contains("close")) {
+                clearTimeout(hideTimer);
+                hideTimer = setTimeout(hideImages, 5000);
+            }
+        });
+
+        // Reset when modal closes
         closeBtn.addEventListener("click", () => {
-            modal.style.display = "none";
+            clearTimeout(hideTimer);
+            showImages();
+            modal.style.display = "none"; // your modal close logic
+            imagesHidden = false;
         });
     });
 });
@@ -1935,6 +1935,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
