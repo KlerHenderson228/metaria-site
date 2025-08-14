@@ -1839,17 +1839,19 @@ function updateModalAnnotationLanguage(modalId) {
 
 
 
+
 document.addEventListener("DOMContentLoaded", function () {
     const modalIds = ["modal3", "modal6"];
 
     modalIds.forEach(modalId => {
         const modal = document.getElementById(modalId);
         const closeBtn = modal.querySelector(".close");
+
+        // Loop through each container separately
         const containers = modal.querySelectorAll(".collapsible-gallery");
 
-        // For each container, track its own timer and hidden state
         containers.forEach(container => {
-            let hideTimer = null;
+            let hideTimer;
             let imagesHidden = false;
             const images = container.querySelectorAll("img");
 
@@ -1863,22 +1865,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagesHidden = false;
             };
 
-            // Add click listener on container itself
+            // When container is clicked
             container.addEventListener("click", () => {
                 if (!imagesHidden) {
-                    // Only start the timer once per container
-                    if (!hideTimer) {
-                        hideTimer = setTimeout(() => {
-                            hideImages();
-                            hideTimer = null; // reset timer
-                        }, 5000);
-                    }
+                    clearTimeout(hideTimer);
+                    hideTimer = setTimeout(hideImages, 5000);
                 }
             });
 
-            // Reset images when modal closes
+            // Reset this container's images when modal closes
             closeBtn.addEventListener("click", () => {
-                if (hideTimer) clearTimeout(hideTimer);
+                clearTimeout(hideTimer);
                 showImages();
             });
         });
@@ -1889,6 +1886,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
 
 
 
@@ -1937,6 +1935,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
