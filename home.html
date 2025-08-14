@@ -1838,8 +1838,8 @@ function updateModalAnnotationLanguage(modalId) {
 
 
 
+
 document.addEventListener("DOMContentLoaded", function () {
-    // List of modals you want to target
     const modalIds = ["modal3", "modal6"];
 
     modalIds.forEach(modalId => {
@@ -1851,36 +1851,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Function to hide images
         const hideImages = () => {
-            galleries.forEach(img => img.style.display = "none");
+            galleries.forEach(img => img.style.visibility = "hidden");
         };
 
         // Function to show images
         const showImages = () => {
-            galleries.forEach(img => img.style.display = "block");
+            galleries.forEach(img => img.style.visibility = "visible");
         };
 
-        // Click handler for container
-        modal.querySelectorAll(".collapsible-gallery").forEach(container => {
-            container.addEventListener("click", () => {
-                // Show images again in case they were hidden before
+        // Trigger when modal opens
+        modal.addEventListener("click", function openModalHandler(e) {
+            // Only start timer if clicking inside modal content, not the close button
+            if (!e.target.classList.contains("close")) {
+                // Show images in case they were hidden
                 showImages();
 
-                // Clear any existing timer
+                // Clear existing timer
                 clearTimeout(hideTimer);
 
-                // Set timer to hide images after 5 seconds
+                // Hide images after 5 seconds
                 hideTimer = setTimeout(hideImages, 5000);
-            });
+            }
         });
 
-        // Reset everything when modal closes
+        // Reset when modal closes
         closeBtn.addEventListener("click", () => {
             clearTimeout(hideTimer);
             showImages();
-            modal.style.display = "none"; // Assuming you close modal like this
+            modal.style.display = "none"; // or your existing close logic
         });
     });
 });
+
+
 
 
 
@@ -1929,6 +1932,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
