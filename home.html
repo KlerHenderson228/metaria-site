@@ -1847,7 +1847,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const closeBtn = modal.querySelector(".close");
         const containers = modal.querySelectorAll(".collapsible-gallery");
 
-        // For each container, track timer and hidden state
+        // For each container, track its own timer and hidden state
         containers.forEach(container => {
             let hideTimer = null;
             let imagesHidden = false;
@@ -1863,22 +1863,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 imagesHidden = false;
             };
 
-            // Start 5-second hide timer when container is clicked
+            // Add click listener on container itself
             container.addEventListener("click", () => {
                 if (!imagesHidden) {
-                    clearTimeout(hideTimer);
-                    hideTimer = setTimeout(hideImages, 5000);
+                    // Only start the timer once per container
+                    if (!hideTimer) {
+                        hideTimer = setTimeout(() => {
+                            hideImages();
+                            hideTimer = null; // reset timer
+                        }, 5000);
+                    }
                 }
             });
 
             // Reset images when modal closes
             closeBtn.addEventListener("click", () => {
-                clearTimeout(hideTimer);
+                if (hideTimer) clearTimeout(hideTimer);
                 showImages();
             });
         });
 
-        // Ensure modal can be closed (your existing logic)
+        // Modal close logic
         closeBtn.addEventListener("click", () => {
             modal.style.display = "none";
         });
@@ -1932,6 +1937,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
