@@ -230,23 +230,19 @@ a {
   position: static; /* ensures no parent interference */
 	  margin: 0;
   padding: 0;
-  width: 100%;
-  height: auto;
+  width: 100vw; 
+	height: 100vh;
   overflow: visible; /* make sure nothing gets clipped */
 }
 	  
 .blob-container {
   position: relative;
-  width: 100%;         /* fixed typo */
-  min-height: 100vh;   /* at least the viewport height */
-  height: auto;        /* expand if content is taller */
-  overflow-y: auto;    /* scroll vertically if needed */
-  overflow-x: hidden;  /* usually hide horizontal scroll unless required */
+  width: 100%;        /* fills the wrapper */
+  height: 100%;       /* match wrapper height */
+  overflow: visible;  /* blobs won't be clipped */
   margin: 0 auto;
-  /* Firefox */
   scrollbar-width: none; 
 }
-
 /* Chrome, Safari, Edge */
 .blob-container::-webkit-scrollbar {
   width: 0;
@@ -1881,6 +1877,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
