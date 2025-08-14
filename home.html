@@ -733,6 +733,36 @@ a {
     max-height: 1000px; /* enough for multiple images */
   }
 
+	  /* Default: desktop */
+.collapsible-gallery img {
+  width: 700px;   /* original desktop size */
+  height: auto;
+  max-width: 100%; /* never exceed container */
+}
+
+/* Mobile portrait */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .collapsible-gallery img {
+    width: 90vw;  /* almost full screen width */
+    height: auto;
+  }
+}
+
+/* Mobile landscape */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .collapsible-gallery img {
+    width: 70vw;  /* narrower to fit height too */
+    height: auto;
+  }
+}
+
+/* Optional: ensure modal padding doesn't cut images */
+.modal-content {
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+
   .image-gallery {
     display: flex;
     flex-wrap: wrap;
@@ -1834,6 +1864,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
