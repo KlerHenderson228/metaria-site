@@ -243,7 +243,7 @@ a {
     --scale: calc(min(100vw / 1000, 100vh / 800));
     transform: scale(var(--scale));
     transform-origin: center center;  /* scale from center */
-   margin-left: calc((100vw - 1000px * var(--scale)) / 2 + 50px);
+   margin-left: calc((100vw - 1000px * var(--scale)) / 2 + 500px);
   }
 }
 
@@ -445,7 +445,7 @@ a {
 @media (max-width: 1024px) { /* covers iPhone Max landscape */
   .modal-content {
     width: 100vw !important;
-	  height: 100vh !important;       /* let it shrink if needed */
+	  height: 100dvh !important;       /* let it shrink if needed */
     
     margin: 0 !important;
     padding: 1rem !important;
@@ -1834,6 +1834,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
