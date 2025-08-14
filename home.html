@@ -185,12 +185,8 @@ html, body {
   font-size: 100%; /* allows user scaling */
 }
 
-	  @media (max-width: 780px) {
-  .blob-container {
-    max-width: 200px;
-  }
-}
-	  @media (max-width: 768px) and (orientation: landscape) {
+
+	  @media (max-width: 1024px) and (orientation: landscape) {
   .modal-content {
     max-height: 90vh;     /* slightly larger max height */
     height: auto;
@@ -224,11 +220,25 @@ a {
 
 .blob-container {
   position: relative;
-  width: 100%;
-  height: 100vh; /* full viewport height */
-  overflow: visible;
+  width: 100%;         /* fixed typo */
+  min-height: 100vh;   /* at least the viewport height */
+  height: auto;        /* expand if content is taller */
+  overflow-y: auto;    /* scroll vertically if needed */
+  overflow-x: hidden;  /* usually hide horizontal scroll unless required */
   margin: 0 auto;
+  /* Firefox */
+  scrollbar-width: none; 
 }
+
+/* Chrome, Safari, Edge */
+.blob-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+
+
+
 .blob {
   position: absolute;
   width: 500px;
@@ -268,10 +278,10 @@ a {
 /* Adjusted positions so blobs stay fully inside viewport */
 
 /* Position blobs with fixed coordinates */
-.blob1 { top: 430px; left: 1000px;} /* colab */
-.blob2 { top: -400px; left: -220px;  transform: rotate(10deg)} /* d */
-.blob3 { top: -100px; left: 750px;  } /* s */
-.blob4 { top: 200px;  left: 300px; } /* us */
+.blob1 { top: 420px; left: 950px;} /* colab */
+.blob2 { top: -320px; left: -220px;  transform: rotate(10deg)} /* d */
+.blob3 { top: -60px; left: 750px;  } /* s */
+.blob4 { top: 180px;  left: 300px; } /* us */
 .blob5 { top: 450px;  left: 100px; } /* contact */
 .blob6 { top: 200px;  left: 450px; } /* nw */
 
@@ -306,7 +316,7 @@ a {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .blob-container {
     width: 100vw;
     height: 100vh;
@@ -733,6 +743,7 @@ a {
 
 
 	<div class="blob-container">
+	 <div class="blob-inner">
 	
 <div class="blob blob1" data-modal="modal1" data-video="videos/vid7.mp4" style="width:300px; height:300px; position: absolute;">
 	<img src="thumbnails/vid7.png" alt="Video 1">
@@ -881,7 +892,27 @@ a {
 <div id="modal3" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <div class="modal-content-body"></div>
+    <h2 class="modal-word" id="patronage-title">Science on Stage</h2>  
+	<p id="modal3-final">1. When something clicks, you remember it.<br>2. We bring science to life with feeling.<br>3. Science on Stage makes research stick.</p>
+        <h2 id="collaborators-title">Green Curtain</h2> 
+<div class="collapsible-gallery">
+  
+    <img src="images/gc.png" alt="Performance 1" style="width: 300px; height: auto;">
+	<p id= "gc-annot">Green Curtain is an innovative environmental project developing lignin-based filters and wipes to prevent harmful chemicals from cosmetics, decorations, and costume washing from entering theatre wastewater. By using bio-based and biodegradable materials, Green Curtain helps protect vulnerable ecosystems, promotes cleaner water, and repurposes large industrial by-products, supporting the circular economy.</p>
+   
+    
+ 
+</div>
+        <h2 id="funders-title">Breath of Carbon</h2>  
+<div class="collapsible-gallery">
+  
+    <img src="images/bc.png" alt="Performance 1" style="width: 700px; height: auto;">
+    <p id= "bc-annot">Breath of Carbon is an XR interactive solo performance that merges science and art to engage online audiences. Using motion capture and digital technologies, it visualizes the carbon cycle and highlights sustainable CO₂ capture’s impact on agriculture, employment, and future generations. The project advances brand development and image creation by showcasing innovative art-tech collaboration that makes complex science accessible and inspiring.</p>
+      
+	   </div>  
+	   
+	 
+	   
   </div>
 </div>
 
@@ -944,10 +975,38 @@ Showcasing innovative tech-driven performance art nationally and internationally
 <div id="modal6" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <div class="modal-content-body"></div>
+    <h2 class="modal-word" id="patronage-title">New Writing</h2>  
+	<p id="modal6-final">In development</p>
+        <h2 id="collaborators-title">Translucence</h2> 
+<div class="collapsible-gallery">
+  
+    <img src="images/translucence.jpeg" alt="Performance 1" style="width: 300px; height: auto;">
+	<p id= "translucence-annot">In a fractured future where Earth’s stability has long since crumbled, exiled scientist Dr. Mara Solberg rediscovers a forgotten innovation capable of sustaining life in the harshest of worlds. Her pursuit of this breakthrough draws the attention of powerful forces determined to erase it from history. Fleeing across the void to a remote settlement on an uncharted world, Mara must adapt to an alien environment, evade those who would see her silenced, and confront the shadow of her own ambition. Translucence fuses live performance with real-time digital scenography, layered soundscapes, and cinematic world-building — where the physical stage merges seamlessly with a living, virtual environment that evolves with the story.</p>
+   
+    
+ 
+</div>
+        <h2 id="funders-title">Eurojob</h2>  
+<div class="collapsible-gallery">
+  
+    <img src="images/eurojob.jpeg" alt="Performance 1" style="width: 700px; height: auto;">
+    <p id= "eurojob-annot">An online-born stage drama about pride, distance, and the fight to be heard.<br>A father. A son. One phone call. Six hours until eviction.<br>In a bedsit, a once-charismatic hustler whose quick wit and bravado now barely conceal his exhaustion and loneliness dials the number he’s avoided for years. What begins as a plea for help becomes a fierce duel over who has forgiven who the most—a raw, funny, and devastating argument that strips away decades of silence.<br>Written for one actor to deliver a virtuoso, multifaceted performance, the play demands every shade of the actor’s craft: shifting from razor-sharp comedy to aching vulnerability in the space of a breath.<br>Born in the digital space through live-streamed readings and virtual rehearsals across borders, Eurojob is a one-act monologue to be staged in theatres and online. The piece fuses the intimacy of a video call with the immediacy of live performance, inviting audiences into a room where love, pride, and stubbornness collide.</p>
+      
+	   </div>
+	   
+<h2 id="funders-title">First Aid, Last Orders</h2>  
+<div class="collapsible-gallery">
+  
+    <img src="images/fa.jpg" alt="Performance 1" style="width: 300px; height: auto;">
+    <p id= "fa-annot">On a cruise ship docked in Helsinki, a supervisor convinced he’s seriously ill drives his cleaning crew to distraction. One sharp-witted cleaner poses as a doctor, dishing out absurd cures while a surprise inspection hurtles closer. To survive the day, the immigrant crew must outwit the chaos before it sinks them all — a sharp-tongued modern farce inspired by Molière’s The Imaginary Invalid. This professional stage production blends live theatre with real-time digital elements — streaming to online audiences, incorporating live video feeds from hidden corners of the ship, and letting viewers aboard and at home experience the same rising storm of comedy, panic, and survival from multiple perspectives.</p>
+      
+	   </div>
+	   
+	   
+	   
   </div>
 </div>
-
+</div>
  
   
 
@@ -1715,21 +1774,32 @@ function updateModalAnnotationLanguage(modalId) {
 
 
  // Select titles
-  const titles = document.querySelectorAll('#board-title, #members-title, #collaborators-title, #funders-title, #acknowlegement-title');
-  
+const titles = document.querySelectorAll('#board-title, #members-title, #collaborators-title, #funders-title, #acknowlegement-title');
 
-  titles.forEach(title => {
-    title.addEventListener('click', () => {
-      const content = title.nextElementSibling;
-      if (content.classList.contains('expanded')) {
-        content.classList.remove('expanded');
-        content.style.maxHeight = null;
-      } else {
-        content.classList.add('expanded');
-        content.style.maxHeight = content.scrollHeight + "px";
+titles.forEach(title => {
+  title.addEventListener('click', () => {
+    const content = title.nextElementSibling;
+
+    // Close all other sections
+    titles.forEach(otherTitle => {
+      const otherContent = otherTitle.nextElementSibling;
+      if (otherContent !== content) {
+        otherContent.classList.remove('expanded');
+        otherContent.style.maxHeight = null;
       }
     });
+
+    // Toggle the clicked one
+    if (content.classList.contains('expanded')) {
+      content.classList.remove('expanded');
+      content.style.maxHeight = null;
+    } else {
+      content.classList.add('expanded');
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
   });
+});
+
 
 
 </script>
@@ -1744,7 +1814,6 @@ function updateModalAnnotationLanguage(modalId) {
 
 </body>
 </html>
-
 
 
 
