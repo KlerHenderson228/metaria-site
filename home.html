@@ -236,15 +236,19 @@ a {
   height: 0;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .blob-container {
     width: 1000px;
     height: 800px;
     --scale: calc(min(100vw / 1000, 100vh / 800));
     transform: scale(var(--scale));
     transform-origin: top left;
+
+    /* center after scaling */
+    margin-left: calc((100vw - 1000px * var(--scale)) / 2);
   }
 }
+
 
 
 
@@ -1831,6 +1835,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
