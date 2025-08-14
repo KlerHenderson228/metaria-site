@@ -243,7 +243,7 @@ a {
     --scale: calc(min(100vw / 1000, 100vh / 800));
     transform: scale(var(--scale));
     transform-origin: center center;  /* scale from center */
-    margin: 0 auto;                  /* center container */
+   margin-left: calc((100vw - 1000px * var(--scale)) / 2 + 50px);
   }
 }
 
@@ -1834,6 +1834,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
