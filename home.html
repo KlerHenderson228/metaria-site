@@ -1840,52 +1840,46 @@ function updateModalAnnotationLanguage(modalId) {
 
 
 
+
 document.addEventListener("DOMContentLoaded", function () {
     const modalIds = ["modal3", "modal6"];
 
     modalIds.forEach(modalId => {
         const modal = document.getElementById(modalId);
         const closeBtn = modal.querySelector(".close");
-        const galleries = modal.querySelectorAll(".collapsible-gallery img");
 
         let hideTimer;
-        let imagesHidden = false; // track if images are already hidden
+        let activeContainer = null; // track the currently opened container
 
-        // Function to hide images and collapse layout
-        const hideImages = () => {
-            galleries.forEach(img => img.style.display = "none");
-            imagesHidden = true;
-        };
-
-        // Function to show images
-        const showImages = () => {
-            galleries.forEach(img => img.style.display = "block");
-            imagesHidden = false;
-        };
-
-        // When modal opens, reset imagesHidden flag
-        modal.addEventListener("show", () => { 
-            imagesHidden = false;
-            showImages();
-        });
-
-        // Click anywhere inside the modal content (but not the close button)
-        modal.querySelector(".modal-content").addEventListener("click", (e) => {
-            if (!imagesHidden && !e.target.classList.contains("close")) {
+        // Click anywhere inside a collapsible-gallery container
+        modal.querySelectorAll(".collapsible-gallery").forEach(container => {
+            container.addEventListener("click", () => {
+                // Reset timer if user clicks again on the same container
                 clearTimeout(hideTimer);
-                hideTimer = setTimeout(hideImages, 5000);
-            }
+
+                activeContainer = container;
+
+                // Show its image(s) immediately in case it was hidden before
+                activeContainer.querySelectorAll("img").forEach(img => img.style.display = "block");
+
+                // Hide only the image(s) in this container after 5 seconds
+                hideTimer = setTimeout(() => {
+                    activeContainer.querySelectorAll("img").forEach(img => img.style.display = "none");
+                }, 5000);
+            });
         });
 
-        // Reset when modal closes
+        // Reset images in all containers when modal closes
         closeBtn.addEventListener("click", () => {
             clearTimeout(hideTimer);
-            showImages();
-            modal.style.display = "none"; // your modal close logic
-            imagesHidden = false;
+            modal.querySelectorAll(".collapsible-gallery img").forEach(img => img.style.display = "block");
+            modal.style.display = "none"; // your close logic
+            activeContainer = null;
         });
     });
 });
+
+
 
 
 
@@ -1935,6 +1929,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
