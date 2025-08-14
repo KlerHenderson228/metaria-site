@@ -1836,6 +1836,58 @@ function updateModalAnnotationLanguage(modalId) {
 
 
 
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // List of modals you want to target
+    const modalIds = ["modal3", "modal6"];
+
+    modalIds.forEach(modalId => {
+        const modal = document.getElementById(modalId);
+        const closeBtn = modal.querySelector(".close");
+        const galleries = modal.querySelectorAll(".collapsible-gallery img");
+
+        let hideTimer;
+
+        // Function to hide images
+        const hideImages = () => {
+            galleries.forEach(img => img.style.display = "none");
+        };
+
+        // Function to show images
+        const showImages = () => {
+            galleries.forEach(img => img.style.display = "block");
+        };
+
+        // Click handler for container
+        modal.querySelectorAll(".collapsible-gallery").forEach(container => {
+            container.addEventListener("click", () => {
+                // Show images again in case they were hidden before
+                showImages();
+
+                // Clear any existing timer
+                clearTimeout(hideTimer);
+
+                // Set timer to hide images after 5 seconds
+                hideTimer = setTimeout(hideImages, 5000);
+            });
+        });
+
+        // Reset everything when modal closes
+        closeBtn.addEventListener("click", () => {
+            clearTimeout(hideTimer);
+            showImages();
+            modal.style.display = "none"; // Assuming you close modal like this
+        });
+    });
+});
+
+
+
+
+
+	
+
  // Select titles
 const titles = document.querySelectorAll('#board-title, #members-title, #collaborators-title, #funders-title, #acknowlegement-title');
 
@@ -1877,6 +1929,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
