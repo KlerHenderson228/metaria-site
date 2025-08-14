@@ -1842,6 +1842,7 @@ function updateModalAnnotationLanguage(modalId) {
 
 
 
+
 document.addEventListener("DOMContentLoaded", function () {
     const modalIds = ["modal3", "modal6"];
 
@@ -1849,11 +1850,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById(modalId);
         const closeBtn = modal.querySelector(".close");
 
-        // Add click listeners to each gallery separately
         modal.querySelectorAll(".collapsible-gallery").forEach(container => {
             let hideTimer = null;
             let imageHidden = false;
-
             const images = container.querySelectorAll("img");
 
             const hideImages = () => {
@@ -1866,8 +1865,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 imageHidden = false;
             };
 
+            // Listen to clicks anywhere inside the container
             container.addEventListener("click", () => {
-                // Only start countdown if image is visible
                 if (!imageHidden) {
                     clearTimeout(hideTimer);
                     hideTimer = setTimeout(hideImages, 5000);
@@ -1940,6 +1939,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
