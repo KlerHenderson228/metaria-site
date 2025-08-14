@@ -147,21 +147,7 @@
 	
   <style>
 
-	   body.loading {
-    overflow: hidden; /* prevent scroll while loading */
-  }
-  #loading-screen {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: #000;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-	  font-family: 'Misto', sans-serif;
-    font-size: 1.2rem;
-    z-index: 10001;
-  }
+
     body {
 		min-height: 100vh;
   /* You can add this to force the browser to resize correctly */
@@ -173,16 +159,18 @@
       align-items: center;
 	  font-family: inter, sans-serif;
     }
+
+
+
 html, body {
-	 background: black;
   margin: 0;
   padding: 0;
-  height: 100%; /* ensures body fills viewport */
-  overflow-x: hidden; /* prevent horizontal scroll */
-  overflow-y: visible; /* Hide scrollbars */
-  position: relative;
-
-  font-size: 100%; /* allows user scaling */
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: black;
+  display: grid;
+  place-items: center; /* center everything */
 }
 
 
@@ -199,42 +187,23 @@ html, body {
 
 
 
-@font-face {
-  font-family: 'Misto';
-  src: url('fonts/Misto.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-.modal-word {
-  font-family: 'Misto', inter;
-  letter-spacing: 1px; /* optional */
-  word-spacing: 30px;
-  font-weight: 400;     /* optional */
-}
 
-a {
-  color: #fdf5e6;       /* your desired crème color */
-  text-decoration: none;
+.blob-wrapper {
+  display: inline-block;   /* shrink to fit content */
+  transform-origin: top left;
+  --scale: calc(min(100vw / 1000, 100vh / 800));
+  transform: scale(var(--scale));
 }
 
 .blob-container {
-  position: relative;
-  width: 100%;         /* fixed typo */
-  min-height: 100vh;   /* at least the viewport height */
-  height: auto;        /* expand if content is taller */
-  overflow-y: auto;    /* scroll vertically if needed */
-  overflow-x: hidden;  /* usually hide horizontal scroll unless required */
-  margin: 0 auto;
-  /* Firefox */
-  scrollbar-width: none; 
+  width: 1000px;
+  height: 800px;
+  position: relative; /* keep your blob positions intact */
 }
 
-/* Chrome, Safari, Edge */
-.blob-container::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
+
+
+
 
 
 
@@ -371,7 +340,24 @@ a {
 }
 
 
+@font-face {
+  font-family: 'Misto';
+  src: url('fonts/Misto.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.modal-word {
+  font-family: 'Misto', inter;
+  letter-spacing: 1px; /* optional */
+  word-spacing: 30px;
+  font-weight: 400;     /* optional */
+}
 
+a {
+  color: #fdf5e6;       /* your desired crème color */
+  text-decoration: none;
+}
 
 
 /* Keep existing modal properties */
@@ -741,9 +727,9 @@ a {
   <span class="lang-option" data-lang="sv" onclick="switchLanguage('sv')">SV</span>
 </div>
 
-
+<div class="blob-wrapper">
 	<div class="blob-container">
-	 <div class="blob-inner">
+	
 	
 <div class="blob blob1" data-modal="modal1" data-video="videos/vid7.mp4" style="width:300px; height:300px; position: absolute;">
 	<img src="thumbnails/vid7.png" alt="Video 1">
@@ -1814,7 +1800,6 @@ titles.forEach(title => {
 
 </body>
 </html>
-
 
 
 
