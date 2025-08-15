@@ -270,15 +270,18 @@ html, body {
 a {
   color: #fdf5e6;       /* your desired crème color */
   text-decoration: none;
+  display: inline-block;  /* important for transform to work */
   transition: transform 0.2s; /* smooth scale effect */
 }
 
 a:hover {
   transform: scale(1.05);   /* enlarge slightly on hover */
 }
-	  a:active, .collapsible-title:active {
+
+a:active, .collapsible-title:active {
   transform: scale(1.05);
 }
+
 
 
 .blob-wrapper {
@@ -2069,3 +2072,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
