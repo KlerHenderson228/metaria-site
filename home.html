@@ -1864,11 +1864,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 imageHidden = true;
             };
 
-            const showImages = () => {
-                images.forEach(img => img.style.display = "block");
-                imageHidden = false;
-            };
-
+            // No showImages() on collapse anymore
             title.addEventListener("click", () => {
                 // Collapse all other containers
                 titles.forEach(otherTitle => {
@@ -1876,7 +1872,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (otherContainer !== container) {
                         otherContainer.classList.remove('expanded');
                         otherContainer.style.maxHeight = null;
-                        otherContainer.querySelectorAll("img").forEach(img => img.style.display = "block");
+                        // Do NOT reset images here
                     }
                 });
 
@@ -1884,23 +1880,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (container.classList.contains('expanded')) {
                     container.classList.remove('expanded');
                     container.style.maxHeight = null;
-                    clearTimeout(hideTimer);
-                    showImages();
+                    clearTimeout(hideTimer); // stop countdown if user closes early
                 } else {
                     container.classList.add('expanded');
                     container.style.maxHeight = container.scrollHeight + "px";
+
+                    // Start countdown if images are not yet hidden
                     if (!imageHidden) {
                         clearTimeout(hideTimer);
-                        hideTimer = setTimeout(hideImages, 1000); // hide after 1s
+                        hideTimer = setTimeout(hideImages, 1000);
                     }
                 }
             });
 
-            // Reset images when modal closes
+            // Reset images only when modal closes
             if (closeBtn) {
                 closeBtn.addEventListener("click", () => {
                     clearTimeout(hideTimer);
-                    showImages();
+                    images.forEach(img => img.style.display = "block");
+                    container.classList.remove('expanded');
+                    container.style.maxHeight = null;
+                    imageHidden = false;
                 });
             }
         });
@@ -1934,14 +1934,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // Toggle the clicked one
             if (content.classList.contains('expanded')) {
                 content.classList.remove('expanded');
-                content.style.maxHeight = null;
-            } else {
-                content.classList.add('expanded');
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    });
-});
+                content.style.maxH
+
 
 
 	
@@ -1960,6 +1954,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
