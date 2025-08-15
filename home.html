@@ -72,52 +72,18 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', async () => {
-  const cookieBanner = document.getElementById('cookie-banner');
-  const cookieOverlay = document.getElementById('cookie-overlay');
+  const cookieConsent = document.getElementById('cookie-consent');
   const acceptBtn = document.getElementById('accept-cookies-btn');
   const rejectBtn = document.getElementById('reject-cookies-btn');
-  const cookieLink = document.getElementById('cookie-settings-link');
 
-  // -------------------------
-  // Fade helpers
-  // -------------------------
   function showCookieConsent() {
-    cookieBanner.classList.add('show');
-    cookieOverlay.classList.add('show');
+    cookieConsent.style.display = 'block';
   }
 
   function hideCookieConsent() {
-    cookieBanner.classList.remove('show');
-    cookieOverlay.classList.remove('show');
+    cookieConsent.style.display = 'none';
   }
 
-  // -------------------------
-  // GA loader
-  // -------------------------
-  async function loadGAScript() {
-    if (!document.getElementById('ga-script')) {
-      const script = document.createElement('script');
-      script.id = 'ga-script';
-      script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=G-836SRJ0HHH";
-      document.head.appendChild(script);
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', 'G-836SRJ0HHH');
-    }
-  }
-
-  function initGAWithVisitorID() {
-    console.log("GA initialized with visitor ID");
-  }
-
-  // -------------------------
-  // Buttons
-  // -------------------------
   acceptBtn.addEventListener('click', async () => {
     localStorage.setItem('cookiesAccepted', 'true');
     hideCookieConsent();
@@ -130,43 +96,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     hideCookieConsent();
   });
 
-  // -------------------------
-  // Page load
-  // -------------------------
-  const consent = localStorage.getItem('cookiesAccepted');
-  if (consent === 'true') {
-    hideCookieConsent();
-    await loadGAScript();
-    initGAWithVisitorID();
-  } else if (consent === 'false') {
-    hideCookieConsent();
-  } else {
-    showCookieConsent();
+  window.addEventListener('load', async () => {
+    const consent = localStorage.getItem('cookiesAccepted');
+    if (consent === 'true') {
+      hideCookieConsent();
+      await loadGAScript();
+      initGAWithVisitorID();
+    } else if (consent === 'false') {
+      hideCookieConsent();
+    } else {
+      showCookieConsent();
+    }
+  });
+
+  // Stub functions for GA (you can replace them with actual logic)
+  async function loadGAScript() {
+    console.log("GA script would be loaded here.");
   }
 
-  // -------------------------
-  // Cookie settings link
-  // -------------------------
-  cookieLink.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    // Remove stored consent
-    localStorage.removeItem('cookiesAccepted');
-
-    // Remove GA script if exists
-    const gaScript = document.getElementById('ga-script');
-    if (gaScript) {
-      gaScript.remove();
-      delete window.gtag;
-      delete window.dataLayer;
-    }
-
-    // Show banner again
-    showCookieConsent();
-  });
-});
+  function initGAWithVisitorID() {
+    console.log("GA initialized.");
+  }
 </script>
-
 
 
 	   <link rel="preload" 
@@ -2072,4 +2023,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
