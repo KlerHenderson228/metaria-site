@@ -41,15 +41,9 @@
   font-family: Inter, sans-serif;
   color: #fdf5e6;
 ">
- <span id="cookie-text">
-  This site uses cookies and Google Analytics to improve your experience.
-  </span>  
-  <br>
-  <a href="privacy.html" target="_blank" id="cookie-policy-link" style="color: #fdf5e6; text-decoration: underline;">
-    Privacy Policy
-  </a> for more details.
+  This site uses cookies and Google Analytics to improve your experience.  
+  Read our <a href="privacy.html" target="_blank" style="color: #fdf5e6; text-decoration: underline;">Privacy Policy</a> for more details.
   <br><br>
-
   <button id="accept-cookies-btn" style="
     background-color: transparent;
     color: #fdf5e6;
@@ -59,7 +53,6 @@
     cursor: pointer;
     font-weight: bold;
   ">Accept</button>
-
   <button id="reject-cookies-btn" style="
     background-color: transparent;
     color: #fdf5e6;
@@ -72,7 +65,8 @@
 </div>
 
 <script>
-	document.addEventListener('DOMContentLoaded', async () => {
+  // Your existing JavaScript code here, just add these lines:
+
   const cookieBanner = document.getElementById('cookie-banner');
   const cookieOverlay = document.getElementById('cookie-overlay');
   const acceptBtn = document.getElementById('accept-cookies-btn');
@@ -82,30 +76,9 @@
     cookieBanner.style.display = 'block';
     cookieOverlay.style.display = 'block';
   }
-
   function hideCookieConsent() {
     cookieBanner.style.display = 'none';
     cookieOverlay.style.display = 'none';
-  }
-
-  async function loadGAScript() {
-    if (!document.getElementById('ga-script')) {
-      const script = document.createElement('script');
-      script.id = 'ga-script';
-      script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=G-836SRJ0HHH";
-      document.head.appendChild(script);
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', 'G-836SRJ0HHH');
-    }
-  }
-
-  function initGAWithVisitorID() {
-    console.log("GA initialized with visitor ID");
   }
 
   acceptBtn.addEventListener('click', async () => {
@@ -128,12 +101,14 @@
       initGAWithVisitorID();
     } else if (consent === 'false') {
       hideCookieConsent();
+      // GA not loaded
     } else {
       showCookieConsent();
     }
   });
-		}
 </script>
+
+
 
 
 
@@ -2041,3 +2016,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
