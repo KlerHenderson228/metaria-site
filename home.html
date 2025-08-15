@@ -73,64 +73,97 @@
 
 <script>
   const cookieBanner = document.getElementById('cookie-banner');
-  const cookieOverlay = document.getElementById('cookie-overlay');
-  const acceptBtn = document.getElementById('accept-cookies-btn');
-  const rejectBtn = document.getElementById('reject-cookies-btn');
+const cookieOverlay = document.getElementById('cookie-overlay');
+const acceptBtn = document.getElementById('accept-cookies-btn');
+const rejectBtn = document.getElementById('reject-cookies-btn');
+const settingsLink = document.getElementById('cookie-settings-link'); // new link
 
-  function showCookieConsent() {
-    cookieBanner.style.display = 'block';
-    cookieOverlay.style.display = 'block';
+// Your GA property ID
+const GA_MEASUREMENT_ID = 'G-836SRJ0HHH';
+
+function showCookieConsent() {
+  cookieBanner.style.display = 'block';
+  cookieOverlay.style.display = 'block';
+}
+
+function hideCookieConsent() {
+  cookieBanner.style.display = 'none';
+  cookieOverlay.style.display = 'none';
+}
+
+async function loadGAScript() {
+  if (!document.getElementById('ga-script')) {
+    const script = document.createElement('script');
+    script.id = 'ga-script';
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_MEASUREMENT_ID);
   }
+}
 
-  function hideCookieConsent() {
-    cookieBanner.style.display = 'none';
-    cookieOverlay.style.display = 'none';
-  }
+function disableGA() {
+  // Official GA opt-out method
+  window[`ga-disable-${GA_MEASUREMENT_ID}`] = true;
 
-  async function loadGAScript() {
-    if (!document.getElementById('ga-script')) {
-      const script = document.createElement('script');
-      script.id = 'ga-script';
-      script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=G-836SRJ0HHH";
-      document.head.appendChild(script);
+  // Remove GA script if present
+  const gaScript = document.getElementById('ga-script');
+  if (gaScript) gaScript.remove();
 
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', 'G-836SRJ0HHH');
-    }
-  }
+  // Clear GA objects
+  delete window.gtag;
+  delete window.dataLayer;
+}
 
-  function initGAWithVisitorID() {
-    console.log("GA initialized with visitor ID");
-  }
+function initGAWithVisitorID() {
+  console.log("GA initialized with visitor ID");
+}
 
-  acceptBtn.addEventListener('click', async () => {
-    localStorage.setItem('cookiesAccepted', 'true');
+// Accept cookies
+acceptBtn.addEventListener('click', async () => {
+  localStorage.setItem('cookiesAccepted', 'true');
+  hideCookieConsent();
+  await loadGAScript();
+  initGAWithVisitorID();
+});
+
+// Reject cookies
+rejectBtn.addEventListener('click', () => {
+  localStorage.setItem('cookiesAccepted', 'false');
+  disableGA();
+  hideCookieConsent();
+});
+
+// Reopen cookie settings (change consent)
+if (settingsLink) {
+  settingsLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.removeItem('cookiesAccepted');
+    disableGA();
+    showCookieConsent();
+  });
+}
+
+// On page load
+window.addEventListener('load', async () => {
+  const consent = localStorage.getItem('cookiesAccepted');
+  if (consent === 'true') {
     hideCookieConsent();
     await loadGAScript();
     initGAWithVisitorID();
-  });
-
-  rejectBtn.addEventListener('click', () => {
-    localStorage.setItem('cookiesAccepted', 'false');
+  } else if (consent === 'false') {
     hideCookieConsent();
-  });
+    disableGA();
+  } else {
+    showCookieConsent();
+  }
+});
 
-  window.addEventListener('load', async () => {
-    const consent = localStorage.getItem('cookiesAccepted');
-    if (consent === 'true') {
-      hideCookieConsent();
-      await loadGAScript();
-      initGAWithVisitorID();
-    } else if (consent === 'false') {
-      hideCookieConsent();
-    } else {
-      showCookieConsent();
-    }
-  });
 </script>
 
 
@@ -147,22 +180,7 @@
 	
   <style>
 
-	   body.loading {
-    overflow: hidden; /* prevent scroll while loading */
-  }
-	  
-  #loading-screen {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: #000;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-	  font-family: 'Misto', sans-serif;
-    font-size: 1.2rem;
-    z-index: 10001;
-  }
+
 	  
     body {
 		min-height: 100vh;
@@ -193,12 +211,6 @@ html, body {
 }
 
 
-	  @media (max-width: 1024px) and (orientation: landscape) {
-  .modal-content {
-    max-height: 90vh;     /* slightly larger max height */
-    height: auto;
-    overflow-y: auto;
-  }
   body, html {
     overflow-y: auto;     /* make sure scrolling is enabled */
   }
@@ -259,17 +271,6 @@ a {
    margin-left: calc((100vw - 1000px * var(--scale)) / 2 + 500px);
   }
 }
-
-
-
-
-
-
-
-
-
-
-	  
 
 
 .blob {
@@ -470,6 +471,12 @@ a {
     -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
   }
 
+	  @media (max-width: 1024px) and (orientation: landscape) {
+  .modal-content {
+    max-height: 90vh;     /* slightly larger max height */
+    height: auto;
+    overflow-y: auto;
+  }
 	  .modal-content img,
   .modal-content video,
   .modal-content canvas {
@@ -621,12 +628,6 @@ a {
   vertical-align: top;
 }
 
-.image gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
 
 
 .footer {
@@ -1841,8 +1842,6 @@ function updateModalAnnotationLanguage(modalId) {
 
 
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const modalIds = ["modal3", "modal6"];
 
@@ -1894,8 +1893,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
 	
 
  // Select titles
@@ -1933,12 +1930,14 @@ titles.forEach(title => {
 <footer class="footer" id="site-footer">
   <span id="footer-text">&copy; 2025 Metaria Ry. All rights reserved.</span>
   <a href="privacy.html" class="footer-link" id="privacy-link">Privacy Policy</a>
+	<a href="#" id="cookie-settings-link" class="footer-link">Cookie Settings</a>
 </footer>
 
 
 
 </body>
 </html>
+
 
 
 
