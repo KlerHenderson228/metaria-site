@@ -1934,8 +1934,14 @@ document.addEventListener("DOMContentLoaded", function () {
             // Toggle the clicked one
             if (content.classList.contains('expanded')) {
                 content.classList.remove('expanded');
-                content.style.maxH
-
+                content.style.maxHeight = null;
+            } else {
+                content.classList.add('expanded');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    });
+});
 
 
 	
@@ -1954,6 +1960,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
