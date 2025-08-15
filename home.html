@@ -1901,24 +1901,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const titles = modal.querySelectorAll(".collapsible-title");
 
         titles.forEach(title => {
-    const container = title.nextElementSibling;
-    const images = container.querySelectorAll("img");
-    let hideTimer = null;
-    let imageHidden = false;
+            const container = title.nextElementSibling;
+            if (!container) return;
+            const images = container.querySelectorAll("img");
+            let hideTimer = null;
+            let imageHidden = false;
 
-    // <-- Replace your old functions here -->
-    const hideImages = () => {
-        images.forEach(img => img.classList.add("hidden"));
-        imageHidden = true;
-    };
-
-    const showImages = () => {
-        images.forEach(img => {
-            img.classList.remove("hidden");
-            img.style.display = "block"; // ensure visible when modal reopens
-        });
-        imageHidden = false;
-    };
+            const hideImages = () => {
+                images.forEach(img => img.style.display = "none");
+                imageHidden = true;
+            };
 
             // No showImages() on collapse anymore
             title.addEventListener("click", () => {
@@ -1944,7 +1936,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Start countdown if images are not yet hidden
                     if (!imageHidden) {
                         clearTimeout(hideTimer);
-                        hideTimer = setTimeout(hideImages, 3000);
+                        hideTimer = setTimeout(hideImages, 1000);
                     }
                 }
             });
@@ -1999,7 +1991,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
 	
 
 
@@ -2018,6 +2009,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
