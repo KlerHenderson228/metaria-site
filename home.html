@@ -72,21 +72,29 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', async () => {
   const cookieBanner = document.getElementById('cookie-banner');
   const cookieOverlay = document.getElementById('cookie-overlay');
   const acceptBtn = document.getElementById('accept-cookies-btn');
   const rejectBtn = document.getElementById('reject-cookies-btn');
+  const cookieLink = document.getElementById('cookie-settings-link');
 
+  // -------------------------
+  // Fade helpers
+  // -------------------------
   function showCookieConsent() {
-    cookieBanner.style.display = 'block';
-    cookieOverlay.style.display = 'block';
+    cookieBanner.classList.add('show');
+    cookieOverlay.classList.add('show');
   }
 
   function hideCookieConsent() {
-    cookieBanner.style.display = 'none';
-    cookieOverlay.style.display = 'none';
+    cookieBanner.classList.remove('show');
+    cookieOverlay.classList.remove('show');
   }
 
+  // -------------------------
+  // GA loader
+  // -------------------------
   async function loadGAScript() {
     if (!document.getElementById('ga-script')) {
       const script = document.createElement('script');
@@ -107,6 +115,9 @@
     console.log("GA initialized with visitor ID");
   }
 
+  // -------------------------
+  // Buttons
+  // -------------------------
   acceptBtn.addEventListener('click', async () => {
     localStorage.setItem('cookiesAccepted', 'true');
     hideCookieConsent();
@@ -119,37 +130,43 @@
     hideCookieConsent();
   });
 
-  window.addEventListener('load', async () => {
-    const consent = localStorage.getItem('cookiesAccepted');
-    if (consent === 'true') {
-      hideCookieConsent();
-      await loadGAScript();
-      initGAWithVisitorID();
-    } else if (consent === 'false') {
-      hideCookieConsent();
-    } else {
-      showCookieConsent();
-    }
-  });
-
-	document.getElementById('cookie-settings-link').addEventListener('click', (e) => {
-  e.preventDefault();
-  // Clear stored consent
-  localStorage.removeItem('cookiesAccepted');
-
-  // Optionally disable GA by removing the script
-  const gaScript = document.getElementById('ga-script');
-  if (gaScript) {
-    gaScript.remove();
-    delete window.gtag;
-    delete window.dataLayer;
+  // -------------------------
+  // Page load
+  // -------------------------
+  const consent = localStorage.getItem('cookiesAccepted');
+  if (consent === 'true') {
+    hideCookieConsent();
+    await loadGAScript();
+    initGAWithVisitorID();
+  } else if (consent === 'false') {
+    hideCookieConsent();
+  } else {
+    showCookieConsent();
   }
 
-  // Show banner again
-  showCookieConsent();
-});
+  // -------------------------
+  // Cookie settings link
+  // -------------------------
+  cookieLink.addEventListener('click', (e) => {
+    e.preventDefault();
 
+    // Remove stored consent
+    localStorage.removeItem('cookiesAccepted');
+
+    // Remove GA script if exists
+    const gaScript = document.getElementById('ga-script');
+    if (gaScript) {
+      gaScript.remove();
+      delete window.gtag;
+      delete window.dataLayer;
+    }
+
+    // Show banner again
+    showCookieConsent();
+  });
+});
 </script>
+
 
 
 	   <link rel="preload" 
@@ -222,6 +239,18 @@ html, body {
   }
 }
 
+#cookie-banner,
+#cookie-overlay {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#cookie-banner.show,
+#cookie-overlay.show {
+  display: block;
+  opacity: 1;
+}
 
 
 @font-face {
@@ -1967,7 +1996,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Start countdown if images are not yet hidden
                     if (!imageHidden) {
                         clearTimeout(hideTimer);
-                        hideTimer = setTimeout(hideImages, 1000);
+                        hideTimer = setTimeout(hideImages, 3000);
                     }
                 }
             });
@@ -2040,208 +2069,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
