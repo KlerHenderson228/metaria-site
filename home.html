@@ -1892,7 +1892,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Start countdown for this container only
                     if (!imageHidden) {
                         clearTimeout(hideTimer);
-                        hideTimer = setTimeout(hideImages, 5000);
+                        hideTimer = setTimeout(hideImages, 1000);
                     }
                 }
             });
@@ -1919,33 +1919,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	
 
- // Select titles
-const titles = document.querySelectorAll('#board-title, #members-title, #collaborators-title, #funders-title, #acknowlegement-title');
-
-titles.forEach(title => {
-  title.addEventListener('click', () => {
-    const content = title.nextElementSibling;
-
-    // Close all other sections
-    titles.forEach(otherTitle => {
-      const otherContent = otherTitle.nextElementSibling;
-      if (otherContent !== content) {
-        otherContent.classList.remove('expanded');
-        otherContent.style.maxHeight = null;
-      }
-    });
-
-    // Toggle the clicked one
-    if (content.classList.contains('expanded')) {
-      content.classList.remove('expanded');
-      content.style.maxHeight = null;
-    } else {
-      content.classList.add('expanded');
-      content.style.maxHeight = content.scrollHeight + "px";
-    }
-  });
-});
-
 
 
 </script>
@@ -1960,6 +1933,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
