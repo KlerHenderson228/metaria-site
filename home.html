@@ -610,9 +610,6 @@ a {
   }
 }
 	
-.collapsible-title {
-    cursor: pointer;
-}
 
 .image-gallery {
   display: flex;
@@ -808,18 +805,44 @@ a {
     object-fit: contain;
   }
 
-.collapsible-title:hover {
-    background-color: #3d3d3d; /* subtle highlight */
+	/* Modal collapsible titles */
+.collapsible-title {
+    display: inline-block; /* wrap around text */
+    padding: 4px 8px;      /* space around the text */
+    border-radius: 6px;    /* optional: rounded edges */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-	  #board-title:hover,
+.collapsible-title:hover {
+    background-color: #3d3d3d; /* highlight */
+    color: white;              /* optional: change text color */
+    transform: scale(1.05);    /* optional: subtle zoom on hover */
+}
+
+/* Page-level collapsible titles */
+#board-title,
+#members-title,
+#collaborators-title,
+#funders-title,
+#acknowlegement-title {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#board-title:hover,
 #members-title:hover,
 #collaborators-title:hover,
 #funders-title:hover,
 #acknowlegement-title:hover {
-    background-color: #3d3d3d; /* subtle highlight */
-    cursor: pointer;
+    background-color: #3d3d3d;
+    color: white;
+    transform: scale(1.05);
 }
+
 
 .collapsible-gallery img {
     transition: opacity 0.5s ease; /* smooth fade */
@@ -2009,6 +2032,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
