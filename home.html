@@ -64,49 +64,7 @@
   ">Reject</button>
 </div>
 
-<script>
-  // Your existing JavaScript code here, just add these lines:
 
-  const cookieBanner = document.getElementById('cookie-banner');
-  const cookieOverlay = document.getElementById('cookie-overlay');
-  const acceptBtn = document.getElementById('accept-cookies-btn');
-  const rejectBtn = document.getElementById('reject-cookies-btn');
-
-  function showCookieConsent() {
-    cookieBanner.style.display = 'block';
-    cookieOverlay.style.display = 'block';
-  }
-  function hideCookieConsent() {
-    cookieBanner.style.display = 'none';
-    cookieOverlay.style.display = 'none';
-  }
-
-  acceptBtn.addEventListener('click', async () => {
-    localStorage.setItem('cookiesAccepted', 'true');
-    hideCookieConsent();
-    await loadGAScript();
-    initGAWithVisitorID();
-  });
-
-  rejectBtn.addEventListener('click', () => {
-    localStorage.setItem('cookiesAccepted', 'false');
-    hideCookieConsent();
-  });
-
-  window.addEventListener('load', async () => {
-    const consent = localStorage.getItem('cookiesAccepted');
-    if (consent === 'true') {
-      hideCookieConsent();
-      await loadGAScript();
-      initGAWithVisitorID();
-    } else if (consent === 'false') {
-      hideCookieConsent();
-      // GA not loaded
-    } else {
-      showCookieConsent();
-    }
-  });
-</script>
 
 
 
@@ -2000,7 +1958,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	
 
+const cookieBanner = document.getElementById('cookie-banner');
+  const cookieOverlay = document.getElementById('cookie-overlay');
+  const acceptBtn = document.getElementById('accept-cookies-btn');
+  const rejectBtn = document.getElementById('reject-cookies-btn');
 
+  function showCookieConsent() {
+    cookieBanner.style.display = 'block';
+    cookieOverlay.style.display = 'block';
+  }
+  function hideCookieConsent() {
+    cookieBanner.style.display = 'none';
+    cookieOverlay.style.display = 'none';
+  }
+
+  acceptBtn.addEventListener('click', async () => {
+    localStorage.setItem('cookiesAccepted', 'true');
+    hideCookieConsent();
+    await loadGAScript();
+    initGAWithVisitorID();
+  });
+
+  rejectBtn.addEventListener('click', () => {
+    localStorage.setItem('cookiesAccepted', 'false');
+    hideCookieConsent();
+  });
+
+  window.addEventListener('load', async () => {
+    const consent = localStorage.getItem('cookiesAccepted');
+    if (consent === 'true') {
+      hideCookieConsent();
+      await loadGAScript();
+      initGAWithVisitorID();
+    } else if (consent === 'false') {
+      hideCookieConsent();
+      // GA not loaded
+    } else {
+      showCookieConsent();
+    }
+  });
 
 </script>
 
@@ -2016,4 +2012,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
