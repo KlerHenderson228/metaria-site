@@ -956,8 +956,8 @@ a {
 <div id="modal3" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h2 class="modal-word" id="patronage-title">Science on Stage</h2>  
-	    <h2 id="collaborators-title">Green Curtain</h2> 
+    <h2 class="modal-word">Science on Stage</h2>  
+	    <h2 id="collapsible-title">Green Curtain</h2> 
 <div class="collapsible-gallery">
   
     <img src="images/gc.png" alt="Performance 1" style="width: 300px; height: auto;">
@@ -966,7 +966,7 @@ a {
     
  
 </div>
-        <h2 id="funders-title">Breath of Carbon</h2>  
+        <h2 id="collapsible-title">Breath of Carbon</h2>  
 <div class="collapsible-gallery">
   
     <img src="images/bc.png" alt="Performance 1" style="width: 700px; height: auto;">
@@ -1038,9 +1038,9 @@ Showcasing innovative tech-driven performance art nationally and internationally
 <div id="modal6" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h2 class="modal-word" id="patronage-title">New Writing</h2>  
+    <h2 class="modal-word" >New Writing</h2>  
 	
-        <h2 id="collaborators-title">Translucence</h2> 
+        <h2 id="collapsible-title">Translucence</h2> 
 <div class="collapsible-gallery">
   
     <img src="images/translucence.jpeg" alt="Performance 1" style="width: 300px; height: auto;">
@@ -1049,7 +1049,7 @@ Showcasing innovative tech-driven performance art nationally and internationally
     
  
 </div>
-        <h2 id="funders-title">Eurojob</h2>  
+        <h2 id="collapsible-title">Eurojob</h2>  
 <div class="collapsible-gallery">
   
     <img src="images/eurojob.jpeg" alt="Performance 1" style="width: 700px; height: auto;">
@@ -1057,7 +1057,7 @@ Showcasing innovative tech-driven performance art nationally and internationally
       
 	   </div>
 	   
-<h2 id="funders-title">First Aid, Last Orders</h2>  
+<h2 id="collapsible-title">First Aid, Last Orders</h2>  
 <div class="collapsible-gallery">
   
     <img src="images/fa.jpg" alt="Performance 1" style="width: 300px; height: auto;">
@@ -1851,6 +1851,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const closeBtn = modal.querySelector(".close");
 
         modal.querySelectorAll(".collapsible-gallery").forEach(container => {
+            const title = container.previousElementSibling; // assumes title is right before container
             let hideTimer = null;
             let imageHidden = false;
             const images = container.querySelectorAll("img");
@@ -1865,8 +1866,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 imageHidden = false;
             };
 
-            // Listen to clicks anywhere inside the container
-            container.addEventListener("click", () => {
+            // Start countdown when the title is clicked to open container
+            title.addEventListener("click", () => {
+                // Check if container is about to open (not already hidden)
                 if (!imageHidden) {
                     clearTimeout(hideTimer);
                     hideTimer = setTimeout(hideImages, 5000);
@@ -1880,13 +1882,12 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
 
-        // Close modal (your existing logic)
+        // Close modal logic
         closeBtn.addEventListener("click", () => {
             modal.style.display = "none";
         });
     });
 });
-
 
 
 
@@ -1939,6 +1940,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
