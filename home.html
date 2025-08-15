@@ -131,6 +131,24 @@
       showCookieConsent();
     }
   });
+
+	document.getElementById('cookie-settings-link').addEventListener('click', (e) => {
+  e.preventDefault();
+  // Clear stored consent
+  localStorage.removeItem('cookiesAccepted');
+
+  // Optionally disable GA by removing the script
+  const gaScript = document.getElementById('ga-script');
+  if (gaScript) {
+    gaScript.remove();
+    delete window.gtag;
+    delete window.dataLayer;
+  }
+
+  // Show banner again
+  showCookieConsent();
+});
+
 </script>
 
 
@@ -1968,6 +1986,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
