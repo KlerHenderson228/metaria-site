@@ -72,29 +72,21 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', async () => {
   const cookieBanner = document.getElementById('cookie-banner');
   const cookieOverlay = document.getElementById('cookie-overlay');
   const acceptBtn = document.getElementById('accept-cookies-btn');
   const rejectBtn = document.getElementById('reject-cookies-btn');
-  const cookieLink = document.getElementById('cookie-settings-link');
 
-  // -------------------------
-  // Fade helpers
-  // -------------------------
   function showCookieConsent() {
-    cookieBanner.classList.add('show');
-    cookieOverlay.classList.add('show');
+    cookieBanner.style.display = 'block';
+    cookieOverlay.style.display = 'block';
   }
 
   function hideCookieConsent() {
-    cookieBanner.classList.remove('show');
-    cookieOverlay.classList.remove('show');
+    cookieBanner.style.display = 'none';
+    cookieOverlay.style.display = 'none';
   }
 
-  // -------------------------
-  // GA loader
-  // -------------------------
   async function loadGAScript() {
     if (!document.getElementById('ga-script')) {
       const script = document.createElement('script');
@@ -115,9 +107,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log("GA initialized with visitor ID");
   }
 
-  // -------------------------
-  // Buttons
-  // -------------------------
   acceptBtn.addEventListener('click', async () => {
     localStorage.setItem('cookiesAccepted', 'true');
     hideCookieConsent();
@@ -130,41 +119,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     hideCookieConsent();
   });
 
-  // -------------------------
-  // Page load
-  // -------------------------
-  const consent = localStorage.getItem('cookiesAccepted');
-  if (consent === 'true') {
-    hideCookieConsent();
-    await loadGAScript();
-    initGAWithVisitorID();
-  } else if (consent === 'false') {
-    hideCookieConsent();
-  } else {
-    showCookieConsent();
-  }
-
-  // -------------------------
-  // Cookie settings link
-  // -------------------------
-  cookieLink.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    // Remove stored consent
-    localStorage.removeItem('cookiesAccepted');
-
-    // Remove GA script if exists
-    const gaScript = document.getElementById('ga-script');
-    if (gaScript) {
-      gaScript.remove();
-      delete window.gtag;
-      delete window.dataLayer;
+  window.addEventListener('load', async () => {
+    const consent = localStorage.getItem('cookiesAccepted');
+    if (consent === 'true') {
+      hideCookieConsent();
+      await loadGAScript();
+      initGAWithVisitorID();
+    } else if (consent === 'false') {
+      hideCookieConsent();
+    } else {
+      showCookieConsent();
     }
-
-    // Show banner again
-    showCookieConsent();
   });
-});
 </script>
 
 
@@ -2064,7 +2030,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <footer class="footer" id="site-footer">
   <span id="footer-text">&copy; 2025 Metaria Ry. All rights reserved.</span>
   <a href="privacy.html" class="footer-link" id="privacy-link">Privacy Policy</a>
-	<a href="#" id="cookie-settings-link" class="footer-link">Cookie Settings</a>
+	
 
 </footer>
 
