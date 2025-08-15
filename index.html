@@ -15,125 +15,7 @@
 	<link rel="preload" href="videos/vid7.mp4" as="video" type="video/mp4">
 <link rel="preload" href="videos/vid8.mp4" as="video" type="video/mp4">
 
-<!-- Cookie banner with overlay -->
-<div id="cookie-overlay" style="
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 9998;
-"></div>
 
-<div id="cookie-banner" style="
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #2b2b2b;
-  padding: 20px 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  border-radius: 8px;
-  text-align: center;
-  z-index: 9999;
-  max-width: 90%;
-  width: 400px;
-  font-family: Inter, sans-serif;
-  color: #fdf5e6;
-">
- <span id="cookie-text">
-  This site uses cookies and Google Analytics to improve your experience.
-  </span>  
-  <br>
-  <a href="privacy.html" target="_blank" id="cookie-policy-link" style="color: #fdf5e6; text-decoration: underline;">
-    Privacy Policy
-  </a> for more details.
-  <br><br>
-
-  <button id="accept-cookies-btn" style="
-    background-color: transparent;
-    color: #fdf5e6;
-    border: 1px solid #fdf5e6;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-  ">Accept</button>
-
-  <button id="reject-cookies-btn" style="
-    background-color: transparent;
-    color: #fdf5e6;
-    border: 1px solid #fdf5e6;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-  ">Reject</button>
-</div>
-
-<script>
-	document.addEventListener('DOMContentLoaded', async () => {
-  const cookieBanner = document.getElementById('cookie-banner');
-  const cookieOverlay = document.getElementById('cookie-overlay');
-  const acceptBtn = document.getElementById('accept-cookies-btn');
-  const rejectBtn = document.getElementById('reject-cookies-btn');
-
-  function showCookieConsent() {
-    cookieBanner.style.display = 'block';
-    cookieOverlay.style.display = 'block';
-  }
-
-  function hideCookieConsent() {
-    cookieBanner.style.display = 'none';
-    cookieOverlay.style.display = 'none';
-  }
-
-  async function loadGAScript() {
-    if (!document.getElementById('ga-script')) {
-      const script = document.createElement('script');
-      script.id = 'ga-script';
-      script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=G-836SRJ0HHH";
-      document.head.appendChild(script);
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', 'G-836SRJ0HHH');
-    }
-  }
-
-  function initGAWithVisitorID() {
-    console.log("GA initialized with visitor ID");
-  }
-
-  acceptBtn.addEventListener('click', async () => {
-    localStorage.setItem('cookiesAccepted', 'true');
-    hideCookieConsent();
-    await loadGAScript();
-    initGAWithVisitorID();
-  });
-
-  rejectBtn.addEventListener('click', () => {
-    localStorage.setItem('cookiesAccepted', 'false');
-    hideCookieConsent();
-  });
-
-  window.addEventListener('load', async () => {
-    const consent = localStorage.getItem('cookiesAccepted');
-    if (consent === 'true') {
-      hideCookieConsent();
-      await loadGAScript();
-      initGAWithVisitorID();
-    } else if (consent === 'false') {
-      hideCookieConsent();
-    } else {
-      showCookieConsent();
-    }
-  });
-		}
-</script>
 
 
 
@@ -867,9 +749,61 @@ a:active, .collapsible-title:active {
   </style>
 </head>
 
-<body class="loading">
+<!-- Cookie banner with overlay -->
+<div id="cookie-overlay" style="
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 9998;
+"></div>
 
-<!-- <div id="loading-screen">Loading...</div> -->
+<div id="cookie-banner" style="
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2b2b2b;
+  padding: 20px 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border-radius: 8px;
+  text-align: center;
+  z-index: 9999;
+  max-width: 90%;
+  width: 400px;
+  font-family: Inter, sans-serif;
+  color: #fdf5e6;
+">
+ <span id="cookie-text">
+  This site uses cookies and Google Analytics to improve your experience.
+  </span>  
+  <br>
+  <a href="privacy.html" target="_blank" id="cookie-policy-link" style="color: #fdf5e6; text-decoration: underline;">
+    Privacy Policy
+  </a> for more details.
+  <br><br>
+
+  <button id="accept-cookies-btn" style="
+    background-color: transparent;
+    color: #fdf5e6;
+    border: 1px solid #fdf5e6;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  ">Accept</button>
+
+  <button id="reject-cookies-btn" style="
+    background-color: transparent;
+    color: #fdf5e6;
+    border: 1px solid #fdf5e6;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  ">Reject</button>
+</div>
 	
 <canvas id="binaryCanvas"></canvas>
 
@@ -1148,6 +1082,71 @@ Showcasing innovative tech-driven performance art nationally and internationally
   
 
 <script>
+
+	
+	document.addEventListener('DOMContentLoaded', async () => {
+  const cookieBanner = document.getElementById('cookie-banner');
+  const cookieOverlay = document.getElementById('cookie-overlay');
+  const acceptBtn = document.getElementById('accept-cookies-btn');
+  const rejectBtn = document.getElementById('reject-cookies-btn');
+
+  function showCookieConsent() {
+    cookieBanner.style.display = 'block';
+    cookieOverlay.style.display = 'block';
+  }
+
+  function hideCookieConsent() {
+    cookieBanner.style.display = 'none';
+    cookieOverlay.style.display = 'none';
+  }
+
+  async function loadGAScript() {
+    if (!document.getElementById('ga-script')) {
+      const script = document.createElement('script');
+      script.id = 'ga-script';
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-836SRJ0HHH";
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-836SRJ0HHH');
+    }
+  }
+
+  function initGAWithVisitorID() {
+    console.log("GA initialized with visitor ID");
+  }
+
+  acceptBtn.addEventListener('click', async () => {
+    localStorage.setItem('cookiesAccepted', 'true');
+    hideCookieConsent();
+    await loadGAScript();
+    initGAWithVisitorID();
+  });
+
+  rejectBtn.addEventListener('click', () => {
+    localStorage.setItem('cookiesAccepted', 'false');
+    hideCookieConsent();
+  });
+
+  window.addEventListener('load', async () => {
+    const consent = localStorage.getItem('cookiesAccepted');
+    if (consent === 'true') {
+      hideCookieConsent();
+      await loadGAScript();
+      initGAWithVisitorID();
+    } else if (consent === 'false') {
+      hideCookieConsent();
+    } else {
+      showCookieConsent();
+    }
+  });
+		}
+
+
 
 
 	document.addEventListener('contextmenu', e => e.preventDefault());
