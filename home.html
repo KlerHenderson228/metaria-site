@@ -1080,86 +1080,73 @@ Showcasing innovative tech-driven performance art nationally and internationally
   
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+  (function() {
+    const GA_MEASUREMENT_ID = 'G-836SRJ0HHH';
+    const COOKIE_NAME = 'user_cookie_consent';
 
-
-(function() {
-  const GA_MEASUREMENT_ID = 'G-836SRJ0HHH';
-  const COOKIE_NAME = 'user_cookie_consent';
-
-  // Utility to set cookies
-  function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
-  }
-
-  // Utility to get cookie
-  function getCookie(name) {
-    const cookies = document.cookie.split(';').map(c => c.trim());
-    for (let c of cookies) {
-      if (c.startsWith(name + '=')) return c.split('=')[1];
+    function setCookie(name, value, days) {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + days*24*60*60*1000);
+      document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
     }
-    return null;
-  }
 
-  // Show banner
-  function showBanner() {
-    document.getElementById('cookie-overlay').style.display = 'block';
-    document.getElementById('cookie-banner').style.display = 'block';
-  }
-
-  // Hide banner
-  function hideBanner() {
-    document.getElementById('cookie-overlay').style.display = 'none';
-    document.getElementById('cookie-banner').style.display = 'none';
-  }
-
-  // Load GA only if consent given
-  function loadGA() {
-    if (!window.gtag) {
-      const script = document.createElement('script');
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-      script.async = true;
-      document.head.appendChild(script);
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', GA_MEASUREMENT_ID, { 'anonymize_ip': true });
+    function getCookie(name) {
+      const cookies = document.cookie.split(';').map(c => c.trim());
+      for (let c of cookies) if (c.startsWith(name + '=')) return c.split('=')[1];
+      return null;
     }
-  }
 
-  // Accept cookies
-  function acceptCookies() {
-    setCookie(COOKIE_NAME, 'accepted', 365);
-    loadGA();
-    hideBanner();
-  }
+    function showBanner() {
+      document.getElementById('cookie-overlay').style.display = 'block';
+      document.getElementById('cookie-banner').style.display = 'block';
+    }
 
-  // Reject cookies
-  function rejectCookies() {
-    setCookie(COOKIE_NAME, 'rejected', 365);
-    hideBanner();
-  }
+    function hideBanner() {
+      document.getElementById('cookie-overlay').style.display = 'none';
+      document.getElementById('cookie-banner').style.display = 'none';
+    }
 
-  // Check cookie consent on load
-  const consent = getCookie(COOKIE_NAME);
-  if (consent === 'accepted') {
-    loadGA();
-  } else if (consent !== 'rejected') {
-    showBanner();
-  }
+    function loadGA() {
+      if (!window.gtag) {
+        const script = document.createElement('script');
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+        script.async = true;
+        document.head.appendChild(script);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID, { 'anonymize_ip': true });
+      }
+    }
 
-  // Event listeners
-  document.getElementById('accept-cookies-btn').addEventListener('click', acceptCookies);
-  document.getElementById('reject-cookies-btn').addEventListener('click', rejectCookies);
+    function acceptCookies() {
+      setCookie(COOKIE_NAME, 'accepted', 365);
+      loadGA();
+      hideBanner();
+    }
 
-  document.getElementById('cookie-settings-link').addEventListener('click', function(e) {
-    e.preventDefault();
-    showBanner();
-  });
-})();
+    function rejectCookies() {
+      setCookie(COOKIE_NAME, 'rejected', 365);
+      hideBanner();
+    }
 
+    const consent = getCookie(COOKIE_NAME);
+    if (consent === 'accepted') {
+      loadGA();
+    } else if (consent !== 'rejected') {
+      showBanner();
+    }
+
+    document.getElementById('accept-cookies-btn').addEventListener('click', acceptCookies);
+    document.getElementById('reject-cookies-btn').addEventListener('click', rejectCookies);
+    document.getElementById('cookie-settings-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      showBanner();
+    });
+  })();
+});
 </script>
 
 
@@ -2059,6 +2046,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
