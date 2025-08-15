@@ -1840,19 +1840,21 @@ function updateModalAnnotationLanguage(modalId) {
 
 
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
+    // -------------------------
+    // Modal collapsibles with image hiding
+    // -------------------------
     const modalIds = ["modal3", "modal6"];
 
     modalIds.forEach(modalId => {
         const modal = document.getElementById(modalId);
+        if (!modal) return;
         const closeBtn = modal.querySelector(".close");
-
         const titles = modal.querySelectorAll(".collapsible-title");
 
         titles.forEach(title => {
             const container = title.nextElementSibling;
+            if (!container) return;
             const images = container.querySelectorAll("img");
             let hideTimer = null;
             let imageHidden = false;
@@ -1868,53 +1870,78 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             title.addEventListener("click", () => {
-                // Collapse all other containers first (your existing logic)
+                // Collapse all other containers
                 titles.forEach(otherTitle => {
                     const otherContainer = otherTitle.nextElementSibling;
                     if (otherContainer !== container) {
                         otherContainer.classList.remove('expanded');
                         otherContainer.style.maxHeight = null;
-
-                        // Reset images in other containers
-                        const otherImages = otherContainer.querySelectorAll("img");
-                        otherImages.forEach(img => img.style.display = "block");
+                        otherContainer.querySelectorAll("img").forEach(img => img.style.display = "block");
                     }
                 });
 
-                // Toggle current container
+                // Toggle this container
                 if (container.classList.contains('expanded')) {
                     container.classList.remove('expanded');
                     container.style.maxHeight = null;
+                    clearTimeout(hideTimer);
+                    showImages();
                 } else {
                     container.classList.add('expanded');
                     container.style.maxHeight = container.scrollHeight + "px";
-
-                    // Start countdown for this container only
                     if (!imageHidden) {
                         clearTimeout(hideTimer);
-                        hideTimer = setTimeout(hideImages, 1000);
+                        hideTimer = setTimeout(hideImages, 1000); // hide after 1s
                     }
                 }
             });
 
             // Reset images when modal closes
-            closeBtn.addEventListener("click", () => {
-                clearTimeout(hideTimer);
-                showImages();
-            });
+            if (closeBtn) {
+                closeBtn.addEventListener("click", () => {
+                    clearTimeout(hideTimer);
+                    showImages();
+                });
+            }
         });
 
         // Close modal
-        closeBtn.addEventListener("click", () => {
-            modal.style.display = "none";
-        });
+        if (closeBtn) {
+            closeBtn.addEventListener("click", () => {
+                modal.style.display = "none";
+            });
+        }
     });
 
+    // -------------------------
+    // Page-level collapsibles
+    // -------------------------
+    const pageTitles = document.querySelectorAll('#board-title, #members-title, #collaborators-title, #funders-title, #acknowlegement-title');
+
+    pageTitles.forEach(title => {
+        title.addEventListener('click', () => {
+            const content = title.nextElementSibling;
+
+            // Close all other sections
+            pageTitles.forEach(otherTitle => {
+                const otherContent = otherTitle.nextElementSibling;
+                if (otherContent !== content) {
+                    otherContent.classList.remove('expanded');
+                    otherContent.style.maxHeight = null;
+                }
+            });
+
+            // Toggle the clicked one
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                content.style.maxHeight = null;
+            } else {
+                content.classList.add('expanded');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    });
 });
-
-
-
-
 
 
 	
@@ -1933,6 +1960,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
 
 
 
