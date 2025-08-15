@@ -1842,7 +1842,6 @@ function updateModalAnnotationLanguage(modalId) {
 
 
 
-
 document.addEventListener("DOMContentLoaded", function () {
     const modalIds = ["modal3", "modal6"];
 
@@ -1851,7 +1850,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const closeBtn = modal.querySelector(".close");
 
         modal.querySelectorAll(".collapsible-gallery").forEach(container => {
-            const title = container.previousElementSibling; // assumes title is right before container
             let hideTimer = null;
             let imageHidden = false;
             const images = container.querySelectorAll("img");
@@ -1866,14 +1864,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 imageHidden = false;
             };
 
-            // Start countdown when the title is clicked to open container
-            title.addEventListener("click", () => {
-                // Check if container is about to open (not already hidden)
-                if (!imageHidden) {
+            // Observe changes in container style (like max-height) or class to detect opening
+            const observer = new MutationObserver(() => {
+                const isOpen = container.offsetHeight > 0; // adjust if your collapsible uses a class instead
+                if (isOpen && !imageHidden) {
                     clearTimeout(hideTimer);
                     hideTimer = setTimeout(hideImages, 5000);
                 }
             });
+
+            observer.observe(container, { attributes: true, attributeFilter: ["style", "class"] });
 
             // Reset when modal closes
             closeBtn.addEventListener("click", () => {
@@ -1888,9 +1888,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
-
-
 
 
 
@@ -1940,6 +1937,7 @@ titles.forEach(title => {
 
 </body>
 </html>
+
 
 
 
