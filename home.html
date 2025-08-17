@@ -1,2016 +1,631 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-
-	
-  <meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>METARIA = art + digital + science</title>
-
-	<link rel="preload" href="videos/vid2.mp4" as="video" type="video/mp4">
-<link rel="preload" href="videos/vid4.mp4" as="video" type="video/mp4">
-	<link rel="preload" href="videos/vid5.mp4" as="video" type="video/mp4">
-<link rel="preload" href="videos/vid6.mp4" as="video" type="video/mp4">
-	<link rel="preload" href="videos/vid7.mp4" as="video" type="video/mp4">
-<link rel="preload" href="videos/vid8.mp4" as="video" type="video/mp4">
-
-<!-- Cookie banner with overlay -->
-<div id="cookie-overlay" style="
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 9998;
-"></div>
-
-<div id="cookie-banner" style="
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #2b2b2b;
-  padding: 20px 30px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  border-radius: 8px;
-  text-align: center;
-  z-index: 9999;
-  max-width: 90%;
-  width: 400px;
-  font-family: Inter, sans-serif;
-  color: #fdf5e6;
-">
-  This site uses cookies and Google Analytics to improve your experience.  
-  Read our <a href="privacy.html" target="_blank" style="color: #fdf5e6; text-decoration: underline;">Privacy Policy</a> for more details.
-  <br><br>
-  <button id="accept-cookies-btn" style="
-    background-color: transparent;
-    color: #fdf5e6;
-    border: 1px solid #fdf5e6;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-  ">Accept</button>
-  <button id="reject-cookies-btn" style="
-    background-color: transparent;
-    color: #fdf5e6;
-    border: 1px solid #fdf5e6;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-  ">Reject</button>
-</div>
-
-
-
-
-
-
-
-
-	   <link rel="preload" 
-        href="fonts/Misto.woff2" 
-        as="font" 
-        type="font/woff2" 
-        crossorigin="anonymous" />
-	<link rel="preload" href="images/bc.png" as="image" />
-		<link rel="preload" href="images/gc.png" as="image" />
-	  <link rel="preload" href="images/translucence.jpeg" as="image" />
-		<link rel="preload" href="images/eurojob.jpeg" as="image" />
-	  <link rel="preload" href="images/fa.jpg" as="image" />
-	
-  <style>
-
-	   body.loading {
-    overflow: hidden; /* prevent scroll while loading */
-  }
-	  
-  #loading-screen {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: #000;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-	  font-family: 'Misto', sans-serif;
-    font-size: 1.2rem;
-    z-index: 10001;
-  }
-	  
-    body {
-		min-height: 100vh;
-  /* You can add this to force the browser to resize correctly */
-  height: 100dvh;  /* dynamic viewport height unit (newer browsers) */
-      margin: 0;
-      background: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-	  font-family: inter, sans-serif;
-    }
-	  
-html {
-  -webkit-text-size-adjust: 100%;
-}
-	  
-html, body {
-	 background: black;
-  margin: 0;
-  padding: 0;
-  height: 100%; /* ensures body fills viewport */
-  overflow-x: hidden; /* prevent horizontal scroll */
-  overflow-y: visible; /* Hide scrollbars */
-  position: relative;
-
-  font-size: 100%; /* allows user scaling */
-}
-
-
-	  @media (max-width: 1024px) and (orientation: landscape) {
-  .modal-content {
-    max-height: 90vh;     /* slightly larger max height */
-    height: auto;
-    overflow-y: auto;
-  }
-  body, html {
-    overflow-y: auto;     /* make sure scrolling is enabled */
-  }
-}
-
-#cookie-banner,
-#cookie-overlay {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-#cookie-banner.show,
-#cookie-overlay.show {
-  display: block;
-  opacity: 1;
-}
-
-
-@font-face {
-  font-family: 'Misto';
-  src: url('fonts/Misto.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-.modal-word {
-  font-family: 'Misto', inter;
-  letter-spacing: 1px; /* optional */
-  word-spacing: 30px;
-  font-weight: 400;     /* optional */
-}
-
-a {
-  color: #fdf5e6;       /* your desired crème color */
-  text-decoration: none;
-  display: inline-block;  /* important for transform to work */
-  transition: transform 0.2s; /* smooth scale effect */
-}
-
-a:hover {
-  transform: scale(1.05);   /* enlarge slightly on hover */
-}
-
-a:active, .collapsible-title:active {
-  transform: scale(1.05);
-}
-
-
-
-.blob-wrapper {
-  position: static; /* ensures no parent interference */
-	  margin: 0;
-  padding: 0;
-  width: 100vw; 
-	height: 100vh;
-  overflow: visible; /* make sure nothing gets clipped */
-}
-	  
-.blob-container {
-  position: relative;
-  width: 100%;        /* fills the wrapper */
-  height: 100%;       /* match wrapper height */
-  overflow: visible;  /* blobs won't be clipped */
-  margin: 0 auto;
-  scrollbar-width: none; 
-}
-/* Chrome, Safari, Edge */
-.blob-container::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-@media (max-width: 768px) {
-  .blob-container {
-    width: 1000px;
-    height: 800px;
-    --scale: calc(min(100vw / 1000, 100vh / 800));
-    transform: scale(var(--scale));
-    transform-origin: center center;  /* scale from center */
-   margin-left: calc((100vw - 1000px * var(--scale)) / 2 + 500px);
-  }
-}
-
-
-
-
-
-
-
-
-
-
-	  
-
-
-.blob {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  /* Optional: prevent blobs from overflowing */
-  
-  pointer-events: none; /* disable rectangle clicks */
-  aspect-ratio: 1 / 1;
-   transform-origin: top left;
-	
-  overflow: visible;   /* ensure canvas isn’t clipped */
-}
-
-.blob-shape {
-  cursor: pointer;
-  pointer-events: auto; /* enable pointer events only on shape */
-  fill: rgba(255, 255, 255, 0.3); /* optional semi-transparent shape on top */
-  transition: fill 0.3s;
-}
-
-.blob-shape:hover {
-  fill: rgba(255, 255, 255, 0.5); /* hover effect */
-}
-
-.blob svg {
-
-  display: block;
-}
-
-.blob video {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-
-/* Adjusted positions so blobs stay fully inside viewport */
-
-/* Position blobs with fixed coordinates */
-.blob1 { top: 61%; left: 70%; } /* colab */
-.blob2 { top: -50%; left: -22%; transform: rotate(10deg); } /* d */
-.blob3 { top: -12.5%; left: 65%; } /* s */
-.blob4 { top: 25%; left: 20%; } /* us */
-.blob5 { top: 56.25%; left: 10%; } /* contact */
-.blob6 { top: 25%; left: 30%; } /* nw */
-
-
-/* Responsive scaling by screen width — including desktop */
-@media (max-width: 1600px) {
-  .blob {
-    transform: scale(0.9);
-  }
-}
-
-@media (max-width: 1200px) {
-  .blob {
-    transform: scale(0.75);
-  }
-}
-
-@media (max-width: 992px) {
-  .blob {
-    transform: scale(0.6);
-  }
-}
-
-@media (max-width: 768px) {
-  .blob {
-    transform: scale(0.5);
-  }
-}
-
-@media (max-width: 480px) {
-  .blob {
-    transform: scale(0.4);
-  }
-}
-
-@media (max-width: 1024px) {
-  .blob-container {
-    width: 100vw;
-    height: 100vh;
-  }
-}
-	  
-	/* Mobile positions (vh / vw) */
-@media (max-width: 1024px) {
-  .blob1 { top: 380px; left: 58vw;} /* colab */
-.blob2 { top: -100px; left: -50vw;  } /* d */
-.blob3 { top: 100px; left: 30vw;  } /* s */
-.blob4 { top: 220px;  left: 5vw; } /* us */
-.blob5 { top: 310px;  left: 70vw; } /* contact */
-.blob6 { top: 350px;  left: -10vw; } /* nw */
-  
-  /* Reduce size for mobile */
-  .blob { width: 150px; height: 150px; }
-}
-
-
-.blob:hover {
-  cursor: pointer; /* or try 'crosshair', 'zoom-in', etc. */
-}
-
-
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-.blob img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* make image fill the blob */
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none; /* allow clicks to go through to blob for modal */
-}
-
-
-#binaryCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100vw;
-  height: calc(100vh + env(safe-area-inset-top));
-  background: white;
-  pointer-events: none;
-  display: block;
-}
-
-
-
-
-
-/* Keep existing modal properties */
-.modal {
-  display: none;  /* keep hidden initially */
-  position: fixed;
-  z-index: 999;
-
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  background: rgba(0,0,0,0.5);
-
-}
-.modal.show {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
- 
-
-/* Keep existing modal-content properties */
-.modal-content {  
-  z-index: 1000;
-  margin: 5% auto;
-  padding: 2rem;
-  padding-top: 2rem;
-  width: 900px;
-  height: 550px;
-  max-height: 80vh;
-  border-radius: 5px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  box-sizing: border-box;
-  position: relative;
-  overflow-y: auto;
-  background-color: #2b2b2b;
-  color: #fdf5e6;
-}
-
-.modal-content img {
- 
-  
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
-
-/* Fullscreen modal on all mobile */
-@media (max-width: 1024px) { /* covers iPhone Max landscape */
-  .modal-content {
-    width: 100vw !important;
-	  height: 100dvh !important;       /* let it shrink if needed */
-    
-    margin: 0 !important;
-    padding: 1rem !important;
-    border-radius: 0 !important;
-    max-width: 100vw;
-    max-height: 100vh;
-	    overflow-y: auto; /* allow vertical scrolling */
-    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
-  }
-
-	  .modal-content img,
-  .modal-content video,
-  .modal-content canvas {
-        
-    object-fit: contain; /* scale proportionally */
-    display: block;
-  }
-
-  }
-	 /* Lower close button on mobile */
-  .modal-content .close {
-    top: 0.5rem !important;  /* move down from top */
-    right: 0.05rem !important;
-    font-size: 24px !important;
-  }
-}
-
-
-
-	  
-
-.modal-content,
-.modal-content p,
-.modal-content h1,
-.modal-content h2,
-.modal-content .modal-word {
-  color: #fdf5e6;
-}
-
-.modal-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-}
-
-.modal-content .close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  float: none;
-  z-index: 10;
-  font-size: 28px;
-  font-weight: bold;
-  
-  padding: 8px 12px;
-  cursor: pointer;
-
-  background-color: transparent;
-  color: #fdf5e6;
-}
-
-.word-fade-container {
-  position: relative;
-  height: 2rem;
-}
-
-.word {
-  opacity: 0;
-  transition: opacity 1s ease;
-  position: absolute;
-  font-size: 2rem;
-  color: black;
-}
-
-/* Words inside modal — absolutely centered */
-.modal-content .word1,
-.modal-content .word2 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  text-align: center;
-  width: auto;
-  max-width: 90%;  /* prevent overflow on small screens */
-}
-
-/* Wrap word2 on small screens */
-@media (max-width: 768px) {
-  .modal-content .word2 {
-    white-space: normal;
-    word-wrap: break-word;
-    width: 80%;
-  }
-}
-
-.modal-annot {
-	  display: flex;
-  flex-direction: column;   /* stack children vertically */
-  justify-content: center;  /* vertical centering */
-  align-items: center;      /* horizontal centering if needed */
-  text-align: center;       /* center text inside */
- 	 margin-top: 1rem; /* pushes annotation down a bit */
-  padding-top: 0;
- position: relative !important;  /* prevent absolute positioning issues */
-  max-width: 100%;
-  padding: 10px;
-  line-height: 1.5;
-  white-space: normal;
-  overflow-wrap: break-word;
-  text-align: justify;   /* justification */
-  font-style: italic;    /* italic text */
-}
-
-
-
-@media (max-width: 600px) {
-  .modal-content {
-    margin: 20px; 
-	  padding-top: 40px;/* adds outer spacing on mobile */
-  }
-  .modal-annot {
-    font-size: 16px;
-    padding-top: 20px;
-    margin: 10px 0;  /* vertical margin only */
-  }
-}
-	
-
-.image-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.image-gallery img {
-  height: 80px;           /* Same height for all images */
-  width: auto;            /* Automatically scale width to preserve aspect ratio */
-  display: block;
-}
-.image-gallery img {
-  width: 150px;
-  height: 150px;
-  object-fit: contain;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 0.5rem;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.image gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: right;
-  padding: 10px 20px;
-  font-size: 14px;
-  color: #555;
-  z-index: 998;
-    display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: nowrap;
-}
-
-/* Link style */
-.footer a.footer-link {
-  color: #555;
-  text-decoration: none;
-}
-
-.footer a.footer-link:hover {
-  text-decoration: underline;
-}
-
-/* Responsive for mobile */
-@media (max-width: 480px) {
-  .footer {
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    padding: 10px;
-  }
-}
-#language-switcher {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 10000;
-  font-size: 18px;
-  color: #555;
-  display: flex;
-  gap: 15px;
-  font-family: inherit;
-  cursor: default;
-  font-weight: 900; /* make text fatter */
-  -webkit-text-stroke: 0.5px #fdf5e6; /* white contour */
-  text-stroke: 0.5px #fdf5e6; /* fallback */
-}
-
-#language-switcher .lang-option:hover {
-  text-decoration: underline;
-}
-
-#language-switcher .lang-option {
-  cursor: pointer;
-  color: #555; /* same as footer text color */
-  padding: 0 10px;
-  font-weight: 900; /* make letters fatter here too */
-  user-select: none;
-  -webkit-text-stroke: 0.5px #fdf5e6; /* white contour */
-  text-stroke: 0.5px #fdf5e6; /* fallback */
-}
-
-#language-switcher .lang-option.selected {
-  font-weight: 2000; /* extra bold for selected */
-  text-decoration: underline; /* underline the selected language */
-  -webkit-text-stroke: 0.5px #fdf5e6; /* keep white contour */
-  text-stroke: 0.5px #fdf5e6;
-}
-
-
-
-@media (max-width: 768px) {
-  #language-switcher {
-    display: flex !important;
-	top: 1px !important;
- 	right: 1px !important;
-	font-size: 12px;
-	gap: 7px;
-  }
-}
-
- /* Make titles look clickable */
-  #board-title, #members-title, #collaborators-title,
-  #funders-title, #acknowlegement-title {
-    cursor: pointer;
-    user-select: none;
-    font-weight: bold;
-    margin-bottom: 0;
-  }
-
-  /* Content to be toggled */
-  .collapsible-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    margin-top: 0;
-    padding-left: 10px; /* indent content a bit */
-  }
-
-  /* When content is expanded */
-  .collapsible-content.expanded {
-    max-height: 500px; /* enough for content, or use scrollHeight in JS */
-  }
-  /* Collapsible image gallery */
-  .collapsible-gallery {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    margin-top: 10px;
-  }
-
-  .collapsible-gallery.expanded {
-    max-height: 1000px; /* enough for multiple images */
-  }
-
-	  /* Default: desktop */
-.collapsible-gallery img {
-  width: 700px;   /* original desktop size */
-  height: auto;
-  max-width: 100%; /* never exceed container */
-}
-
-/* Mobile portrait */
-@media (max-width: 1024px) and (orientation: portrait) {
-  .collapsible-gallery img {
-    width: 90vw;  /* almost full screen width */
-    height: auto;
-  }
-}
-
-/* Mobile landscape */
-@media (max-width: 1024px) and (orientation: landscape) {
-  .collapsible-gallery img {
-    width: 70vw;  /* narrower to fit height too */
-    height: auto;
-  }
-}
-
-/* Optional: ensure modal padding doesn't cut images */
-.modal-content {
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-
-  .image-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .image-gallery img {
-    max-height: 80px;
-    object-fit: contain;
-  }
-
-	/* Modal collapsible titles */
-.collapsible-title {
-    display: inline-block; /* wrap around text */
-    padding: 4px 8px;      /* space around the text */
-    border-radius: 6px;    /* optional: rounded edges */
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.collapsible-title:hover {
-    background-color: #3d3d3d; /* highlight */
-    color: white;              /* optional: change text color */
-    transform: scale(1.05);    /* optional: subtle zoom on hover */
-}
-
-/* Page-level collapsible titles */
-#board-title,
-#members-title,
-#collaborators-title,
-#funders-title,
-#acknowlegement-title {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-#board-title:hover,
-#members-title:hover,
-#collaborators-title:hover,
-#funders-title:hover,
-#acknowlegement-title:hover {
-    background-color: #3d3d3d;
-    color: white;
-    transform: scale(1.05);
-}
-
-
-.collapsible-gallery img {
-    transition: opacity 0.5s ease; /* smooth fade */
-    opacity: 1; /* visible by default */
-}
-
-.collapsible-gallery img.hidden {
-    opacity: 0; /* fade out */
-}
-
-
-	  
-  </style>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Metaria = art+digital+science</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Dewi
+  * Template URL: https://bootstrapmade.com/dewi-free-multi-purpose-html-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
-<body class="loading">
+<body class="index-page">
 
-<!-- <div id="loading-screen">Loading...</div> -->
-	
-<canvas id="binaryCanvas"></canvas>
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-<div id="language-switcher" style="position: fixed; top: 10px; right: 10px; z-index: 10000;">
-  <span class="lang-option" data-lang="en" onclick="switchLanguage('en')">EN</span>
-  <span class="lang-option" data-lang="fi" onclick="switchLanguage('fi')">FI</span>
-  <span class="lang-option" data-lang="sv" onclick="switchLanguage('sv')">SV</span>
-</div>
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+         <img src="assets/img/logo.png" alt="">
+       <!-- <h1 class="sitename">Metaria</h1>-->
+      </a>
 
-<div class="blob-wrapper">
-	<div class="blob-container">
-	 <div class="blob-inner">
-	
-<div class="blob blob1" data-modal="modal1" data-video="videos/vid7.mp4" style="width:300px; height:300px; position: absolute;">
-	<img src="thumbnails/vid7.png" alt="Video 1">
-  <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
-  <svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-    <path class="blob-shape" fill="rgba(255,255,255,0.01)"
-      d="M14.2,-16.8C20.1,-18.4,27.6,-17.2,37,-12.3C46.5,-7.4,57.9,1.3,54,5.6C50,10,30.8,10,21.5,15.8C12.1,21.6,12.6,33.2,9.3,36.3C6,39.4,-1.2,33.9,-13.7,35.4C-26.2,36.9,-44.1,45.3,-51.9,41.9C-59.7,38.5,-57.3,23.2,-61.9,7.4C-66.5,-8.3,-77.9,-24.6,-71.9,-30.8C-65.9,-37,-42.4,-33.2,-27.5,-27.4C-12.6,-21.7,-6.3,-14.1,-1.1,-12.4C4.2,-10.8,8.4,-15.2,14.2,-16.8Z"
-      transform="translate(100 100)" />
-  </svg>
-</div>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">Leadership</a></li>
+          <li><a href="#services">New Writing</a></li>
+          <li><a href="#science">Science on Stage</a></li>
+          <li><a href="#team">About</a></li>
+          <li><a href="#collab">Patronage</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
 
-<div class="blob blob2" data-modal="modal2" data-video="videos/vid2.mp4" style="width:1000px; height:1000px; position: absolute;">
-	<img src="thumbnails/vid2.png" alt="Video 1">
-  <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
-  <svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-    <path class="blob-shape" fill="rgba(255,255,255,0.01)"
-      d="M17.6,-18.4C30.4,-19.1,53.7,-27.1,65.6,-23.4C77.5,-19.7,78,-4.2,66.9,3.1C55.7,10.5,33,9.7,21.6,13.7C10.3,17.7,10.4,26.6,6.1,33.9C1.8,41.3,-6.9,47.1,-18.6,49.8C-30.3,52.6,-45.1,52.2,-43.8,43.6C-42.4,35,-25,18,-20.5,6.8C-16.1,-4.4,-24.7,-9.8,-31.2,-22C-37.7,-34.2,-42.1,-53.2,-36.5,-55.8C-30.9,-58.4,-15.5,-44.5,-6.5,-34.4C2.4,-24.2,4.8,-17.6,17.6,-18.4Z"
-      transform="translate(100 100)" />
-  </svg>
-</div>
+      <a class="cta-btn" href="index.html#contact">Call Us</a>
 
-<div class="blob blob3" data-modal="modal3" data-video="videos/vid8.mp4" style="width:600px; height:600px; position: absolute;">
-	<img src="thumbnails/vid8.png" alt="Video 1">
-  <!-- Canvas for video -->
-  <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
-
-  <!-- SVG path for click detection -->
-  <svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-    <path 
-      class="blob-shape" 
-      fill="rgba(255,255,255,0.01)"
-      d="M30.4,-38.1C40.5,-40.8,50.5,-34.2,59,-24.4C67.5,-14.5,74.5,-1.4,75.3,12.6C76.1,26.6,70.6,41.5,58.8,45.7C47,49.9,28.9,43.3,13.8,48.5C-1.4,53.6,-13.5,70.5,-19.7,68.2C-25.9,65.9,-26.2,44.4,-35,31.7C-43.9,19.1,-61.2,15.2,-70.3,5.2C-79.3,-4.7,-79.9,-20.7,-74.8,-35.1C-69.7,-49.4,-58.9,-62.1,-45.4,-57.9C-32,-53.8,-16,-32.9,-2.9,-28.3C10.1,-23.7,20.3,-35.5,30.4,-38.1Z"
-      transform="translate(100 100)" />
-  </svg>
-</div>
-
-	<div class="blob blob4" data-modal="modal4" data-video="videos/vid4.mp4" style="width:350px; height:350px; position: absolute;">
-		<img src="thumbnails/vid4.png" alt="Video 1">
-  <!-- Canvas for video -->
-  <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
-
-  <!-- SVG path for click detection -->
-  <svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-    <path 
-      class="blob-shape" 
-      fill="rgba(255,255,255,0.01)"
-      d="M22.8,-41.1C24.6,-34.3,17.8,-19.7,19.8,-10.5C21.8,-1.3,32.5,2.5,34.6,6.7C36.6,10.8,29.9,15.4,25.6,24.5C21.3,33.5,19.6,47.1,14,49.6C8.4,52.1,-0.9,43.5,-13.7,42C-26.5,40.4,-42.7,45.7,-57.4,42.3C-72.1,38.8,-85.2,26.5,-79.2,16.2C-73.3,5.9,-48.2,-2.3,-36.7,-12.3C-25.1,-22.2,-27.2,-33.8,-23.3,-39.7C-19.5,-45.5,-9.7,-45.6,0.4,-46.2C10.5,-46.8,21,-47.9,22.8,-41.1Z"
-      transform="translate(100 100)" />
-  </svg>
-</div>
-
-<div class="blob blob5" data-modal="modal5" data-video="videos/vid5.mp4" style="width:200px; height:200px; position: absolute;">
-	<img src="thumbnails/vid5.png" alt="Video 1">
-  <!-- Canvas for video -->
-  <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
-
-  <!-- SVG path for click detection -->
-  <svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-    <path 
-      class="blob-shape" 
-      fill="rgba(255,255,255,0.01)"
-      d="M21.3,-35.9C28.3,-28.8,34.8,-23.8,40,-17C45.1,-10.1,48.8,-1.3,51.7,10.4C54.6,22,56.7,36.5,51.7,48C46.7,59.6,34.7,68.2,23,66.2C11.3,64.1,0,51.4,-11.8,45.5C-23.5,39.5,-35.6,40.5,-37.3,34.5C-38.9,28.6,-30,15.8,-35.4,2.8C-40.8,-10.1,-60.3,-23.3,-61.8,-31.6C-63.3,-39.9,-46.6,-43.3,-33.3,-47.5C-20,-51.7,-10,-56.8,-1.4,-54.6C7.2,-52.5,14.4,-43.1,21.3,-35.9Z"
-      transform="translate(100 100)" />
-  </svg>
-</div>
-
-<div class="blob blob6" data-modal="modal6" data-video="videos/vid6.mp4" style="width:600px; height:600px; position: absolute;">
-	<img src="thumbnails/vid6.png" alt="Video 1">
-  <!-- Canvas for video -->
-  <canvas class="blob-canvas" width="200" height="200" style="position:absolute; top:0; left:0;"></canvas>
-
-  <!-- SVG path for click detection -->
-  <svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-    <path 
-      class="blob-shape" 
-      fill="rgba(255,255,255,0.01)"
-      d="M42.2,-70.6C49.9,-60.8,47.9,-40.9,45.6,-26.5C43.2,-12.2,40.5,-3.4,42.5,8.5C44.4,20.3,51.1,35.2,45.4,36.3C39.7,37.5,21.7,24.9,8.3,29.3C-5.1,33.8,-13.8,55.2,-24.9,62.3C-36.1,69.4,-49.6,62,-53,50.3C-56.4,38.5,-49.6,22.3,-43.9,11C-38.1,-0.3,-33.4,-6.7,-30.8,-14.8C-28.3,-23,-27.9,-32.9,-23.1,-44C-18.3,-55.2,-9.2,-67.6,4.1,-73.9C17.3,-80.2,34.6,-80.4,42.2,-70.6Z"
-      transform="translate(100 100)" />
-  </svg>
-</div>
-
-
-</div>	
-
-<div id="modal1" class="modal">
-
-  <div class="modal-content">
-   <span class="close">&times;</span> 
-    <h2 class="modal-word" id="patronage-title">Patronage</h2>  
-        <h2 id="collaborators-title">Collaborators</h2> 
-<div class="collapsible-gallery">
-  <div class="image-gallery">
-    <img src="images/teme.png" alt="Performance 1">
-    <img src="images/STOD.png" alt="Performance 2">
-    <img src="images/lahti.jpg" alt="Performance 3">
-    <img src="images/cfg.gif" alt="Performance 4">
-    <img src="images/riksteatern.png" alt="Performance 5">
-    <img src="images/Aalto.svg" alt="Performance 6">
-  </div>
-</div>
-        <h2 id="funders-title">Funders</h2>  
-<div class="collapsible-gallery">
-  <div class="image-gallery">
-    <img src="images/OKM.svg" alt="Performance 1">
-    <img src="images/Kordelin.jpg" alt="Performance 2">
-    <img src="images/taike.jpg" alt="Performance 3">
-    <img src="images/avek.png" alt="Performance 4">
-      </div>
-	   </div>  
-	   
-	   <h2 id="acknowlegement-title">Acknowlegement</h2>  
-<div class="collapsible-gallery">
-  <div class="image-gallery">
-    <img src="images/svteatern.png" alt="Performance 1">
-    <img src="images/arena.jpg" alt="Performance 2">
-    <img src="images/guthrie.png" alt="Performance 3">
-    <img src="images/rsc.svg" alt="Performance 4">
-	<img src="images/berliner.png" alt="Performance 1">
-    <img src="images/narodowy.png" alt="Performance 2">
-    <img src="images/pac.svg" alt="Performance 3">
-    <img src="images/shaw.png" alt="Performance 4">
-	<img src="images/abbey.png" alt="Performance 1">
-    <img src="images/alley.png" alt="Performance 2">
-    <img src="images/nt.avif" alt="Performance 3">
-    <img src="images/sast.svg" alt="Performance 4">
-      </div>
-	   </div>
-	   
-	   
-  </div>
-</div>
-
-
-<div class="modal" id="modal2">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-	<div class="modal-content-body"></div>
     </div>
-	</div>
- 
+  </header>
 
+  <main class="main">
 
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
 
+      <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
 
+      <div class="container d-flex flex-column align-items-center">
+        <h2 data-aos="fade-up" data-aos-delay="100">PLAN. LAUNCH. GROW.</h2>
+        <p data-aos="fade-up" data-aos-delay="200">We are team of talented designers making websites with Bootstrap</p>
+        <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+          <a href="#about" class="btn-get-started">Get Started</a>
+          <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+        </div>
+      </div>
 
-<div id="modal3" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2 class="modal-word">Science on Stage</h2>  
-	    <h2 class="collapsible-title">Green Curtain</h2> 
-<div class="collapsible-gallery">
-  
-    <img src="images/gc.png" alt="Performance 1" style="width: 300px; height: auto;">
-	<p id= "gc-annot">Green Curtain is an innovative environmental project developing lignin-based filters and wipes to prevent harmful chemicals from cosmetics, decorations, and costume washing from entering theatre wastewater. By using bio-based and biodegradable materials, Green Curtain helps protect vulnerable ecosystems, promotes cleaner water, and repurposes large industrial by-products, supporting the circular economy.</p>
+    </section><!-- /Hero Section -->
+
+    <!-- Leadership Section -->
+    <section id="about" class="about section">
+
+      <div class="container">
+
+        <div class="row gy-4">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h2>Leadership</h2>
+            <p>Dramaturgy of Theatre Leadership</p>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="content ps-0 ps-lg-5">
+                <div class="position-relative mt-4">
+                <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt="">
+                <a href="https://www.youtube.com/watch?v=VLYPH7pkxJM" class="glightbox pulsating-play-btn"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
    
-    
- 
-</div>
-        <h2 class="collapsible-title">Breath of Carbon</h2>  
-<div class="collapsible-gallery">
-  
-    <img src="images/bc.png" alt="Performance 1" style="width: 700px; height: auto;">
-    <p id= "bc-annot">Breath of Carbon is an XR interactive solo performance that merges science and art to engage online audiences. Using motion capture and digital technologies, it visualizes the carbon cycle and highlights sustainable CO₂ capture’s impact on agriculture, employment, and future generations. The project advances brand development and image creation by showcasing innovative art-tech collaboration that makes complex science accessible and inspiring.</p>
-      
-	   </div>  
-	   
-	 
-	   
-  </div>
-</div>
 
+    <!-- Services Section NW -->
+    <section id="services" class="services section">
 
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2></h2>
+        <p>New Writing<br></p>
+      </div><!-- End Section Title -->
 
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-<div id="modal4" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
+        <div class="row gy-5">
+
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="service-item">
+              <div class="img">
+                <img src="assets/img/fa.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="details position-relative">
+                <div class="icon">
+                  <i class="bi bi-activity"></i>
+                </div>
+                <a href="" class="stretched-link">
+                  <h3>First Aid, Last Orders</h3>
+                </a>
+                <p>On a cruise ship docked in Helsinki, a supervisor convinced he’s seriously ill drives his cleaning crew to distraction. One sharp-witted cleaner poses as a doctor, dishing out absurd cures while a surprise inspection hurtles closer. To survive the day, the immigrant crew must outwit the chaos before it sinks them all — a sharp-tongued modern farce inspired by Molière’s The Imaginary Invalid. This professional stage production blends live theatre with real-time digital elements — streaming to online audiences, incorporating live video feeds from hidden corners of the ship, and letting viewers aboard and at home experience the same rising storm of comedy, panic, and survival from multiple perspectives.</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="service-item">
+              <div class="img">
+                <img src="assets/img/translucence.jpeg" class="img-fluid" alt="">
+              </div>
+              <div class="details position-relative">
+                <div class="icon">
+                  <i class="bi bi-binoculars"></i>
+                </div>
+                <a href="" class="stretched-link">
+                  <h3>Translucence</h3>
+                </a>
+                <p>In a fractured future where Earth’s stability has long since crumbled, exiled scientist Dr. Mara Solberg rediscovers a forgotten innovation capable of sustaining life in the harshest of worlds. Her pursuit of this breakthrough draws the attention of powerful forces determined to erase it from history. Fleeing across the void to a remote settlement on an uncharted world, Mara must adapt to an alien environment, evade those who would see her silenced, and confront the shadow of her own ambition. Translucence fuses live performance with real-time digital scenography, layered soundscapes, and cinematic world-building — where the physical stage merges seamlessly with a living, virtual environment that evolves with the story.</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="service-item">
+              <div class="img">
+                <img src="assets/img/eurojob.jpeg" class="img-fluid" alt="">
+              </div>
+              <div class="details position-relative">
+                <div class="icon">
+                  <i class="bi bi-easel"></i>
+                </div>
+                <a href="" class="stretched-link">
+                  <h3>Eurojob</h3>
+                </a>
+                <p>An online-born stage drama about pride, distance, and the fight to be heard.<br>A father. A son. One phone call. Six hours until eviction.<br>In a bedsit, a once-charismatic hustler whose quick wit and bravado now barely conceal his exhaustion and loneliness dials the number he’s avoided for years. What begins as a plea for help becomes a fierce duel over who has forgiven who the most—a raw, funny, and devastating argument that strips away decades of silence.<br>Written for one actor to deliver a virtuoso, multifaceted performance, the play demands every shade of the actor’s craft: shifting from razor-sharp comedy to aching vulnerability in the space of a breath.<br>Born in the digital space through live-streamed readings and virtual rehearsals across borders, Eurojob is a one-act monologue to be staged in theatres and online. The piece fuses the intimacy of a video call with the immediacy of live performance, inviting audiences into a room where love, pride, and stubbornness collide.</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Services Section -->
 	
-    <h2 class="modal-word" id="about-title">About us</h2>  
-      <p id="about-description">
-      Metaria ry is a non-profit association founded in 2015 by  <a href="https://www.linkedin.com/in/tuomokarvonen/" target="_blank">Tuomo Karvonen</a>, <a href="https://www.linkedin.com/in/matti-luhtala-a499802b/" target="_blank">Matti Luhtala</a>, and <a href="https://www.linkedin.com/in/jyrki-pylv%C3%A4s-378293a7/" target="_blank">Jyrki Pylväs</a>. Metaria promotes and explores new forms of performing arts in digital environments.
-Showcasing innovative tech-driven performance art nationally and internationally.<br></p>
+	
+	
+    <!-- Services Section  -->
+    <section id="science" class="services section">
 
-       <p id="previous-link"> <a href="https://www.metaria.fi" target="_blank"><b >Previous works</b></a><br>
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2></h2>
+        <p>Science on Stage<br></p>
+      </div><!-- End Section Title -->
 
-         </p>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-       <p id="board-title">Board of Directors 2024-2025</p>
-<p class="collapsible-content">
-  <a href="https://www.linkedin.com/in/tero-hein%C3%A4m%C3%A4ki-7815b614/" target="_blank">Tero Heinämäki</a><br>
+        <div class="row gy-5">
+
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="service-item">
+              <div class="img">
+                <img src="assets/img/gc.png" class="img-fluid" alt="">
+              </div>
+              <div class="details position-relative">
+                <div class="icon">
+                  <i class="bi bi-box-seam"></i>
+                </div>
+                <a href="" class="stretched-link">
+                  <h3>Green Curtain</h3>
+                </a>
+                <p>Green Curtain is an innovative environmental project developing lignin-based filters and wipes to prevent harmful chemicals from cosmetics, decorations, and costume washing from entering theatre wastewater. By using bio-based and biodegradable materials, Green Curtain helps protect vulnerable ecosystems, promotes cleaner water, and repurposes large industrial by-products, supporting the circular economy.</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="service-item">
+              <div class="img">
+                <img src="assets/img/bc.png" class="img-fluid" alt="">
+              </div>
+              <div class="details position-relative">
+                <div class="icon">
+                  <i class="bi bi-broadcast"></i>
+                </div>
+                <a href="" class="stretched-link">
+                  <h3>The Breath of Carbon</h3>
+                </a>
+                <p>The Breath of Carbon is an XR interactive solo performance that merges science and art to engage online audiences. Using motion capture and digital technologies, it visualizes the carbon cycle and highlights sustainable CO₂ capture’s impact on agriculture, employment, and future generations. The project advances brand development and image creation by showcasing innovative art-tech collaboration that makes complex science accessible and inspiring.</p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+         
+
+        </div>
+
+      </div>
+
+    </section><!-- /Services Section -->
+	
+	
+	
+	
+	<!-- Features Section -->
+    <section id="team" class="features section">
+
+      <div class="container">
+
+        <ul class="nav nav-tabs row  d-flex" data-aos="fade-up" data-aos-delay="100">
+          <li class="nav-item col-3">
+            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+              <i class="bi bi-binoculars"></i>
+              <h4 class="d-none d-lg-block">About Us</h4>
+            </a>
+          </li>
+          <li class="nav-item col-3">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
+              <i class="bi bi-box-seam"></i>
+              <h4 class="d-none d-lg-block">Board of Directors 2025-2026</h4>
+            </a>
+          </li>
+          <li class="nav-item col-3">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
+              <i class="bi bi-brightness-high"></i>
+              <h4 class="d-none d-lg-block">Members</h4>
+            </a>
+          </li>
+           </ul><!-- End Tab Nav -->
+
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="tab-pane fade active show" id="features-tab-1">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+               
+                <p>
+                  Metaria ry is a non-profit association founded in 2015 by  <a href="https://www.linkedin.com/in/tuomokarvonen/" target="_blank">Tuomo Karvonen</a>, <a href="https://www.linkedin.com/in/matti-luhtala-a499802b/" target="_blank">Matti Luhtala</a>, and <a href="https://www.linkedin.com/in/jyrki-pylv%C3%A4s-378293a7/" target="_blank">Jyrki Pylväs</a>. Metaria promotes and explores new forms of performing arts in digital environments.
+Showcasing innovative tech-driven performance art nationally and internationally.
+                </p>
+				<p> <a href="https://www.metaria.fi" target="_blank"><b>Previous works</b></a></p>
+
+              </div>
+              
+            </div>
+          </div><!-- End Tab Content Item -->
+
+          <div class="tab-pane fade" id="features-tab-2">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                
+                <p>
+                  <a href="https://www.linkedin.com/in/tero-hein%C3%A4m%C3%A4ki-7815b614/" target="_blank">Tero Heinämäki</a><br>
   <a href="https://www.linkedin.com/in/heidi-naakka-54bb9468/" target="_blank">Heidi Naakka</a><br>
   <a href="https://www.linkedin.com/in/ekaterina-osmekhina-00045231/" target="_blank">Ekaterina Osmekhina</a><br>
   <a href="https://www.linkedin.com/in/daria-robertson/" target="_blank">Daria Robertson</a><br>
   <a href="https://www.linkedin.com/in/david-r-534462136/" target="_blank">David Robertson (chair)</a><br>
-</p>
+                </p>
+                </div>
+            </div>
+          </div><!-- End Tab Content Item -->
 
-<p id="members-title">Members</p>
-<p class="collapsible-content">
-  <a href="https://www.linkedin.com/in/atuuli333/" target="_blank">Tuuli Ahonen</a><br>
+          <div class="tab-pane fade" id="features-tab-3">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+               
+                <p>
+                  <a href="https://www.linkedin.com/in/atuuli333/" target="_blank">Tuuli Ahonen</a><br>
   <a href="https://www.linkedin.com/in/seficarmel/" target="_blank">Sefi Carmel</a><br>
   <a href="https://www.linkedin.com/in/joh-orengo/" target="_blank">Ј​oh ​О​rengo</a><br>
   Jouni Ruuth<br>
   <a href="https://www.linkedin.com/in/sofia-stupenkova-31068a250/" target="_blank">Sofia Stupenkova</a><br>
   <a href="https://www.linkedin.com/in/erik-s%C3%B6derblom-9ba7b820/" target="_blank">Erik Söderblom</a><br>
   <a href="https://www.linkedin.com/in/gautam-vishwanath-4690b7b6/" target="_blank">Gautam Vishwanath</a><br>
-</p>
-      
-    </div>
-</div>
+                </p>
+                
+            </div>
+          </div><!-- End Tab Content Item -->
 
+          
 
+        </div>
 
+      </div>
 
-<div id="modal5" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-     <h2 class="modal-word" id="contact-title">Contact</h2>  
-    <p>
-        FIN 2761325-3<br>
-      trustee@metaria.org
-       </p>
-  </div>
-</div>
-
-
-
-
-<div id="modal6" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2 class="modal-word" >New Writing</h2>  
+    </section><!-- /Features Section -->
 	
-        <h2 class="collapsible-title">Translucence</h2> 
-<div class="collapsible-gallery">
-  
-    <img src="images/translucence.jpeg" alt="Performance 1" style="width: 300px; height: auto;">
-	<p id= "translucence-annot">In a fractured future where Earth’s stability has long since crumbled, exiled scientist Dr. Mara Solberg rediscovers a forgotten innovation capable of sustaining life in the harshest of worlds. Her pursuit of this breakthrough draws the attention of powerful forces determined to erase it from history. Fleeing across the void to a remote settlement on an uncharted world, Mara must adapt to an alien environment, evade those who would see her silenced, and confront the shadow of her own ambition. Translucence fuses live performance with real-time digital scenography, layered soundscapes, and cinematic world-building — where the physical stage merges seamlessly with a living, virtual environment that evolves with the story.</p>
-   
+	
+
+    <!-- Clients Section -->
+    <section id="collab" class="clients section light-background">
+
+      
+
+    </section><!-- /Clients Section -->
+
     
- 
-</div>
-        <h2 class="collapsible-title">Eurojob</h2>  
-<div class="collapsible-gallery">
-  
-    <img src="images/eurojob.jpeg" alt="Performance 1" style="width: 700px; height: auto;">
-    <p id= "eurojob-annot">An online-born stage drama about pride, distance, and the fight to be heard.<br>A father. A son. One phone call. Six hours until eviction.<br>In a bedsit, a once-charismatic hustler whose quick wit and bravado now barely conceal his exhaustion and loneliness dials the number he’s avoided for years. What begins as a plea for help becomes a fierce duel over who has forgiven who the most—a raw, funny, and devastating argument that strips away decades of silence.<br>Written for one actor to deliver a virtuoso, multifaceted performance, the play demands every shade of the actor’s craft: shifting from razor-sharp comedy to aching vulnerability in the space of a breath.<br>Born in the digital space through live-streamed readings and virtual rehearsals across borders, Eurojob is a one-act monologue to be staged in theatres and online. The piece fuses the intimacy of a video call with the immediacy of live performance, inviting audiences into a room where love, pride, and stubbornness collide.</p>
-      
-	   </div>
-	   
-<h2 class="collapsible-title">First Aid, Last Orders</h2>  
-<div class="collapsible-gallery">
-  
-    <img src="images/fa.jpg" alt="Performance 1" style="width: 300px; height: auto;">
-    <p id= "fa-annot">On a cruise ship docked in Helsinki, a supervisor convinced he’s seriously ill drives his cleaning crew to distraction. One sharp-witted cleaner poses as a doctor, dishing out absurd cures while a surprise inspection hurtles closer. To survive the day, the immigrant crew must outwit the chaos before it sinks them all — a sharp-tongued modern farce inspired by Molière’s The Imaginary Invalid. This professional stage production blends live theatre with real-time digital elements — streaming to online audiences, incorporating live video feeds from hidden corners of the ship, and letting viewers aboard and at home experience the same rising storm of comedy, panic, and survival from multiple perspectives.</p>
-      
-	   </div>
-	   
-	   
-	   </div>
-  </div>
-</div>
-</div>
- 
-  
 
-<script>
+    <!-- Services 2 Section -->
+    <section id="services-2" class="services-2 section light-background">
 
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2></h2>
+        <p>Collaborators</p>
+      </div><!-- End Section Title -->
 
-	document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {
-    e.preventDefault();
-  }
-});
+      <div class="container" data-aos="fade-up">
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Preload blob videos
-  document.querySelectorAll(".blob[data-video]").forEach(blob => {
-    const src = blob.getAttribute("data-video");
-    if (src) {
-      const video = document.createElement("video");
-      video.src = src;
-      video.preload = "auto";
-      video.muted = true; // important for autoplay on mobile
-      video.load();
-    }
-  });
+        <div class="row gy-4">
 
-const imagesToPreload = [
-  "images/bc.png",
-  "images/gc.png",
-  "images/translucence.jpeg",
-		"images/eurojob.jpeg",
-	"images/fa.jpg",
-];
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/teme.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
 
-imagesToPreload.forEach(src => {
-  const img = new Image();
-  img.src = src;
-});
-}); 
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/STOD.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
 
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/lahti.jpg" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
 
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/cfg.gif" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/riksteatern.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/Aalto.svg" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Services 2 Section -->
 	
-// === Binary Pop-up with Original Background ===
-// === Binary Pop-up with Fade In + Fade Out ===
-const canvas = document.getElementById("binaryCanvas");
-const ctx = canvas.getContext("2d");
+	
+	 <!-- Services 2 Section -->
+    <section id="services-2" class="services-2 section light-background">
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2></h2>
+        <p>Funders</p>
+      </div><!-- End Section Title -->
 
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+      <div class="container" data-aos="fade-up">
 
-let particles = [];
+        <div class="row gy-4">
 
-function createParticle() {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    value: Math.random() > 0.5 ? "1" : "0",
-    size: Math.random() * 44 + 5,
-    opacity: 0, // start invisible
-    fadeInSpeed: 0.05, // how fast to fade in
-    fadeOutSpeed: Math.random() * 0.0005 + 0.0001, // how fast to fade out
-    visibleTime: 180, // frames to stay fully visible before fading out
-    state: "fadeIn" // fadeIn → visible → fadeOut
-  });
-}
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/OKM.svg" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
 
-function drawBackground() {
-  ctx.fillStyle = "rgba(88, 209, 201, 0.1)"; // same teal fade
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/Kordelin.jpg" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
 
-function drawParticles() {
-  for (let i = particles.length - 1; i >= 0; i--) {
-    const p = particles[i];
-    ctx.globalAlpha = p.opacity;
-    ctx.font = `${p.size}px monospace`;
-    ctx.fillStyle = "#2b2b2b";
-    ctx.fillText(p.value, p.x, p.y);
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/taike.jpg" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
 
-    // Fade in
-    if (p.state === "fadeIn") {
-      p.opacity += p.fadeInSpeed;
-      if (p.opacity >= 1) {
-        p.opacity = 1;
-        p.state = "visible";
-      }
-    }
-    // Fully visible
-    else if (p.state === "visible") {
-      p.visibleTime--;
-      if (p.visibleTime <= 0) {
-        p.state = "fadeOut";
-      }
-    }
-    // Fade out
-    else if (p.state === "fadeOut") {
-      p.opacity -= p.fadeOutSpeed;
-      if (p.opacity <= 0) {
-        particles.splice(i, 1);
-      }
-    }
-  }
-  ctx.globalAlpha = 1;
-}
-
-function loop() {
-  drawBackground();
-  if (Math.random() < 0.8) { // spawn chance
-    createParticle();
-  }
-  drawParticles();
-  requestAnimationFrame(loop);
-}
-
-loop();
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/avek.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
 
 
+        </div>
 
+      </div>
 
+    </section><!-- /Services 2 Section --> <!-- Services 2 Section -->
+    <section id="services-2" class="services-2 section light-background">
 
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2></h2>
+        <p>Acknowlegement</p>
+      </div><!-- End Section Title -->
 
+      <div class="container" data-aos="fade-up">
 
+        <div class="row gy-4">
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/svteatern.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/arena.jpg" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/guthrie.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/rsc.svg" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/berliner.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/narodowy.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+		  
+		            <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/pac.svg" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/shaw.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/abbey.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/alley.png" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/nt.avif" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+          <div class="col-xl-2 col-md-3 col-6 client-logo">
+            <img src="assets/img/clients/sast.svg" class="img-fluid" alt="">
+          </div><!-- End Client Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Services 2 Section -->
+	
 	
 
-	
-
-
-const translations = {
-  en: {
-    "cookie-text": "This site uses cookies and Google Analytics to improve your experience.",
-    "cookie-policy-link": "Privacy Policy",
-    "accept-cookies-btn": "Accept",
-    "reject-cookies-btn": "Reject",
-	"patronage-title": "Patronage",
-    "collaborators-title": "Collaborators",
-    "funders-title": "Funders",
-	"acknowlegement-title": "Acknowlegement",
-    "about-title": "About us",
-    "about-description": `Metaria ry is a non-profit association founded in 2015 by <a href="https://www.linkedin.com/in/tuomokarvonen/" target="_blank">Tuomo Karvonen</a>, <a href="https://www.linkedin.com/in/matti-luhtala-a499802b/" target="_blank">Matti Luhtala</a>, and <a href="https://www.linkedin.com/in/jyrki-pylv%C3%A4s-378293a7/" target="_blank">Jyrki Pylväs</a>. Metaria promotes and explores new forms of performing arts in digital environments. Showcasing innovative tech-driven performance art nationally and internationally.<br>`,
-    "previous-link": `<a href="https://www.metaria.fi" target="_blank"><b>Previous works</b></a><br>`,
-    "board-title": `<b>Board of Directors 2024-2025</b><br>`,
-    "members-title": `<b>Members</b><br>`,
-	"contact-title": "Contact",
-	"bc-annot": "Breath of Carbon is an XR interactive solo performance that merges science and art to engage online audiences. Using motion capture and digital technologies, it visualizes the carbon cycle and highlights sustainable CO₂ capture’s impact on agriculture, employment, and future generations. The project advances brand development and image creation by showcasing innovative art-tech collaboration that makes complex science accessible and inspiring.",
-	"gc-annot": "Green Curtain is an innovative environmental project developing lignin-based filters and wipes to prevent harmful chemicals from cosmetics, decorations, and costume washing from entering theatre wastewater. By using bio-based and biodegradable materials, Green Curtain helps protect vulnerable ecosystems, promotes cleaner water, and repurposes large industrial by-products, supporting the circular economy.",
-    "modal3-final": "1. When something clicks, you remember it.<br>2. We bring science to life with feeling.<br>3. Science on Stage makes research stick.",
-  "translucence-annot": "In a fractured future where Earth’s stability has long since crumbled, exiled scientist Dr. Mara Solberg rediscovers a forgotten innovation capable of sustaining life in the harshest of worlds. Her pursuit of this breakthrough draws the attention of powerful forces determined to erase it from history. Fleeing across the void to a remote settlement on an uncharted world, Mara must adapt to an alien environment, evade those who would see her silenced, and confront the shadow of her own ambition.<br><br> Translucence fuses live performance with real-time digital scenography, layered soundscapes, and cinematic world-building — where the physical stage merges seamlessly with a living, virtual environment that evolves with the story.",
-	"eurojob-annot": "An online-born stage drama about pride, distance, and the fight to be heard.<br><br>A father. A son. One phone call. Six hours until eviction. In a bedsit, a once-charismatic hustler whose quick wit and bravado now barely conceal his exhaustion and loneliness dials the number he’s avoided for years. What begins as a plea for help becomes a fierce duel over who has forgiven who the most—a raw, funny, and devastating argument that strips away decades of silence.<br><br>Written for one actor to deliver a virtuoso, multifaceted performance, the play demands every shade of the actor’s craft: shifting from razor-sharp comedy to aching vulnerability in the space of a breath.<br><br>Born in the digital space through live-streamed readings and virtual rehearsals across borders, Eurojob is a one-act monologue to be staged in theatres and online. The piece fuses the intimacy of a video call with the immediacy of live performance, inviting audiences into a room where love, pride, and stubbornness collide.",
-	"fa-annot": "On a cruise ship docked in Helsinki, a supervisor convinced he’s seriously ill drives his cleaning crew to distraction. One sharp-witted cleaner poses as a doctor, dishing out absurd cures while a surprise inspection hurtles closer. To survive the day, the immigrant crew must outwit the chaos before it sinks them all — a sharp-tongued modern farce inspired by Molière’s The Imaginary Invalid. This professional stage production blends live theatre with real-time digital elements — streaming to online audiences, incorporating live video feeds from hidden corners of the ship, and letting viewers aboard and at home experience the same rising storm of comedy, panic, and survival from multiple perspectives.",
-  "modal6-final": "In development",
-	
-
-    "footer-text": "© 2025 Metaria Ry. All rights reserved.",
-    "privacy-link": "Privacy Policy"
-  },
-  fi: {
-    "cookie-text": "Tämä sivusto käyttää evästeitä ja Google Analyticsia parantaakseen käyttökokemustasi.",
-    "cookie-policy-link": "Tietosuojaseloste",
-    "accept-cookies-btn": "Hyväksy",
-    "reject-cookies-btn": "Hylkää",
-	"patronage-title": "Tuki",
-    "collaborators-title": "Yhteistyökumppanit",
-    "funders-title": "Rahoittajat",
-	"acknowlegement-title": "Tunnustus",
-    "about-title": "Esittely",
-    "about-description": `Metaria ry on voittoa tavoittelematon yhdistys, joka perustettiin vuonna 2015 <a href="https://www.linkedin.com/in/tuomokarvonen/" target="_blank">Tuomo Karvosen</a>, <a href="https://www.linkedin.com/in/matti-luhtala-a499802b/" target="_blank">Matti Luhtalan</a> ja <a href="https://www.linkedin.com/in/jyrki-pylv%C3%A4s-378293a7/" target="_blank">Jyrki Pylvään</a> toimesta. Metaria edistää ja tutkii uusia esittävän taiteen muotoja digitaalisissa ympäristöissä. Se esittelee innovatiivista, teknologiaa hyödyntävää esittävää taidetta kansallisesti ja kansainvälisesti.<br>`,
-    "previous-link": `<a href="https://www.metaria.fi" target="_blank"><b>Aiempia töitä</b></a><br>`,
-    "board-title": `<b>Hallitus 2024-2025</b><br>`,
-    "members-title": `<b>Jäsenet</b><br>`,
-    "contact-title": "Yhteystiedot",
-	"bc-annot": "Breath of Carbon on XR-interaktiivinen yksinäyttämöesitys, joka yhdistää tieteen ja taiteen tavoittaakseen verkkoyleisön. Liikkeenkaappaus- ja digitaalisia teknologioita hyödyntäen se havainnollistaa hiilen kiertokulkua ja korostaa kestävän hiilidioksidin talteenoton merkitystä maataloudelle, työllisyydelle ja tuleville sukupolville. Projekti edistää brändin kehitystä ja imagon rakentamista näyttämällä innovatiivisen taide- ja teknologiayhteistyön, joka tekee monimutkaisesta tieteestä saavutettavaa ja innostavaa.",
-	"gc-annot": "Green Curtain on innovatiivinen ympäristöprojekti, joka kehittää ligniinipohjaisia suodattimia ja pyyhkeitä estämään haitallisten kosmetiikka-, koristelu- ja pukujen pesussa käytettävien kemikaalien pääsyn teatterin jätevesiin. Biopohjaisten ja biohajoavien materiaalien avulla Green Curtain suojaa haavoittuvia ekosysteemejä, edistää puhtaampaa vettä ja hyödyntää teollisuuden sivuvirtoja kiertotalouden edistämiseksi.",
-    "modal3-final": "1. Kun jokin loksahtaa, muistat sen.<br>2. Tuomme tieteen eloon tunteella.<br>3. Science on Stage saa tutkimuksen jäämään mieleen.",
-    "translucence-annot": "Murtuneessa tulevaisuudessa, jossa Maan vakaus on jo kauan sitten murentunut, karkotettu tiedemies tohtori Mara Solberg löytää uudelleen unohdetun innovaation, joka kykenee ylläpitämään elämää kaikkein karuimmillakin maailmoilla. Hänen pyrkimyksensä tämän läpimurron saavuttamiseksi herättää voimakkaiden tahojen huomion, jotka haluavat poistaa sen historiasta. Paeten tyhjiön halki kartoittamattomalle planeetalle syrjäiseen asutukseen, Maran on sopeuduttava vieraaseen ympäristöön, vältettävä hiljaiseksi haluavia ja kohdattava oman kunnianhimonsa varjo. <br><br>Translucence yhdistää live-esityksen reaaliaikaiseen digitaaliseen lavastukseen, moniulotteisiin äänimaisemiin ja elokuvamaiseen maailman rakentamiseen — fyysinen lava sulautuu saumattomasti elävään, virtuaaliseen ympäristöön, joka kehittyy tarinan mukana.",
-	"eurojob-annot": "Verkossa syntynyt näyttämödraama ylpeydestä, etäisyydestä ja taistelusta tulla kuulluksi.<br>Isä. Poika. Yksi puhelu. Kuusi tuntia pois­muuttoon.<br>Yksiö­asunnossa entinen karismaattinen konna, jonka nopea äly ja räiskyvä itsevarmuus nyt tuskin peittävät hänen uupumustaan ja yksinäisyyttään, valitsee numeron, jota on välttänyt vuosia. Se, mikä alkaa avunpyynnöstä, muuttuu kiivaaksi kaksintaisteluksi siitä, kuka on antanut eniten anteeksi — raaka, hauska ja musertava riita, joka repii pois vuosikymmeniä hiljaisuutta.<br><br>Näytelmä on kirjoitettu yhdelle näyttelijälle, joka esittää virtuoosimaisen monipuolisen roolin. Näytelmä vaatii näyttelijältä kaiken taidon kirjon: terävästä komiikasta sydäntä särkevään haavoittuvuuteen hengähdyksen sisällä.<br><br>Digitaalisessa tilassa syntynyt, suoratoistettujen lukujen ja virtuaaliharjoitusten kautta rajat ylittävä Eurojob on yhden näytöksen monologi, joka esitetään teattereissa ja verkossa. Teos yhdistää videopuhelun intiimiyden ja live-esiintymisen välittömyyden kutsuen yleisön huoneeseen, jossa rakkaus, ylpeys ja itsepäisyys törmäävät.",
-	"fa-annot": "Risteilyaluksella, joka on kiinnitetty Helsingin satamaan, esimies, joka on vakuuttunut olevansa vakavasti sairas, ajaa siivousryhmänsä epätoivoon. Yksi teräväpäinen siivooja esittää lääkäriä ja määrää absurdeja hoitoja, kun yllättävä tarkastus lähestyy. Selviytyäkseen päivästä maahanmuuttajatyöryhmän on päihitettävä kaaos ennen kuin se hukuttaa heidät kaikki — teräväkielinen moderni farssi, joka on saanut inspiraationsa Molièren teoksesta Kuvitteellinen tauti. Tämä ammattimainen näyttämöprodukti yhdistää live-teatterin reaaliaikaisiin digitaalisiin elementteihin — esitys striimataan verkossa, mukana on live-videokuvaa aluksen piilopaikoista ja katsojat sekä laivalla että kotona pääsevät kokemaan saman kasvavan komedian, paniikin ja selviytymisen myrskyn monista näkökulmista.",
-	"modal6-final": "Kehitteillä",
-
-    "footer-text": "© 2025 Metaria Ry. Kaikki oikeudet pidätetään.",
-    "privacy-link": "Tietosuojaseloste"
-  },
-  sv: {
-    "cookie-text": "Denna webbplats använder cookies och Google Analytics för att förbättra din upplevelse.",
-    "cookie-policy-link": "Integritetspolicy",
-    "accept-cookies-btn": "Acceptera",
-    "reject-cookies-btn": "Avvisa",
-	"patronage-title": "Samarbetspartners",
-    "collaborators-title": "Samarbetspartners",
-    "funders-title": "Finansiärer",
-	"acknowlegement-title": "Erkännande",
-    "about-title": "Om oss",
-    "about-description": `Metaria ry är en ideell förening grundad 2015 av <a href=\"https://www.linkedin.com/in/tuomokarvonen/\" target=\"_blank\">Tuomo Karvonen</a>, <a href=\"https://www.linkedin.com/in/matti-luhtala-a499802b/\" target=\"_blank\">Matti Luhtala</a> och <a href=\"https://www.linkedin.com/in/jyrki-pylv%C3%A4s-378293a7/\" target=\"_blank\">Jyrki Pylväs</a>. Metaria främjar och utforskar nya former av scenkonst i digitala miljöer. Vi presenterar innovativ, teknikdriven scenkonst både nationellt och internationellt.<br>`,
-    "previous-link": `<a href="https://www.metaria.fi" target="_blank"><b>Tidigare arbeten</b></a><br>`,
-    "board-title": `<b>Styrelsen 2024-2025</b><br>`,
-    "members-title": `<b>Medlemmar</b><br>`,
-    "contact-title": "Kontakt",
-	"bc-annot": "Breath of Carbon är en XR-interaktiv soloföreställning som förenar vetenskap och konst för att nå en onlinepublik. Genom rörelsefångst och digital teknik visualiserar den kolcykeln och lyfter fram hållbar koldioxidinfångnings betydelse för jordbruk, sysselsättning och kommande generationer. Projektet främjar varumärkesutveckling och imagebyggande genom att visa innovativt samarbete mellan konst och teknik som gör komplex vetenskap tillgänglig och inspirerande.",
-	"gc-annot": "Green Curtain är ett innovativt miljöprojekt som utvecklar ligninbaserade filter och våtservetter för att förhindra att skadliga kemikalier från kosmetika, dekorationer och kostymtvätt hamnar i teaterns avloppsvatten. Genom att använda biobaserade och biologiskt nedbrytbara material hjälper Green Curtain till att skydda känsliga ekosystem, främja renare vatten och återanvända stora industrins biprodukter för att stödja en cirkulär ekonomi.",
-    "modal3-final": "1. När något klickar, minns du det.<br>2. Vi ger liv åt vetenskapen med känsla.<br>3. Science on Stage får forskningen att fastna.",
-    "translucence-annot": "I en splittrad framtid där Jordens stabilitet sedan länge har fallit samman, återupptäcker den landsförvisade vetenskapskvinnan Dr. Mara Solberg en bortglömd innovation som kan upprätthålla liv i de hårdaste världarna. Hennes strävan efter detta genombrott väcker uppmärksamhet hos mäktiga krafter som är fast beslutna att radera den från historien. På flykt över tomrummet till en avlägsen bosättning på en okänd värld, måste Mara anpassa sig till en främmande miljö, undvika dem som vill tysta henne och konfrontera skuggan av sin egen ambition. <br><br>Translucence förenar liveframträdande med realtids digital scenografi, lager av ljudlandskap och filmisk världsskapande — där den fysiska scenen smälter samman sömlöst med en levande, virtuell miljö som utvecklas med berättelsen.",
-	"eurojob-annot": "Ett online-fött sceniskt drama om stolthet, distans och kampen för att bli hörd.<br><br>En far. En son. Ett telefonsamtal. Sex timmar till vräkning.<br>I en enrummare ringer en en gång karismatisk bluffmakare, vars kvicka sinne och bravur nu knappt döljer hans utmattning och ensamhet, numret han undvikit i åratal. Det som börjar som en hjälpförfrågan blir en häftig duell om vem som har förlåtit mest – ett rått, roligt och förödande gräl som sliter bort årtionden av tystnad.<br><br>Skriven för en skådespelare som ska leverera en virtuos, mångfacetterad prestation, kräver pjäsen alla skiftningar i skådespelarens hantverk: från knivskarp komedi till smärtsam sårbarhet på ett andetag.<br><br>Född i den digitala världen genom livesända läsningar och virtuella repetition över gränser är Eurojob en monolog i ett akt att spelas på teater och online. Pjäsen förenar intimiteten i ett videosamtal med liveframträdandets omedelbarhet och bjuder in publiken till ett rum där kärlek, stolthet och envishet kolliderar.",
-	"fa-annot": "På ett kryssningsfartyg förtöjt i Helsingfors driver en arbetsledare, övertygad om att han är allvarligt sjuk, sin städbesättning till vansinne. En kvick städare låtsas vara läkare och delar ut absurda botemedel samtidigt som en överraskande inspektion närmar sig. För att överleva dagen måste den invandrade besättningen överlista kaoset innan det dränker dem alla — en vass modern fars inspirerad av Molières Den inbillade sjuke. Denna professionella scenuppsättning blandar live-teater med realtids digitala element — streamas till onlinepublik, inkluderar live-videoströmmar från fartygets gömda hörn och låter tittare både ombord och hemma uppleva samma växande storm av komedi, panik och överlevnad ur flera perspektiv.",
-	"modal6-final": "Under utveckling",
-
-    "footer-text": "© 2025 Metaria Ry. Alla rättigheter förbehålls.",
-    "privacy-link": "Integritetspolicy"
-  }
-};
-
-let currentLang = 'en'; // default language
-
-function switchLanguage(lang) {
-  currentLang = lang; 
-  // Update page text content based on selected language
-  const keys = Object.keys(translations[lang]);
-
-const htmlIds = [
-  "cookie-text", 
-  "cookie-policy-link", 
-  "about-description", 
-  "previous-link", 
-  "board-title", 
-  "members-title",
-	"gc-annot",
-	"bc-annot",
-  "translucence-annot",
-  "eurojob-annot",
-  "fa-annot", 
-	"modal3-final",
-	"modal6-final"
-];
-
-keys.forEach(id => {
-  const el = document.getElementById(id);
-  if (!el) return;
-
-  // Use the outer htmlIds here
-  if (htmlIds.includes(id)) {
-    el.innerHTML = translations[lang][id];
-  } else {
-    el.textContent = translations[lang][id];
-  }
-});
-
-	
-updateModalAnnotationLanguage('modal3');
-updateModalAnnotationLanguage('modal6');
-
-	
-  // Update language switcher UI to highlight selected language
-  document.querySelectorAll('#language-switcher .lang-option').forEach(el => {
-    el.classList.remove('selected');
-  });
-  const selected = document.querySelector(`#language-switcher .lang-option[data-lang="${lang}"]`);
-  if (selected) selected.classList.add('selected');
-}
-
-// On page load, set default language
-document.addEventListener('DOMContentLoaded', () => {
-  switchLanguage('en'); // or your preferred default language
-});
-
-
-
-function setModalHeight() {
-  const modalContent = document.querySelector('.modal-content');
-  if(modalContent){
-    modalContent.style.height = window.innerHeight + 'px';
-  }
-}
-
-window.addEventListener('resize', setModalHeight);
-window.addEventListener('orientationchange', setModalHeight);
-setModalHeight(); // initial call
-
-
-
-	
-
-
-
-
-document.querySelectorAll('.blob').forEach(blob => {
-  const canvas = blob.querySelector('.blob-canvas');
-  const ctx = canvas.getContext('2d');
-
-  const width = blob.scrollWidth;   // instead of offsetWidth
-const height = blob.scrollHeight; // instead of offsetHeight
-canvas.width = width;
-canvas.height = height;
-
-
-  const videoSrc = blob.getAttribute('data-video');
-  const video = document.createElement('video');
-  video.src = videoSrc;
-  video.loop = true;
-  video.muted = true;
-  video.playsInline = true;
-  video.style.display = 'none';
-  document.body.appendChild(video);
-
-	video.autoplay = true;     // ensure autoplay is set
-video.play().catch(() => {}); 
-
-  const thumb = blob.querySelector('img');
-  thumb.style.display = 'none'; // hide the img element
-
-  const pathEl = blob.querySelector('.blob-shape');
-  const pathD = pathEl.getAttribute('d');
-
-  const svg = blob.querySelector('svg');
-  const viewBoxAttr = svg.getAttribute('viewBox');
-  let viewBox = [0, 0, width, height];
-  if (viewBoxAttr) viewBox = viewBoxAttr.split(' ').map(Number);
-
-  const transform = pathEl.getAttribute('transform') || '';
-  const translateMatch = transform.match(/translate\(([^)]+)\)/);
-  let translateX = 0, translateY = 0;
-  if (translateMatch) {
-    const parts = translateMatch[1].split(/[\s,]+/).map(Number);
-    translateX = parts[0];
-    translateY = parts[1] || 0;
-  }
-
-  const originalPath = new Path2D(pathD);
-
-  let videoReady = false;
-
-  video.addEventListener('canplay', () => {
-    videoReady = true;
-    video.play().catch(() => {});
-  });
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-
-    const scaleX = width / viewBox[2];
-    const scaleY = height / viewBox[3];
-
-    ctx.translate(translateX * scaleX, translateY * scaleY);
-    ctx.scale(scaleX, scaleY);
-    ctx.clip(originalPath);
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-
-    if (videoReady) {
-      // draw video
-      const videoScale = Math.max(width / video.videoWidth, height / video.videoHeight);
-      const videoWidthScaled = video.videoWidth * videoScale;
-      const videoHeightScaled = video.videoHeight * videoScale;
-      const videoX = (width - videoWidthScaled) / 2;
-      const videoY = (height - videoHeightScaled) / 2;
-      ctx.drawImage(video, videoX, videoY, videoWidthScaled, videoHeightScaled);
-    } else if (thumb.complete) {
-      // draw thumbnail only if video not ready
-      const thumbScale = Math.max(width / thumb.naturalWidth, height / thumb.naturalHeight);
-      const thumbWidthScaled = thumb.naturalWidth * thumbScale;
-      const thumbHeightScaled = thumb.naturalHeight * thumbScale;
-      const thumbX = (width - thumbWidthScaled) / 2;
-      const thumbY = (height - thumbHeightScaled) / 2;
-      ctx.drawImage(thumb, thumbX, thumbY, thumbWidthScaled, thumbHeightScaled);
-    }
-
-    ctx.restore();
-    requestAnimationFrame(draw);
-  }
-
-  draw();
-});
-
-
-
-
-
-
-
-
-	
-// === Modal Content Data ===
-const modalContent = {
-  modal3: [
-    { type: "word",  text: "Science on Stage" },
-    { type: "image", src: "images/bc.png", title: "Breath of Carbon" },
-	{ type: "annot", id: "bc-annot",text: "Breath of Carbon is an XR interactive solo performance that merges science and art to engage online audiences. Using motion capture and digital technologies, it visualizes the carbon cycle and highlights sustainable CO₂ capture’s impact on agriculture, employment, and future generations. The project advances brand development and image creation by showcasing innovative art-tech collaboration that makes complex science accessible and inspiring." },
-    { type: "image", src: "images/gc.png", title: "Green Curtain" },
-	{ type: "annot", id: "gc-annot",text: "Green Curtain is an innovative environmental project developing lignin-based filters and wipes to prevent harmful chemicals from cosmetics, decorations, and costume washing from entering theatre wastewater. By using bio-based and biodegradable materials, Green Curtain helps protect vulnerable ecosystems, promotes cleaner water, and repurposes large industrial by-products, supporting the circular economy." },
-    { type: "final", id: "modal3-final", text: "1. When something clicks, you remember it.<br>2. We bring science to life with feeling.<br>3. Science on Stage makes research stick." }
-  ],
-  modal6: [
-    { type: "word",  text: "New Writing" },
-    { type: "image", src: "images/translucence.jpeg", title: "Translucence" },
-	{ type: "annot", id: "translucence-annot", text: "In a fractured future where Earth’s stability has long since crumbled, exiled scientist Dr. Mara Solberg rediscovers a forgotten innovation capable of sustaining life in the harshest of worlds. Her pursuit of this breakthrough draws the attention of powerful forces determined to erase it from history. Fleeing across the void to a remote settlement on an uncharted world, Mara must adapt to an alien environment, evade those who would see her silenced, and confront the shadow of her own ambition. Translucence fuses live performance with real-time digital scenography, layered soundscapes, and cinematic world-building — where the physical stage merges seamlessly with a living, virtual environment that evolves with the story." },
-    { type: "image", src: "images/eurojob.jpeg", title: "Eurojob" },
-	{ type: "annot", id: "eurojob-annot",text: "An online-born stage drama about pride, distance, and the fight to be heard.<br>A father. A son. One phone call. Six hours until eviction.<br>In a bedsit, a once-charismatic hustler whose quick wit and bravado now barely conceal his exhaustion and loneliness dials the number he’s avoided for years. What begins as a plea for help becomes a fierce duel over who has forgiven who the most—a raw, funny, and devastating argument that strips away decades of silence.<br>Written for one actor to deliver a virtuoso, multifaceted performance, the play demands every shade of the actor’s craft: shifting from razor-sharp comedy to aching vulnerability in the space of a breath.<br>Born in the digital space through live-streamed readings and virtual rehearsals across borders, Eurojob is a one-act monologue to be staged in theatres and online. The piece fuses the intimacy of a video call with the immediacy of live performance, inviting audiences into a room where love, pride, and stubbornness collide." },
-	{ type: "image", src: "images/fa.jpg", title: "First Aid, Last Orders" },
-	{ type: "annot", id: "fa-annot",text: "On a cruise ship docked in Helsinki, a supervisor convinced he’s seriously ill drives his cleaning crew to distraction. One sharp-witted cleaner poses as a doctor, dishing out absurd cures while a surprise inspection hurtles closer. To survive the day, the immigrant crew must outwit the chaos before it sinks them all — a sharp-tongued modern farce inspired by Molière’s The Imaginary Invalid. This professional stage production blends live theatre with real-time digital elements — streaming to online audiences, incorporating live video feeds from hidden corners of the ship, and letting viewers aboard and at home experience the same rising storm of comedy, panic, and survival from multiple perspectives." },
-    { type: "final", id: "modal6-final", text: "In development" }
-  ]
-};
-
-// Function to preload an image
-const preloadImage = src => {
-  const img = new Image();
-  img.src = src;
-};
-
-// Preload images for two modals
-["modal3", "modal6"].forEach(modalKey => {
-  if (modalContent[modalKey]) {
-    modalContent[modalKey].forEach(item => {
-      if (item.type === "image") {
-        preloadImage(item.src);
-      }
-    });
-  }
-});
-
-	
-// === Modal Open/Close ===
-const blobs = document.querySelectorAll('.blob');
-const modals = document.querySelectorAll('.modal');
-const closeButtons = document.querySelectorAll('.modal .close');
-
-blobs.forEach(blob => {
-  blob.addEventListener('click', () => {
-    const modalId = blob.getAttribute('data-modal');
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      modal.style.display = "block";
-
-      if (modalId === "modal2") {
-        playWordFadeSequence(modal);
-      } else if (modalContent[modalId]) {
-        playSequenceFromData(modalId);
-      }
-    }
-  });
-});
-
-closeButtons.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const modal = e.target.closest('.modal');
-    modal.style.display = "none";
-	
-// When closing modal:
-if (modal.sequenceTimeouts) {
-  modal.sequenceTimeouts.forEach(tid => clearTimeout(tid));
-  modal.sequenceTimeouts = [];
-}
-
-clearTimeout(modal.wordTimer1);
-clearTimeout(modal.wordTimer2);
-modal.wordTimer1 = null;
-modal.wordTimer2 = null;
-
-    // Reset word1/word2
-    const word1 = modal.querySelector('.word1');
-    const word2 = modal.querySelector('.word2');
-    if (word1) word1.style.opacity = 0;
-    if (word2) word2.style.opacity = 0;
-
-    // Reset dynamic content
-    const container = modal.querySelector('.modal-content-body');
-    if (container) container.innerHTML = "";
-
-    clearTimeout(modal.wordTimer1);
-    clearTimeout(modal.wordTimer2);
-  });
-});
-
-window.addEventListener('click', (event) => {
-  modals.forEach(modal => {
-    if (event.target === modal) {
-      modal.style.display = "none";
-	  
-	  // When closing modal:
-if (modal.sequenceTimeouts) {
-  modal.sequenceTimeouts.forEach(tid => clearTimeout(tid));
-  modal.sequenceTimeouts = [];
-}
-
-
-      const word1 = modal.querySelector('.word1');
-      const word2 = modal.querySelector('.word2');
-      if (word1) word1.style.opacity = 0;
-      if (word2) word2.style.opacity = 0;
-
-      const container = modal.querySelector('.modal-content-body');
-      if (container) container.innerHTML = "";
-
-      clearTimeout(modal.wordTimer1);
-      clearTimeout(modal.wordTimer2);
-    }
-  });
-});
-
-
-
-	document.addEventListener('click', () => {
-  document.querySelectorAll('.blob video').forEach(video => {
-    if (video.paused) {
-      video.play().catch(() => {});
-    }
-  });
-}, { once: true }); // only need first tap
-
-
-
-
-	
-
-// === Word Animation for Modal 1 ===
-function playWordFadeSequence(modal) {
-  const container = modal.querySelector('.modal-content-body');
-  if (!container) return;
-
-  container.innerHTML = ''; // Clear previous content
-
-  // Create word1
-  const word1 = document.createElement('div');
-  word1.className = 'word1';
-  word1.classList.add("modal-word")
-  word1.style.opacity = 0;
-  word1.style.transition = 'opacity 1s';
-  word1.style.fontSize = '40px';
-  word1.style.textAlign = 'center';
-  
-  word1.textContent = 'Leadership';
-
-  // Create word2 (as a hyperlink)
-  const word2 = document.createElement('div');
-  word2.className = 'word2';
-  word2.style.opacity = 0;
-  word2.style.transition = 'opacity 1s';
-  word2.style.textAlign = 'center';
-  word2.style.display = 'flex';
-word2.style.justifyContent = 'center';
-word2.style.alignItems = 'center';       
-word2.style.overflow = 'hidden';          // Optional: hide overflow
-word2.style.textOverflow = 'ellipsis';    // Optional: show "..." if clipped
-word2.style.width = '100%';               // Ensure it spans the modal
-
-
-  const link = document.createElement('a');
-  link.href = 'https://www.youtube.com/@theatreleadership';
-  link.target = '_blank'; 
-  link.style.fontSize = '28px';  
-  link.textContent = 'Dramaturgy of Theatre Leadership';
-  word2.appendChild(link);
-
-  // Add to container
-  container.appendChild(word1);
-  container.appendChild(word2);
-
-  // Animate
-  modal.wordTimer1 = setTimeout(() => {
-    word1.style.opacity = 1;
-  }, 300);
-
-  modal.wordTimer2 = setTimeout(() => {
-    word1.style.opacity = 0;
-    word2.style.opacity = 1;
-  }, 2000);
-}
-
-
-// === Word/Image Animation for Modal 2 & 3 ===
-function playSequenceFromData(modalId) {
-  const modal = document.getElementById(modalId);
-  const container = modal.querySelector('.modal-content-body');
-  const sequence = modalContent[modalId];
-  let index = 0;
-
-  if (!container || !sequence) return;
-
-  // Clear previous timeouts if any
-  if (modal.sequenceTimeouts) {
-    modal.sequenceTimeouts.forEach(tid => clearTimeout(tid));
-  }
-  modal.sequenceTimeouts = [];
-  container.innerHTML = '';
-  container.style.display = 'flex';
-  container.style.justifyContent = 'center';
-  container.style.alignItems = 'center';
-  container.style.flexDirection = 'column';
-  container.style.height = '100%';
-  container.style.textAlign = 'center';
-
-  function showNext() {
-    if (index >= sequence.length) return;
-
-    const item = sequence[index];
-
-   if (item.type === "final") {
-  const finalMessage = document.createElement('div');
-  finalMessage.innerHTML = translations[currentLang][item.id] || item.text || "Thank you!";
-  finalMessage.className = item.class;
-  finalMessage.style.opacity = 0;
-  finalMessage.style.transition = 'opacity 1s ease';
-  finalMessage.style.fontSize = '18px';
-finalMessage.style.textAlign = "justify";
-  finalMessage.style.marginTop = '30px';
-  finalMessage.style.display = 'flex';
-  finalMessage.style.justifyContent = 'center';
-  finalMessage.style.alignItems = 'center';
-  finalMessage.style.height = '100%';
-
-	// Make a square frame around the text
-finalMessage.style.display = 'inline-flex';
-finalMessage.style.justifyContent = 'center';
-finalMessage.style.alignItems = 'center';
-finalMessage.style.padding = '20px';  // space between text and frame
-finalMessage.style.border = '2px solid  #fdf5e6'; // frame color
-finalMessage.style.borderRadius = '3px'; // optional: rounded corners
-
-finalMessage.style.width = 'auto';
-finalMessage.style.height = 'auto';
-finalMessage.style.maxWidth = '90vw'; // prevent it from overflowing on mobile
-finalMessage.style.boxSizing = 'border-box';
-
-  container.appendChild(finalMessage);
-
-  // Store ref on modal object for later updates
-  modal.currentFinalElement = finalMessage;
-  modal.currentFinalId = item.id;
-
-  requestAnimationFrame(() => {
-    finalMessage.style.opacity = 1;
-  });
-  return;
-}
-
-
-    const el = document.createElement('div');
-    el.style.opacity = 0;
-    el.style.transition = 'opacity 1s ease';
-    el.style.textAlign = 'center';
-    el.style.margin = '20px auto';
-    el.className = item.class || '';
-
-    if (item.type === "word") {
-      el.textContent = item.text;
-      el.classList.add("modal-word");
-      el.style.fontSize = '40px';
-      el.style.display = 'flex';
-      el.style.justifyContent = 'center';
-      el.style.alignItems = 'center';
-    }
-
-  if (item.type === "image") {
-  const img = document.createElement('img');
-  img.src = item.src;
-  img.alt = item.title;
-  img.style.maxWidth = '100%';
-  img.style.objectFit = 'contain';
-  img.style.borderRadius = '1px';
-  img.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
-  img.style.marginBottom = '10px';
-  img.loading = "eager";
-
-  // Adjust maxHeight for mobile
-  if (window.innerWidth <= 1024) {  // mobile or iPad landscape
-    img.style.maxHeight = "50vh"; // fit modal height with some padding
-  } else {
-    img.style.maxHeight = "400px"; // desktop
-  }
-
-  const caption = document.createElement('div');
-  caption.textContent = item.title;
-  caption.style.fontSize = '18px';
-
-  el.appendChild(img);
-  el.appendChild(caption);
-}
-
-
-    if (item.type === "annot") {
-	  
-	el.innerHTML = translations[currentLang][item.id] || item.text || "No text available";
-	el.classList.add("modal-annot");
-	el.style.fontStyle = "italic";
-  	el.style.textAlign = "justify";
-	el.style.height = '100%';
-	el.style.alignItems = 'center';
-	el.classList.add('nocopy');
-	
-
-  // Conditionally apply mobile-specific styles
-  if (window.innerWidth <= 1024) {
-    el.style.fontSize = "12px";
-    el.style.padding = "12px";
-	el.style.marginTop = "20px";
-    el.style.margin = "10px 0";
-  } 
-
-  modal.currentAnnotElement = el;
-  modal.currentAnnotId = item.id;
-      
-	  
-    }
-
-    container.appendChild(el);
-    requestAnimationFrame(() => {
-      el.style.opacity = 1;
-    });
-
-    const fadeOutDelay = 2500;
-let timeoutId;
-
-    if (item.type === "image" && sequence[index + 1]?.type === "annot") {
-      timeoutId = setTimeout(() => {
-        el.style.opacity = 0;
-        setTimeout(() => {
-          el.remove();
-          index++; // advance to annot
-          showNext(); 
-        }, 1000);
-      }, 2500);
-    } else {
-      const prevItem = sequence[index - 1];
-      const isImageAnnotation = item.type === "annot" && prevItem?.type === "image";
-      const delay = isImageAnnotation ? 1500 : 2500;
-
-      timeoutId = setTimeout(() => {
-        el.style.opacity = 0;
-        setTimeout(() => {
-          el.remove();
-          index++;
-          showNext();
-        }, 1000);
-      }, delay);
-    }
-
-    modal.sequenceTimeouts.push(timeoutId);
-  }
-
-  showNext();
-}
-  
-function updateModalAnnotationLanguage(modalId) {
-  const modal = document.getElementById(modalId);
-  if (!modal) return;
-
-  // Update annotation element
-  const el = modal.currentAnnotElement;
-  const id = modal.currentAnnotId;
-  if (el && id) {
-    el.innerHTML = translations[currentLang][id] || "No text available";
-  }
-
-  // Update final message element
-  const finalEl = modal.currentFinalElement;
-  const finalId = modal.currentFinalId;
-  if (finalEl && finalId) {
-    finalEl.innerHTML = translations[currentLang][finalId] || "Thank you!";
-  }
-}
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    // -------------------------
-    // Modal collapsibles with image hiding
-    // -------------------------
-    const modalIds = ["modal3", "modal6"];
-
-    modalIds.forEach(modalId => {
-        const modal = document.getElementById(modalId);
-        if (!modal) return;
-        const closeBtn = modal.querySelector(".close");
-        const titles = modal.querySelectorAll(".collapsible-title");
-
-        titles.forEach(title => {
-            const container = title.nextElementSibling;
-            if (!container) return;
-            const images = container.querySelectorAll("img");
-            let hideTimer = null;
-            let imageHidden = false;
-
-            const hideImages = () => {
-                images.forEach(img => img.style.display = "none");
-                imageHidden = true;
-            };
-
-            // No showImages() on collapse anymore
-            title.addEventListener("click", () => {
-                // Collapse all other containers
-                titles.forEach(otherTitle => {
-                    const otherContainer = otherTitle.nextElementSibling;
-                    if (otherContainer !== container) {
-                        otherContainer.classList.remove('expanded');
-                        otherContainer.style.maxHeight = null;
-                        // Do NOT reset images here
-                    }
-                });
-
-                // Toggle this container
-                if (container.classList.contains('expanded')) {
-                    container.classList.remove('expanded');
-                    container.style.maxHeight = null;
-                    clearTimeout(hideTimer); // stop countdown if user closes early
-                } else {
-                    container.classList.add('expanded');
-                    container.style.maxHeight = container.scrollHeight + "px";
-
-                    // Start countdown if images are not yet hidden
-                    if (!imageHidden) {
-                        clearTimeout(hideTimer);
-                        hideTimer = setTimeout(hideImages, 3000);
-                    }
-                }
-            });
-
-            // Reset images only when modal closes
-            if (closeBtn) {
-                closeBtn.addEventListener("click", () => {
-                    clearTimeout(hideTimer);
-                    images.forEach(img => img.style.display = "block");
-                    container.classList.remove('expanded');
-                    container.style.maxHeight = null;
-                    imageHidden = false;
-                });
-            }
-        });
-
-        // Close modal
-        if (closeBtn) {
-            closeBtn.addEventListener("click", () => {
-                modal.style.display = "none";
-            });
-        }
-    });
-
-    // -------------------------
-    // Page-level collapsibles
-    // -------------------------
-    const pageTitles = document.querySelectorAll('#board-title, #members-title, #collaborators-title, #funders-title, #acknowlegement-title');
-
-    pageTitles.forEach(title => {
-        title.addEventListener('click', () => {
-            const content = title.nextElementSibling;
-
-            // Close all other sections
-            pageTitles.forEach(otherTitle => {
-                const otherContent = otherTitle.nextElementSibling;
-                if (otherContent !== content) {
-                    otherContent.classList.remove('expanded');
-                    otherContent.style.maxHeight = null;
-                }
-            });
-
-            // Toggle the clicked one
-            if (content.classList.contains('expanded')) {
-                content.classList.remove('expanded');
-                content.style.maxHeight = null;
-            } else {
-                content.classList.add('expanded');
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    });
-});
-
-	
-
-const cookieBanner = document.getElementById('cookie-banner');
-  const cookieOverlay = document.getElementById('cookie-overlay');
-  const acceptBtn = document.getElementById('accept-cookies-btn');
-  const rejectBtn = document.getElementById('reject-cookies-btn');
-
-  function showCookieConsent() {
-    cookieBanner.style.display = 'block';
-    cookieOverlay.style.display = 'block';
-  }
-  function hideCookieConsent() {
-    cookieBanner.style.display = 'none';
-    cookieOverlay.style.display = 'none';
-  }
-
-  acceptBtn.addEventListener('click', async () => {
-    localStorage.setItem('cookiesAccepted', 'true');
-    hideCookieConsent();
-    await loadGAScript();
-    initGAWithVisitorID();
-  });
-
-  rejectBtn.addEventListener('click', () => {
-    localStorage.setItem('cookiesAccepted', 'false');
-    hideCookieConsent();
-  });
-
-  window.addEventListener('load', async () => {
-    const consent = localStorage.getItem('cookiesAccepted');
-    if (consent === 'true') {
-      hideCookieConsent();
-      await loadGAScript();
-      initGAWithVisitorID();
-    } else if (consent === 'false') {
-      hideCookieConsent();
-      // GA not loaded
-    } else {
-      showCookieConsent();
-    }
-  });
-
-</script>
-
-
-<footer class="footer" id="site-footer">
-  <span id="footer-text">&copy; 2025 Metaria Ry. All rights reserved.</span>
-  <a href="privacy.html" class="footer-link" id="privacy-link">Privacy Policy</a>
-	
-
-</footer>
-
-
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2></h2>
+        <p>Contact</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+          <div class="col-lg-6 ">
+            <div class="row gy-4">
+
+              <div class="col-lg-12">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+                  <i class="bi bi-geo-alt"></i>
+                  <h3>ID</h3>
+                  <p>FIN 2761325-3</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="col-md-6">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+                  <i class="bi bi-telephone"></i>
+                  <h3>Call Us</h3>
+                  <p>+358 40 843 3095</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="col-md-6">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
+                  <i class="bi bi-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>trustee@metaria.org</p>
+                </div>
+              </div><!-- End Info Item -->
+
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="500">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">Metaria</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Business ID FIN 2761325-3</p>
+            <p></p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+358 40 843 3095</span></p>
+            <p><strong>Email:</strong> <span>trustee@metaria.org</span></p>
+          </div>
+          
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4></h4>
+          <ul>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#about">Leadership</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#services">New Writing</a></li>
+			<li><i class="bi bi-chevron-right"></i> <a href="#science">Science on Stage</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#team">About</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#collab">Patronage</a></li>
+          </ul>
+        </div>      
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Metaria</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href=“https://themewagon.com>ThemeWagon
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
 
 </body>
+
 </html>
-
-
