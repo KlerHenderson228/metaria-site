@@ -1,70 +1,41 @@
-(function () {
-  "use strict";
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("contact-form");
 
-  let forms = document.querySelectorAll('.php-email-form');
+  form.addEventListener("submit", function(event) {
+    event.preventDefault(); // stay on page
 
-  forms.forEach(function(form) {
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
+    const loading = form.querySelector(".loading");
+    const errorEl = form.querySelector(".error-message");
+    const sentEl = form.querySelector(".sent-message");
 
-      const loading = form.querySelector('.loading');
-      const errorEl = form.querySelector('.error-message');
-      const sentEl = form.querySelector('.sent-message');
+    loading.style.display = "block";
+    errorEl.style.display = "none";
+    sentEl.style.display = "none";
 
-      loading.classList.add('d-block');
-      errorEl.classList.remove('d-block');
-      sentEl.classList.remove('d-block');
+    const formData = new FormData(form);
 
-      let action = form.getAttribute('action');
-      if (!action) {
-        displayError(form, "Form action is not set!");
-        return;
-      }
-
-      let formData = new FormData(form);
-
-      // Optional: handle recaptcha
-      let recaptchaKey = form.getAttribute('data-recaptcha-site-key');
-      if (recaptchaKey && typeof grecaptcha !== "undefined") {
-        grecaptcha.ready(function() {
-          grecaptcha.execute(recaptchaKey, {action: 'submit'}).then(token => {
-            formData.set('g-recaptcha-response', token);
-            submitToFormspree(form, action, formData);
-          });
-        });
-      } else {
-        submitToFormspree(form, action, formData);
-      }
-    });
-  });
-
-  function submitToFormspree(form, action, formData) {
-    fetch(action, {
-      method: 'POST',
+    fetch(form.action, {
+      method: "POST",
       body: formData,
-      headers: {'Accept': 'application/json'}
+      headers: { "Accept": "application/json" }
     })
     .then(response => response.json())
     .then(data => {
-      form.querySelector('.loading').classList.remove('d-block');
+      loading.style.display = "none";
       if (data.ok) {
-        form.querySelector('.sent-message').classList.add('d-block');
+        sentEl.style.display = "block";
         form.reset();
       } else {
-        let errorMsg = data?.errors?.map(e => e.message).join(", ") || "Form submission failed.";
-        displayError(form, errorMsg);
+        errorEl.textContent = data.errors ? data.errors.map(e => e.message).join(", ") : "Form submission failed.";
+        errorEl.style.display = "block";
       }
     })
     .catch(error => {
-      form.querySelector('.loading').classList.remove('d-block');
-      displayError(form, error.message);
+      loading.style.display = "none";
+      errorEl.textContent = error.message;
+      errorEl.style.display = "block";
     });
-  }
-
-  function displayError(form, error) {
-    const errorEl = form.querySelector('.error-message');
-    errorEl.innerHTML = error;
-    errorEl.classList.add('d-block');
-  }
-
-})();
+  });
+});
+</script>
