@@ -49,7 +49,7 @@
     });
   });
 
- function php_email_form_submit(thisForm, action, formData) {
+function php_email_form_submit(thisForm, action, formData) {
   fetch(action, {
     method: 'POST',
     body: formData,
@@ -60,17 +60,15 @@
     thisForm.querySelector('.loading').classList.remove('d-block');
 
     if (data.ok) {
-      // Show success
       thisForm.querySelector('.sent-message').classList.add('d-block');
       thisForm.reset();
     } else {
-      // Show error from Formspree (or fallback)
       let errorMsg = data.errors ? data.errors.map(e => e.message).join(", ") : "Form submission failed.";
-      throw new Error(errorMsg);
+      displayError(thisForm, errorMsg);
     }
   })
   .catch((error) => {
-    displayError(thisForm, error);
+    displayError(thisForm, error.message);
   });
 }
 
@@ -82,4 +80,5 @@
   }
 
 })();
+
 
