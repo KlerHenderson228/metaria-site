@@ -71,6 +71,11 @@ function php_email_form_submit(thisForm, action, formData) {
     displayError(thisForm, error.message);
   });
 }
+function displayError(form, message) {
+  let errorEl = form.querySelector('.error-message');
+  errorEl.innerHTML = message;
+  errorEl.classList.add('d-block');
+}
 
 
   function displayError(thisForm, error) {
@@ -80,5 +85,6 @@ function php_email_form_submit(thisForm, action, formData) {
   }
 
 })();
+
 
 
