@@ -1,14 +1,16 @@
-<script>
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById("contact-form");
 
   form.addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent redirect
+    event.preventDefault(); // stay on page
 
-    // Show loading, hide previous messages
-    document.querySelector(".loading").style.display = "block";
-    document.querySelector(".error-message").style.display = "none";
-    document.querySelector(".sent-message").style.display = "none";
+    const loading = form.querySelector(".loading");
+    const errorEl = form.querySelector(".error-message");
+    const sentEl = form.querySelector(".sent-message");
+
+    loading.style.display = "block";
+    errorEl.style.display = "none";
+    sentEl.style.display = "none";
 
     const formData = new FormData(form);
 
@@ -19,20 +21,19 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then(response => response.json())
     .then(data => {
-      document.querySelector(".loading").style.display = "none";
+      loading.style.display = "none";
       if (data.ok) {
-        document.querySelector(".sent-message").style.display = "block";
+        sentEl.style.display = "block";
         form.reset();
       } else {
-        document.querySelector(".error-message").textContent = "Form submission failed.";
-        document.querySelector(".error-message").style.display = "block";
+        errorEl.textContent = "Form submission failed.";
+        errorEl.style.display = "block";
       }
     })
     .catch(error => {
-      document.querySelector(".loading").style.display = "none";
-      document.querySelector(".error-message").textContent = error.message;
-      document.querySelector(".error-message").style.display = "block";
+      loading.style.display = "none";
+      errorEl.textContent = error.message;
+      errorEl.style.display = "block";
     });
   });
 });
-</script>
