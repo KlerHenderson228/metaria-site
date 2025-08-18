@@ -1,44 +1,70 @@
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const form = document.getElementById("contact-form");
+(function () {
+  "use strict";
 
-  form.addEventListener("submit", function(event) {
-    event.preventDefault(); // stay on page
+  let forms = document.querySelectorAll('.php-email-form');
 
-    const loading = form.querySelector(".loading");
-    const errorEl = form.querySelector(".error-message");
-    const sentEl = form.querySelector(".sent-message");
+  forms.forEach(function(form) {
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
 
-    // Show loading, hide previous messages
-    loading.style.display = "block";
-    errorEl.style.display = "none";
-    sentEl.style.display = "none";
+      const loading = form.querySelector('.loading');
+      const errorEl = form.querySelector('.error-message');
+      const sentEl = form.querySelector('.sent-message');
 
-    const formData = new FormData(form);
+      loading.classList.add('d-block');
+      errorEl.classList.remove('d-block');
+      sentEl.classList.remove('d-block');
 
-    fetch("https://formspree.io/f/mjkodanr", {
-      method: "POST",
+      let action = form.getAttribute('action');
+      if (!action) {
+        displayError(form, "Form action is not set!");
+        return;
+      }
+
+      let formData = new FormData(form);
+
+      // Optional: handle recaptcha
+      let recaptchaKey = form.getAttribute('data-recaptcha-site-key');
+      if (recaptchaKey && typeof grecaptcha !== "undefined") {
+        grecaptcha.ready(function() {
+          grecaptcha.execute(recaptchaKey, {action: 'submit'}).then(token => {
+            formData.set('g-recaptcha-response', token);
+            submitToFormspree(form, action, formData);
+          });
+        });
+      } else {
+        submitToFormspree(form, action, formData);
+      }
+    });
+  });
+
+  function submitToFormspree(form, action, formData) {
+    fetch(action, {
+      method: 'POST',
       body: formData,
-      headers: { "Accept": "application/json" }
+      headers: {'Accept': 'application/json'}
     })
-    .then(response => {
-      loading.style.display = "none";
-      if (response.ok) {
-        sentEl.style.display = "block";
+    .then(response => response.json())
+    .then(data => {
+      form.querySelector('.loading').classList.remove('d-block');
+      if (data.ok) {
+        form.querySelector('.sent-message').classList.add('d-block');
         form.reset();
       } else {
-        return response.json().then(data => {
-          let errorMsg = data?.errors?.map(e => e.message).join(", ") || "Form submission failed.";
-          errorEl.textContent = errorMsg;
-          errorEl.style.display = "block";
-        });
+        let errorMsg = data?.errors?.map(e => e.message).join(", ") || "Form submission failed.";
+        displayError(form, errorMsg);
       }
     })
     .catch(error => {
-      loading.style.display = "none";
-      errorEl.textContent = error.message;
-      errorEl.style.display = "block";
+      form.querySelector('.loading').classList.remove('d-block');
+      displayError(form, error.message);
     });
-  });
-});
-</script>
+  }
+
+  function displayError(form, error) {
+    const errorEl = form.querySelector('.error-message');
+    errorEl.innerHTML = error;
+    errorEl.classList.add('d-block');
+  }
+
+})();
