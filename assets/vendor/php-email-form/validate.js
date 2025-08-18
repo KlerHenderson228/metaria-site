@@ -1,3 +1,4 @@
+<script>
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById("contact-form");
 
@@ -8,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const errorEl = form.querySelector(".error-message");
     const sentEl = form.querySelector(".sent-message");
 
+    // Show loading, hide previous messages
     loading.style.display = "block";
     errorEl.style.display = "none";
     sentEl.style.display = "none";
@@ -19,15 +21,17 @@ document.addEventListener("DOMContentLoaded", function() {
       body: formData,
       headers: { "Accept": "application/json" }
     })
-    .then(response => response.json())
-    .then(data => {
+    .then(response => {
       loading.style.display = "none";
-      if (data.ok) {
+      if (response.ok) {
         sentEl.style.display = "block";
         form.reset();
       } else {
-        errorEl.textContent = "Form submission failed.";
-        errorEl.style.display = "block";
+        return response.json().then(data => {
+          let errorMsg = data?.errors?.map(e => e.message).join(", ") || "Form submission failed.";
+          errorEl.textContent = errorMsg;
+          errorEl.style.display = "block";
+        });
       }
     })
     .catch(error => {
@@ -37,3 +41,4 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+</script>
