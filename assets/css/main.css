@@ -139,6 +139,64 @@ h6 {
   }
 }
 
+
+.language-switcher {
+  position: relative;
+  display: inline-block;
+  font-family: var(--nav-font);
+}
+
+.language-switcher .sub-menu-toggle {
+  cursor: pointer;
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 0.25rem;
+  transition: 0.2s;
+}
+
+.language-switcher .sub-menu-toggle:hover {
+  background: color-mix(in srgb, var(--accent-color), black 15%);
+}
+
+.language-switcher .second-level {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;        
+  border-radius: 1rem;   
+ overflow: hidden;   
+  background: var(--nav-dropdown-background-color);
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.language-switcher .second-level li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--nav-dropdown-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.language-switcher .second-level li a:hover {
+  background-color: var(--nav-dropdown-hover-color);
+  color: var(--contrast-color);
+}
+
+.language-switcher .second-level.show {
+  display: block;
+}
+
+
+
+
+
 /* Pulsating Play Button
 ------------------------------*/
 .pulsating-play-btn {
