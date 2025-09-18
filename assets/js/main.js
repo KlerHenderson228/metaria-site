@@ -22,6 +22,36 @@
   document.addEventListener('scroll', toggleScrolled);
   window.addEventListener('load', toggleScrolled);
 
+
+
+/**
+ * Language switcher toggle
+ */
+const languageSwitchers = document.querySelectorAll('.sub-menu-toggle');
+
+languageSwitchers.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent body click
+    const dropdown = btn.nextElementSibling;
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !expanded);
+    dropdown.classList.toggle('show', !expanded);
+  });
+});
+
+// Close language dropdown when clicking outside
+document.addEventListener('click', () => {
+  languageSwitchers.forEach(btn => {
+    const dropdown = btn.nextElementSibling;
+    btn.setAttribute('aria-expanded', false);
+    dropdown.classList.remove('show');
+  });
+});
+
+
+
+
+
   /**
    * Mobile nav toggle
    */
