@@ -332,7 +332,7 @@ h6 {
   
    .header .language-switcher {
     order: 2; /* move after logo */
-    
+    margin-right: 10px;
   }
 
   .header .cta-btn {
