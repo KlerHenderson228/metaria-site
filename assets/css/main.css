@@ -332,13 +332,13 @@ h6 {
   
    .header .language-switcher {
     order: 2; /* move after logo */
-    margin-left: 15px; /* optional spacing */
+    
   }
 
   .header .cta-btn {
     order: 3;
     margin: 0 15px 0 0;
-    padding: 6px 15px;
+    padding: 5px 10px;
   }
 
   .header .navmenu {
