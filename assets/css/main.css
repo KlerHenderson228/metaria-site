@@ -309,9 +309,9 @@ h6 {
 .header .cta-btn,
 .header .cta-btn:focus {
   color: var(--contrast-color);
-  font-size: 13px;
+  font-size: 8px;
   padding: 7px 25px;
-  margin: 0 0 0 30px;
+  margin: 0 0 0 15px;
   border-radius: 4px;
   transition: 0.3s;
   text-transform: uppercase;
