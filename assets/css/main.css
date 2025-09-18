@@ -328,7 +328,11 @@ h6 {
 @media (max-width: 1200px) {
   .header .logo {
     order: 1;
-    max-height: 20px;
+   
+  }
+  
+   .header .logo img {
+    max-height: 20px; /* smaller logo for mobile */
   }
   
    .header .language-switcher {
