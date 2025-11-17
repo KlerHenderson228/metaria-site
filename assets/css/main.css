@@ -155,6 +155,8 @@ h6 {
   font-size: 0.9rem;
   border-radius: 0.25rem;
   transition: 0.2s;
+    width: 70px;        /* or any size you prefer */
+  text-align: center; /* ensures text stays centered */
 }
 
 .language-switcher .sub-menu-toggle:hover {
@@ -194,21 +196,6 @@ h6 {
   display: block;
 }
 
-.language-switcher .second-level {         /* ensure parent doesn't force a different alignment */
-  white-space: nowrap;
-  text-align: center;                      /* fallback centering */
-}
-
-.language-switcher .second-level li {      /* make li a block so children can fill width */
-  display: block;
-}
-
-.language-switcher .second-level li a {    /* anchor fills the li and centers text */
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 0.5rem 1rem;
-}
 
 
 
