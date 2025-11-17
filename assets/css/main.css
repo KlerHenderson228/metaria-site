@@ -155,7 +155,7 @@ h6 {
   font-size: 0.9rem;
   border-radius: 0.25rem;
   transition: 0.2s;
-    width: 50px;        /* or any size you prefer */
+    width: 40px;        /* or any size you prefer */
   text-align: center; /* ensures text stays centered */
 }
 
