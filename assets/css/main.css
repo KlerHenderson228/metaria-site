@@ -502,6 +502,11 @@ h6 {
 }
 
 /* Mobile Navigation */
+
+.cta-btn {
+  display: none !important;
+}
+
 @media (max-width: 1199px) {
   .mobile-nav-toggle {
     color: var(--nav-color);
