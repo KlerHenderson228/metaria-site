@@ -334,11 +334,9 @@ h6 {
     order: 1;
    
   }
-  @media (max-width: 1200px) {
-  .cta-btn {
-    display: none;
-  }
-}
+
+  
+
   
    .header .logo img {
     max-height: 20px; /* smaller logo for mobile */
