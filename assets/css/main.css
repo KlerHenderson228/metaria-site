@@ -322,6 +322,14 @@ h6 {
   border: 2px solid var(--contrast-color);
 }
 
+@media (max-width: 1199px) {
+  .header .cta-btn,
+  .header .cta-btn:focus {
+    font-size: 10px;      /* smaller text */
+    padding: 4px 6px;     /* adjust spacing */
+  }
+}
+
 .header .cta-btn:hover,
 .header .cta-btn:focus:hover {
   color: var(--contrast-color);
