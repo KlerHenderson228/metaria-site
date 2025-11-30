@@ -305,7 +305,7 @@ h6 {
 /* Mobile screens only */
 @media (max-width: 1199px) {
   .header .logo img {
-    max-height: 50px; /* adjust this value as needed */
+    max-height: 50px !important; /* adjust this value as needed */
   }
 }
 .header .logo h1 {
