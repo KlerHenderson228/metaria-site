@@ -326,7 +326,7 @@ h6 {
   .header .cta-btn,
   .header .cta-btn:focus {
     font-size: 10px;      /* smaller text */
-    padding: 4px 6px;     /* adjust spacing */
+    padding: 2px 3px;     /* adjust spacing */
   }
 }
 
