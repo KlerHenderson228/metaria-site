@@ -347,7 +347,7 @@ h6 {
 
   
    .header .logo img {
-    max-height: 25px; /* smaller logo for mobile */
+    max-height: 20px; /* smaller logo for mobile */
   }
   
    .header .language-switcher {
