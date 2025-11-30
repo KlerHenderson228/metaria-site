@@ -302,7 +302,12 @@ h6 {
   max-height: 36px;
   margin-right: 8px;
 }
-
+/* Mobile screens only */
+@media (max-width: 1199px) {
+  .header .logo img {
+    max-height: 50px; /* adjust this value as needed */
+  }
+}
 .header .logo h1 {
   font-size: 30px;
   margin: 0;
