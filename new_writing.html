@@ -136,7 +136,26 @@
   </div>
 </section>
 <!-- /Service Details Section -->
+<style>
+/* Desktop-only image sizing */
+@media (min-width: 992px) {
+  .services-img {
+    width: 100%;        /* fill the container width */
+    max-width: 300px;   /* scale down if container is wider */
+    height: auto;       /* maintain original aspect ratio */
+    display: block;     /* remove inline gaps */
+    border-radius: 16px; /* optional: rounded corners */
+    margin-bottom: 20px; /* optional: spacing from text */
+  }
 
+  /* Ensure text below aligns nicely */
+  .col-lg-8 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>
   </main>
 
    <footer id="footer" class="footer dark-background">
@@ -202,32 +221,30 @@
 const serviceData = {
   web: {
     sideTitle: "First Aid, Last Orders",
-    sideText: "Human-centered, accessible, and visually coherent digital experiences.",
+    sideText: "...",
     image: "assets/img/fa.jpg",
     mainTitle: "First Aid, Last Orders",
     mainText: "On a cruise ship docked in Helsinki, a supervisor convinced he’s seriously ill drives his cleaning crew to distraction. One sharp-witted cleaner poses as a doctor, dishing out absurd cures while a surprise inspection hurtles closer. To survive the day, the immigrant crew must outwit the chaos before it sinks them all — a sharp-tongued modern farce inspired by Molière’s The Imaginary Invalid. This professional stage production blends live theatre with real-time digital elements — streaming to online audiences, incorporating live video feeds from hidden corners of the ship, and letting viewers aboard and at home experience the same rising storm of comedy, panic, and survival from multiple perspectives.",
     bullets: [
-      "Responsive and accessible layouts",
-      "Design systems aligned with brand identity",
-      "Performance-optimized front-end architecture"
+      "..."
     ]
   },
 
   software: {
     sideTitle: "Translucence",
-    sideText: "Robust, scalable software solutions tailored to operational needs.",
+    sideText: "...",
     image: "assets/img/translucence.jpeg",
-    mainTitle: "Purpose-Driven Software Engineering",
+    mainTitle: "Translucence",
     mainText: "In a fractured future where Earth’s stability has long since crumbled, exiled scientist Dr. Mara Solberg rediscovers a forgotten innovation capable of sustaining life in the harshest of worlds. Her pursuit of this breakthrough draws the attention of powerful forces determined to erase it from history. Fleeing across the void to a remote settlement on an uncharted world, Mara must adapt to an alien environment, evade those who would see her silenced, and confront the shadow of her own ambition. Translucence fuses live performance with real-time digital scenography, layered soundscapes, and cinematic world-building — where the physical stage merges seamlessly with a living, virtual environment that evolves with the story.",
     
   },
 
   product: {
     sideTitle: "Product Management",
-    sideText: "From concept to deployment with structured governance.",
+    sideText: "...",
     image: "assets/img/eurojob.jpeg",
     mainTitle: "Eurojob",
-    mainText: "Verkossa syntynyt näyttämödrama ylpeydestä, etäisyydestä ja taistelusta tulla kuulluksi.<br>Isä. Poika. Yksi puhelu. Kuusi tuntia ennen häätöä.<br>Pienessä yksiössä entinen karismaattinen konna, jonka nopea älykkyys ja pelottomuus nyt tuskin peittävät hänen uupumustaan ja yksinäisyyttään, valitsee numeron, jota hän on välttänyt vuosia. Se, mikä alkaa avunpyynnön muodossa, muuttuu kiivaaksi kaksintaisteluksi siitä, kuka on antanut anteeksi eniten — raaka, hauska ja musertava väittely, joka riisuu vuosikymmenten hiljaisuuden.<br>Näytelmä on kirjoitettu yhdelle näyttelijälle virtuoosisen, monipuolisen esityksen toteuttamiseen, ja se vaatii näyttelijän koko taituruuden kirjon: terävästä komediasta särkevään haavoittuvuuteen yhdessä hengenvetäyksessä.<br>Eurojob syntyi digitaalisessa tilassa live-striimattujen lukujen ja virtuaalisten harjoitusten kautta yli rajojen, ja se on yhden näytöksen monologi, joka esitetään teattereissa ja verkossa. Teos yhdistää videopuhelun intiimiyden ja live-esityksen välittömyyden, kutsuen yleisön huoneeseen, jossa rakkaus, ylpeys ja itsepäisyys kohtaavat.",
+    mainText: "An online-born stage drama about pride, distance, and the fight to be heard.A father. A son. One phone call. Six hours until eviction.In a bedsit, a once-charismatic hustler whose quick wit and bravado now barely conceal his exhaustion and loneliness dials the number he’s avoided for years. What begins as a plea for help becomes a fierce duel over who has forgiven who the most—a raw, funny, and devastating argument that strips away decades of silence.Written for one actor to deliver a virtuoso, multifaceted performance, the play demands every shade of the actor’s craft: shifting from razor-sharp comedy to aching vulnerability in the space of a breath.Born in the digital space through live-streamed readings and virtual rehearsals across borders, Eurojob is a one-act monologue to be staged in theatres and online. The piece fuses the intimacy of a video call with the immediacy of live performance, inviting audiences into a room where love, pride, and stubbornness collide.",
     
   },
 
