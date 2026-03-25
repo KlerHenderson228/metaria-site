@@ -138,25 +138,21 @@
 <!-- /Service Details Section -->
 <style>
 @media (min-width: 992px) {
-  .services-img {
-    width: 100%;              /* fill column width */
-    max-width: 300px;         /* cap image width */
-    height: auto;             /* keep original aspect ratio */
-    display: block;
-    border-radius: 0 0 16px 16px; /* round bottom corners only */
-    margin-bottom: 20px;      /* spacing to text */
-    object-fit: cover;
-  }
-
-  /* Make column shrink to content instead of stretching */
-  .col-lg-8 {
-    display: block;           /* remove flex behavior */
-    height: auto;             /* let column height match content */
-  }
-
-  /* Optional: ensure row does not stretch its children */
   .row.gy-4 {
-    align-items: flex-start;  /* children align at top, not stretched */
+    align-items: flex-start; /* prevent columns from stretching */
+  }
+
+  .services-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 0 0 16px 16px; /* round bottom corners */
+    display: block;
+    margin-bottom: 0; /* text will start immediately below image */
+  }
+
+  .service-content {
+    display: inline-block; /* shrink container to content (image + text) */
   }
 }
 </style>
