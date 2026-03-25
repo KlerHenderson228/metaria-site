@@ -755,6 +755,62 @@ Showcasing innovative tech-driven performance art nationally and internationally
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
+
+			// عناصر
+const track = document.getElementById("servicesTrack");
+const cards = document.querySelectorAll(".service-card");
+const dots = document.querySelectorAll(".dotnav button");
+
+// --- UPDATE ACTIVE STATE BASED ON SCROLL ---
+function updateActiveState() {
+  const trackCenter = track.scrollLeft + track.offsetWidth / 2;
+
+  let closestIndex = 0;
+  let closestDistance = Infinity;
+
+  cards.forEach((card, index) => {
+    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+    const distance = Math.abs(trackCenter - cardCenter);
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = index;
+    }
+  });
+
+  // Update dots
+  dots.forEach(dot => dot.classList.remove("active"));
+  if (dots[closestIndex]) {
+    dots[closestIndex].classList.add("active");
+  }
+
+  // Update cards (optional visual highlight)
+  cards.forEach(card => card.classList.remove("active"));
+  if (cards[closestIndex]) {
+    cards[closestIndex].classList.add("active");
+  }
+}
+
+// --- SCROLL LISTENER (CRITICAL FOR MOBILE) ---
+track.addEventListener("scroll", () => {
+  updateActiveState();
+});
+
+// --- DOT CLICK → SCROLL TO CARD ---
+dots.forEach((dot, index) => {
+  dot.addEventListener("click", () => {
+    cards[index].scrollIntoView({
+      behavior: "smooth",
+      inline: "center"
+    });
+  });
+});
+
+// --- INITIAL STATE ---
+window.addEventListener("load", () => {
+  updateActiveState();
+});
+
 </body>
 
 </html>
