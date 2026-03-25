@@ -139,22 +139,24 @@
 <style>
 @media (min-width: 992px) {
   .services-img {
-    width: 100%;          /* fill the container width */
-    max-width: 300px;     /* scale down if container is wider */
-    height: auto;         /* maintain original aspect ratio */
-    display: block;       /* remove inline gaps */
-    border-radius: 16px 16px 16px 16px; /* rounded corners all around */
-    margin-bottom: 20px;  /* spacing to the text below */
-    object-fit: cover;    /* ensures image fills its box without stretching */
+    width: 100%;              /* fill column width */
+    max-width: 300px;         /* cap image width */
+    height: auto;             /* keep original aspect ratio */
+    display: block;
+    border-radius: 0 0 16px 16px; /* round bottom corners only */
+    margin-bottom: 20px;      /* spacing to text */
+    object-fit: cover;
   }
 
-  /* Make the content container wrap tightly around the image */
+  /* Make column shrink to content instead of stretching */
   .col-lg-8 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start; /* text starts immediately below image */
-    height: auto;                /* allow container to shrink to content */
+    display: block;           /* remove flex behavior */
+    height: auto;             /* let column height match content */
+  }
+
+  /* Optional: ensure row does not stretch its children */
+  .row.gy-4 {
+    align-items: flex-start;  /* children align at top, not stretched */
   }
 }
 </style>
