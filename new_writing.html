@@ -138,21 +138,38 @@
 <!-- /Service Details Section -->
 <style>
 @media (min-width: 992px) {
+  /* Prevent row from stretching columns */
   .row.gy-4 {
-    align-items: flex-start; /* prevent columns from stretching */
+    align-items: flex-start; /* don't stretch columns */
   }
 
+  /* Right column should shrink to content */
+  .col-lg-8 {
+    display: block; /* not flex */
+  }
+
+  /* Image styling */
   .services-img {
     width: 100%;
     max-width: 300px;
     height: auto;
-    border-radius: 0 0 16px 16px; /* round bottom corners */
+    border-radius: 0 0 16px 16px; /* rounded bottom corners */
     display: block;
-    margin-bottom: 0; /* text will start immediately below image */
+    margin-bottom: 0; /* text immediately after image */
   }
 
+  /* Container wraps image + text tightly */
   .service-content {
-    display: inline-block; /* shrink container to content (image + text) */
+    display: inline-block; /* shrink to fit image + text */
+    padding: 0; /* optional: remove extra padding */
+    margin: 0;
+  }
+
+  /* Optional: text starts immediately below image */
+  .service-content h3,
+  .service-content p,
+  .service-content ul {
+    margin-top: 10px; /* small spacing */
   }
 }
 </style>
