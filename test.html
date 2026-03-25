@@ -125,18 +125,18 @@
     </a>
 	
 	
- <a href="Services.html#tre" class="service-card" id="service-4">
+ <a href="Services.html#tre" class="service-card" id="service-3">
       <h2>Tension & Trauma Releasing Exercises (TRE®)</h2>
       <p>A self-help technique developed by Dr. David Berceli.</p>
     </a>
 	
 	
-   <a href="Services.html#stage" class="service-card" id="service-3">
+   <a href="Services.html#stage" class="service-card" id="service-4">
       <h2>Building the Stage</h2>
       <p>Metaria’s extended reality (XR)workshop for storytelling, design, and innovation.</p>
     </a>
 
-    <a href="Services.html#2d" class="service-card" id="service-4">
+    <a href="Services.html#2d" class="service-card" id="service-5>
       <h2>2D and 3D illustration</h2>
       <p>Visualisaiton for precision, clarity, and lasting impact.</p>
     </a>
@@ -257,9 +257,26 @@ body {
 }
 
 @media (max-width: 768px) {
+  .services-track {
+    padding: 0 4vw; /* reduce side padding */
+  }
+
   .service-card {
-    min-width: 85vw;
-    padding: 40px;
+    min-width: 92vw;
+    max-width: 92vw;
+    padding: 24px;
+    height: auto;
+
+    box-sizing: border-box; /* critical: includes padding in width */
+  }
+
+  .service-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
   }
 }
 </style>
