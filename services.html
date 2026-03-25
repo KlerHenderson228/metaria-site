@@ -147,20 +147,20 @@
 <style>
 /* Desktop-only image sizing */
 @media (min-width: 992px) {
-  /* Wrap image in a container to enforce height */
   .services-img {
-    width: 100%;           /* span container width */
-    max-height: 450px;     /* desktop image height limit */
-    object-fit: cover;     /* fill container, crop if necessary */
-    border-radius: 16px;   /* optional: rounded corners */
-    display: block;        /* remove inline gaps */
+    width: 100%;        /* fill the container width */
+    max-width: 700px;   /* scale down if container is wider */
+    height: auto;       /* maintain original aspect ratio */
+    display: block;     /* remove inline gaps */
+    border-radius: 16px; /* optional: rounded corners */
+    margin-bottom: 20px; /* optional: spacing from text */
   }
 
-  /* Optional: ensure the container doesn't collapse */
+  /* Ensure text below aligns nicely */
   .col-lg-8 {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* keep text left-aligned */
+    align-items: flex-start;
   }
 }
 </style>
