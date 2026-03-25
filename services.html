@@ -141,6 +141,34 @@
 </section>
 <!-- /Service Details Section -->
 
+
+
+
+<style>
+/* Desktop-only image sizing */
+@media (min-width: 992px) {
+  /* Wrap image in a container to enforce height */
+  .services-img {
+    width: 100%;           /* span container width */
+    max-height: 450px;     /* desktop image height limit */
+    object-fit: cover;     /* fill container, crop if necessary */
+    border-radius: 16px;   /* optional: rounded corners */
+    display: block;        /* remove inline gaps */
+  }
+
+  /* Optional: ensure the container doesn't collapse */
+  .col-lg-8 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* keep text left-aligned */
+  }
+}
+</style>
+
+
+
+	  
+
   </main>
 
    <footer id="footer" class="footer dark-background">
