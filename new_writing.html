@@ -137,42 +137,46 @@
 </section>
 <!-- /Service Details Section -->
 <style>
+.service-content {
+  display: none;
+}
+
+.service-content.active {
+  display: block;
+}
+
+/* Optional: desktop-only image scaling */
 @media (min-width: 992px) {
-  /* Prevent row from stretching columns */
-  .row.gy-4 {
-    align-items: flex-start; /* don't stretch columns */
-  }
-
-  /* Right column should shrink to content */
-  .col-lg-8 {
-    display: block; /* not flex */
-  }
-
-  /* Image styling */
   .services-img {
     width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 0 0 16px 16px; /* rounded bottom corners */
-    display: block;
-    margin-bottom: 0; /* text immediately after image */
+    max-width: 450px; /* control desktop width */
+    height: auto;     /* keep aspect ratio */
+    border-radius: 16px;
+  }
+}
+
+/* Desktop-only image sizing */
+@media (min-width: 992px) {
+  /* Wrap image in a container to enforce height */
+  .services-img {
+    width: 100%;           /* span container width */
+    max-height: 450px;     /* desktop image height limit */
+    object-fit: cover;     /* fill container, crop if necessary */
+    border-radius: 16px;   /* optional: rounded corners */
+    display: block;        /* remove inline gaps */
   }
 
-  /* Container wraps image + text tightly */
-  .service-content {
-    display: inline-block; /* shrink to fit image + text */
-    padding: 0; /* optional: remove extra padding */
-    margin: 0;
-  }
-
-  /* Optional: text starts immediately below image */
-  .service-content h3,
-  .service-content p,
-  .service-content ul {
-    margin-top: 10px; /* small spacing */
+  /* Optional: ensure the container doesn't collapse */
+  .col-lg-8 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* keep text left-aligned */
   }
 }
 </style>
+
+
+	  
   </main>
 
    <footer id="footer" class="footer dark-background">
