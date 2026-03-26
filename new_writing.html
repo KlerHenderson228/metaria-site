@@ -148,10 +148,13 @@
 /* Optional: desktop-only image scaling */
 @media (min-width: 992px) {
   .services-img {
-    width: 100%;
-    max-width: 450px; /* control desktop width */
-    height: auto;     /* keep aspect ratio */
-    border-radius: 8px;
+    .services-img {
+  width: 100%;
+  max-width: 450px; /* control size horizontally instead */
+  height: auto;     /* CRITICAL: no forced height */
+  display: block;
+  border-radius: 8px;
+
   }
 }
 
