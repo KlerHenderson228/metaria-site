@@ -106,7 +106,7 @@
     </div><!-- End Page Title -->
 
     <!-- Service Details Section -->
-   <section id="service-details" class="service-details section">
+    <section id="service-details" class="service-details section">
   <div class="container">
     <div class="row gy-4">
 
@@ -122,22 +122,90 @@
 
        </div>
 
-      <!-- Right column: main service content -->
       <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-        <img id="service-image" src="assets/img/SC.jpg" class="img-fluid services-img" alt="Web Design">
 
-        <h3 id="service-main-title">Soundtrack Creation</h3>
-        <p id="service-main-text">
-          Original music composition, sound engineering, sound mixing, and sound design services are offered by Metaria member Soundtrack Creation, providing the wider creative and cultural industries with access to high-quality, professionally delivered audio production and post-production solutions.
-  </p>
+  <!-- SC -->
+  <div id="sc" class="service-content active">
+    <img src="assets/img/SC.jpg" class="img-fluid services-img" alt="Soundtrack Creation">
+    <h3>Soundtrack Creation</h3>
+    <p>
+      Original music composition, sound engineering, sound mixing, and sound design services are offered by Metaria member Soundtrack Creation, providing the wider creative and cultural industries with access to high-quality, professionally delivered audio production and post-production solutions.
+    </p>
+   
+  </div>
 
-        
-      </div>
+  <!-- ST -->
+  <div id="st" class="service-content">
+    <img src="assets/img/ST.jfif" class="img-fluid services-img" alt="SphereTrax">
+    <h3>SphereTrax</h3>
+    <p>
+      Music licensing services are offered by Metaria member SphereTrax, providing the wider creative, audiovisual, and digital industries with access to high-quality, professionally licensed music through a transparent, creator-centric platform. SphereTrax also enables musicians and composers to license their work globally under fair and clearly defined terms, supporting sustainable creative careers.
+    </p>
+    
+  </div>
+
+  <!-- TRE -->
+  <div id="tre" class="service-content">
+    <img src="assets/img/tre.jpeg" class="img-fluid services-img" alt="TRE">
+    <h3>Tension & Trauma Releasing Exercises (TRE®)</h3>
+    <p>
+      Tension & Trauma Releasing Exercises (TRE) is a body-based method designed to activate natural neurogenic tremors that help release deep muscular tension and support nervous system regulation. During the session, participants are guided through a sequence of simple exercises followed by a controlled tremor response, allowing the body to discharge accumulated stress in a safe and structured way.
+    </p>
+    <ul>
+      <li><i class="bi bi-check-circle"></i> <span>Reduction of chronic muscular tension and physical stress</span></li>
+      <li><i class="bi bi-check-circle"></i> <span>Support for recovery from work-related and emotional stress</span></li>
+      <li><i class="bi bi-check-circle"></i> <span>Improved relaxation, sleep quality, and overall wellbeing</span></li>
+    </ul>
+	  <h3>Instructor Introduction</h3>
+	  <p>
+     Heidi Naakka is a certified TRE instructor (since 2016) with extensive experience working with both individual clients and professional groups across healthcare, performing arts, and corporate sectors.
+	  </p>
+	  <ul>
+      <li><i class="bi bi-check-circle"></i> <span>Over 8 years of experience delivering TRE sessions</span></li>
+      <li><i class="bi bi-check-circle"></i> <span>Worked with diverse groups including HUS nurses and midwives, consulting company staff, national team ski jumping coaches, and theatre professionals</span></li>
+      <li><i class="bi bi-check-circle"></i> <span>Long-term collaboration with the Finnish Migraine Association (6 years) and TRE Finland (5 years)</span></li>
+    </ul>
+  </div>
+
+  <!-- Stage -->
+  <div id="stage" class="service-content">
+    <img src="assets/img/BS.jpg" class="img-fluid services-img" alt="Building the Stage">
+    <h3>Building the Stage</h3>
+    <p>
+      Metaria’s three-day workshop helps companies explore the creative and strategic potential of extended reality (XR) — including VR, AR, MR, AI, and gamification — for storytelling, design, and innovation. Participants move from inspiration to hands-on prototyping using no-code tools and XR headsets, developing immersive concepts tailored to their goals. The final session focuses on refining prototypes and creating a clear six-month roadmap for continued growth and implementation. Due to demand booking is no longer available for 2025. Call us now to register for spring 2026.
+    </p>
+    
+  </div>
+
+  <!-- 2D/3D -->
+  <div id="2d" class="service-content">
+    <img src="assets/img/2d.jpeg" class="img-fluid services-img" alt="2D and 3D illustration">
+    <h3>2D and 3D illustration</h3>
+    <p>
+      We help you transform your expertise and ideas into engaging artistic experiences that capture attention and communicate your message with clarity and impact.
+    </p>
+   <div class="position-relative mt-4">
+  <img
+    src="assets/img/about-2.jpg"
+    class="img-fluid rounded-4"
+    alt="Video preview"
+  >
+
+  <a
+    href="https://www.youtube.com/watch?v=9bCHgdEa_vM"
+    class="glightbox pulsating-play-btn position-absolute top-50 start-50 translate-middle"
+    
+	></a>
+</div>
+  </div>
+
+</div>
+</div>
 
 
 
     </div>
-  </div>
+  
 </section>
 <!-- /Service Details Section -->
 
@@ -230,91 +298,36 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
   
-  <script>
-const serviceData = {
-  sc: {
-    sideTitle: "Soundtrack Creation",
-    sideText: "...",
-    image: "assets/img/SC.jpg",
-    mainTitle: "Soundtrack Creation",
-    mainText: "Original music composition, sound engineering, sound mixing, and sound design services are offered by Metaria member Soundtrack Creation, providing the wider creative and cultural industries with access to high-quality, professionally delivered audio production and post-production solutions.",
-    bullets: [
-      "Responsive and accessible layouts",
-      "Design systems aligned with brand identity",
-      "Performance-optimized front-end architecture"
-    ]
-  },
+    <script>
 
-  st: {
-    sideTitle: "SphereTrax",
-    sideText: "...",
-    image: "assets/img/ST.jfif",
-    mainTitle: "SphereTrax",
-    mainText: "Music licensing services are offered by Metaria member SphereTrax, providing the wider creative, audiovisual, and digital industries with access to high-quality, professionally licensed music through a transparent, creator-centric platform. SphereTrax also enables musicians and composers to license their work globally under fair and clearly defined terms, supporting sustainable creative careers.",
-    
-  },
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll(".services-list a");
+  const contents = document.querySelectorAll(".service-content");
 
-  tre: {
-    sideTitle: "Tension & Trauma Releasing Exercises (TRE®)",
-    sideText: "...",
-    image: "assets/img/tre.jpeg",
-    mainTitle: "Tension & Trauma Releasing Exercises (TRE®)",
-    mainText: "Tension & Trauma Releasing Exercises (TRE) is a body-based method designed to activate natural neurogenic tremors that help release deep muscular tension and support nervous system regulation. During the session, participants are guided through a sequence of simple exercises followed by a controlled tremor response, allowing the body to discharge accumulated stress in a safe and structured way.",
-    bullets: [
-      "Responsive and accessible layouts",
-      "Design systems aligned with brand identity",
-      "Performance-optimized front-end architecture"
-    ]
-  },
+  function activateService(key) {
+    links.forEach(l => l.classList.toggle("active", l.dataset.service === key));
+    contents.forEach(c => c.classList.toggle("active", c.id === key));
+  }
 
-
-stage: {
-    sideTitle: "Building the Stage",
-    sideText: "...",
-    image: "assets/img/BS.jpg",
-    mainTitle: "Building the Stage",
-    mainText: "Metaria’s three-day workshop helps companies explore the creative and strategic potential of extended reality (XR) — including VR, AR, MR, AI, and gamification — for storytelling, design, and innovation. Participants move from inspiration to hands-on prototyping using no-code tools and XR headsets, developing immersive concepts tailored to their goals. The final session focuses on refining prototypes and creating a clear six-month roadmap for continued growth and implementation. Due to demand booking is no longer available for 2025. Call us now to register for spring 2026.",
-    
-  },
-  
-  
-  "2d": {
-    sideTitle: "2D and 3D illustration",
-    sideText: "...",
-    image: "assets/img/2d.jpeg",
-    mainTitle: "2D and 3D illustration",
-    mainText: "We help you transform your expertise and ideas into engaging artistic experiences that capture attention and communicate your message with clarity and impact.",
-    video: "https://www.youtube.com/watch?v=VLYPH7pkxJM"
-  },
-
-};
-
-const links = document.querySelectorAll(".services-list a");
-
-links.forEach(link => {
-  link.addEventListener("click", e => {
-    e.preventDefault();
-
-    links.forEach(l => l.classList.remove("active"));
-    link.classList.add("active");
-
-    const key = link.dataset.service;
-    const data = serviceData[key];
-
-    
-    document.getElementById("service-image").src = data.image;
-    document.getElementById("service-main-title").textContent = data.mainTitle;
-    document.getElementById("service-main-text").textContent = data.mainText;
-
-    const ul = document.getElementById("service-list");
-    ul.innerHTML = "";
-    data.bullets.forEach(item => {
-      ul.innerHTML += `
-        <li><i class="bi bi-check-circle"></i> <span>${item}</span></li>
-      `;
+  // Click events for left menu
+  links.forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const key = link.dataset.service;
+      activateService(key);
+      // Update hash without scrolling
+      history.replaceState(null, null, "#" + key);
     });
   });
+
+  // On page load: check if hash is present
+  const hash = window.location.hash.slice(1);
+  if (hash) {
+    const link = document.querySelector(`.services-list a[data-service="${hash}"]`);
+    if (link) activateService(hash);
+  }
 });
+
 </script>
 <script>
 window.addEventListener("DOMContentLoaded", () => {
