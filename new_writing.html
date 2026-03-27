@@ -273,7 +273,7 @@ links.forEach(link => {
     
     document.getElementById("service-image").src = data.image;
     document.getElementById("service-main-title").textContent = data.mainTitle;
-    document.getElementById("service-main-text").textContent = data.mainText;
+    document.getElementById("service-main-text").textHTML = data.mainText;
 
     const ul = document.getElementById("service-list");
     ul.innerHTML = "";
