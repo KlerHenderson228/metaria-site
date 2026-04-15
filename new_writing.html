@@ -122,16 +122,32 @@
 
       <!-- Right column: main service content -->
       <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-        <img id="service-image" src="assets/img/fa1.jpeg" class="img-fluid services-img" alt="Web Design">
+      
 
-        <h3 id="service-main-title">First Aid, Last Orders</h3>
-        <p id="service-main-text">
-          On a cruise ship docked in Helsinki, a supervisor convinced he’s seriously ill drives his cleaning crew to distraction. One sharp-witted cleaner poses as a doctor, dishing out absurd cures while a surprise inspection hurtles closer. To survive the day, the immigrant crew must outwit the chaos before it sinks them all — a sharp-tongued modern farce inspired by Molière’s The Imaginary Invalid. <br><br>This professional stage production blends live theatre with real-time digital elements — streaming to online audiences, incorporating live video feeds from hidden corners of the ship, and letting viewers aboard and at home experience the same rising storm of comedy, panic, and survival from multiple perspectives.
+		  
+<div id="sc" class="service-content active">
+    
+  <img src="assets/img/fa1.jpeg" class="img-fluid services-img" alt="First Aid, Last Orders">
+  <h3>First Aid, Last Orders</h3>
+
+    <p>
+     On a cruise ship docked in Helsinki, a supervisor convinced he’s seriously ill drives his cleaning crew to distraction. One sharp-witted cleaner poses as a doctor, dishing out absurd cures while a surprise inspection hurtles closer. To survive the day, the immigrant crew must outwit the chaos before it sinks them all — a sharp-tongued modern farce inspired by Molière’s The Imaginary Invalid. <br><br>This professional stage production blends live theatre with real-time digital elements — streaming to online audiences, incorporating live video feeds from hidden corners of the ship, and letting viewers aboard and at home experience the same rising storm of comedy, panic, and survival from multiple perspectives.
   </p>
+    <img src="assets/img/fa2.jpeg" class="img-fluid services-img" alt="First Aid, Last Orders teaser">
+  </div>
 
+
+		  
         
       </div>
 
+
+		
+ 
+
+
+
+		
     </div>
   </div>
 </section>
@@ -223,6 +239,47 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+	 <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll(".services-list a");
+  const contents = document.querySelectorAll(".service-content");
+
+  function activateService(key) {
+    links.forEach(l => l.classList.toggle("active", l.dataset.service === key));
+    contents.forEach(c => c.classList.toggle("active", c.id === key));
+  }
+
+  // Click events for left menu
+  links.forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const key = link.dataset.service;
+      activateService(key);
+      // Update hash without scrolling
+      history.replaceState(null, null, "#" + key);
+    });
+  });
+
+  // On page load: check if hash is present
+  const hash = window.location.hash.slice(1);
+  if (hash) {
+    const link = document.querySelector(`.services-list a[data-service="${hash}"]`);
+    if (link) activateService(hash);
+  }
+});
+
+</script>
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  const hash = window.location.hash.slice(1); // get string after #
+  if (hash) {
+    const link = document.querySelector(`.services-list a[data-service="${hash}"]`);
+    if (link) link.click(); // trigger JS to update content dynamically
+  }
+});
+</script>
   
   <script>
 const serviceData = {
