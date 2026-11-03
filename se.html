@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 
 <head>
   <meta charset="utf-8">
@@ -34,6 +34,142 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+<style>
+
+
+
+/* SECTION WRAPPER */
+.services-gallery {
+  position: relative;
+  padding: 40px 0;
+  overflow: hidden;
+}
+
+/* SCROLL CONTAINER */
+.services-gallery .services-track {
+  display: flex;
+  gap: 40px;
+
+  overflow-x: auto;
+  overflow-y: hidden;   /* critical */
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  padding: 0 6vw;
+
+	 /* Hide scrollbar (Firefox) */
+  scrollbar-width: none;
+
+  /* Hide scrollbar (IE/Edge legacy) */
+  -ms-overflow-style: none;
+}
+
+
+.services-gallery .services-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* SERVICE CARD */
+.services-gallery .service-card {
+  min-width: 60vw;
+  max-width: 800px;
+  height: 350px;
+  background: #1c1c1c;
+  border-radius: 8px;
+  padding: 60px;
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity: 1;
+
+  cursor: pointer;
+}
+
+.services-gallery .service-card.active {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.services-gallery .service-card h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #ff4a17;
+}
+
+.services-gallery .service-card p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+/* DOT NAVIGATION */
+.services-gallery .dotnav {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.services-gallery .dotnav ul {
+  display: flex;
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.services-gallery .dotnav button {
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  border: none;
+  background: #555;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.services-gallery .dotnav button.active {
+  background: #ccc;
+  transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+  .services-track {
+    padding: 0 4vw; /* reduce side padding */
+  }
+
+  .service-card {
+    min-width: 92vw;
+    max-width: 92vw;
+    padding: 24px;
+    height: auto;
+
+    box-sizing: border-box; /* critical: includes padding in width */
+  }
+
+  .service-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+
+	
+
+.services-gallery { background: #0f0f0f; color: white; font-family: system-ui, -apple-system, sans-serif; }
+.services-gallery .section-title p { color: white; }
+.services-gallery .service-card { box-sizing: border-box; min-height: 350px; height: auto; text-decoration: none; }
+.services-gallery .service-card:focus-visible, .services-gallery button:focus-visible { outline: 3px solid #ff4a17; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .services-gallery .services-track { scroll-behavior: auto; } .services-gallery .service-card { transition: none; } }
+
+</style>
 </head>
 
 <body class="index-page">
@@ -41,7 +177,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <a href="se.html" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
          <img src="assets/img/logo.png" alt="">
        <!-- <h1 class="sitename">Metaria</h1>-->
@@ -53,12 +189,12 @@
     <li><a href="#hero" class="active">Hem</a></li>
     <li class="dropdown"><a href="#about"><span>Projekt</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
       <ul>
-        <li><a href="#about">Ledarskap</a></li>
-        <li><a href="#nw">Ny skrivning</a></li>
-        <li><a href="#science">Vetenskap på scen</a></li>
+        <li><a href="leadership.html">Teaterledarskap</a></li>
+        <li><a href="new_writing.html">Ny dramatik</a></li>
+        <li><a href="science.html">Vetenskap på scen</a></li>
       </ul>
     </li>
-    <li><a href="#services">Tjänster</a></li>
+    <li><a href="services.html">Tjänster</a></li>
     <li class="dropdown"><a href="#team"><span>Om oss</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
       <ul>
         <li><a href="#team">Vem vi är</a></li>
@@ -105,276 +241,127 @@
 
     </section><!-- /Hero Section -->
 
-    <!-- Leadership Section -->
-    <section id="about" class="about section section light-background">
-
-      <div class="container">
-
-        <div class="row gy-4">
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="container section-title" data-aos="fade-up">
-        <h2></h2>
-        <p>Ledarskap<br></p>
-      </div>
-            <p> <a href="https://www.youtube.com/@theatreleadership" target="_blank">Dramaturgy of Theatre Leadership</a> är en kostnadsfri serie i sex delar med exklusiva intervjuer, där internationellt prisbelönta teaterledare diskuterar ledarskapsutmaningar för institutionsteatrar under 2000-talet. De delar också den officiella processen för att välja pjäser och rekrytera frilansare till sina hus.
-			</p>
-          </div>
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
-            <div class="content ps-0 ps-lg-5">
-                <div class="position-relative mt-4">
-                <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt="">
-                <a href="https://www.youtube.com/watch?v=VLYPH7pkxJM" class="glightbox pulsating-play-btn"></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- /About Section -->
-
-   
-
-    <!-- Services Section NW -->
-    <section id="nw" class="services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2></h2>
-        <p>Ny skrivning<br></p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-5">
-
-          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-            <div class="service-item">
-              <div class="img">
-                <img src="assets/img/fa.jpg" class="img-fluid" alt="">
-              </div>
-              <div class="details position-relative">
-                <div class="icon">
-                  <i class="bi bi-activity"></i>
-                </div>
-                
-                  <h3>First Aid, Last Orders</h3>
-                </a>
-                <p>På ett kryssningsfartyg som ligger i Helsingfors driver en övertygad sjuk chef sitt städteam till förtvivlan. En kvick städare låtsas vara läkare och delar ut absurda botemedel, medan en oväntad inspektion närmar sig. För att överleva dagen måste den invandrade besättningen överlista kaoset innan det slår ut dem alla — en vassmodern fars inspirerad av Molières "Den inbillade sjuke". Denna professionella scenproduktion blandar live-teater med digitala element i realtid — strömmande till onlinepublik, med live-videoströmmar från gömda hörn av fartyget, och låter tittare ombord och hemma uppleva samma växande storm av komedi, panik och överlevnad ur flera perspektiv.</p>
-</div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-            <div class="service-item">
-              <div class="img">
-                <img src="assets/img/translucence.jpeg" class="img-fluid" alt="">
-              </div>
-              <div class="details position-relative">
-                <div class="icon">
-                  <i class="bi bi-binoculars"></i>
-                </div>
-                
-                  <h3>Translucence</h3>
-                </a>
-                <p>I en splittrad framtid där Jordens stabilitet länge har kollapsat återupptäcker den landsflyktige vetenskapsmannen Dr. Mara Solberg en glömd innovation som kan upprätthålla livet i de tuffaste världarna. Hennes jakt på detta genombrott drar till sig uppmärksamheten från mäktiga krafter som är fast beslutna att radera den ur historien. Flyende genom tomrummet till en avlägsen bosättning på en okänd värld måste Mara anpassa sig till en främmande miljö, undvika dem som vill tysta henne och konfrontera skuggan av sin egen ambition. "Translucence" förenar liveföreställning med digital scenografi i realtid, lager på lager av ljudlandskap och filmisk världsskapande — där den fysiska scenen sömlöst smälter samman med en levande, virtuell miljö som utvecklas tillsammans med berättelsen.</p>
- </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-            <div class="service-item">
-              <div class="img">
-                <img src="assets/img/eurojob.jpeg" class="img-fluid" alt="">
-              </div>
-              <div class="details position-relative">
-                <div class="icon">
-                  <i class="bi bi-easel"></i>
-                </div>
-               
-                  <h3>Eurojob</h3>
-                </a>
-                <p>En nätfödd scenföreställning om stolthet, avstånd och kampen för att bli hörd.<br>En far. En son. Ett telefonsamtal. Sex timmar till vräkning.<br>I en liten enrummare ringer en tidigare karismatisk hustler, vars kvickhet och bravur nu knappt döljer hans utmattning och ensamhet, numret han undvikit i åratal. Det som börjar som en hjälpande vädjan blir en intensiv duell om vem som har förlåtit mest — en rå, rolig och förkrossande argumentation som blottlägger årtionden av tystnad.<br>Skapad för en skådespelare att leverera en virtuos, mångfacetterad prestation, kräver pjäsen varje nyans av skådespelarens hantverk: från knivskarp komedi till smärtsam sårbarhet på ett andetag.<br>Eurojob föddes i det digitala rummet genom live-streamade läsningar och virtuella repetitioner över gränser, och är ett enaktarsmonolog som kan spelas på teatrar och online. Pjäsen förenar videokonferensens intimitet med liveföreställningens omedelbarhet och bjuder in publiken till ett rum där kärlek, stolthet och envishet kolliderar.</p>
- </div>
-            </div>
-          </div><!-- End Service Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Services Section -->
-	
-	
-	
-    <!-- Services Section  -->
-    <section id="science" class="services ">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2></h2>
-        <p>Vetenskap på Scen<br></p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-5">
-
-          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-            <div class="service-item">
-              <div class="img">
-                <img src="assets/img/gc.png" class="img-fluid" alt="">
-              </div>
-              <div class="details position-relative">
-                <div class="icon">
-                  <i class="bi bi-box-seam"></i>
-                </div>
-                
-                  <h3>Green Curtain</h3>
-                </a>
-                <p>Green Curtain är ett innovativt miljöprojekt som utvecklar ligninbaserade filter och torkdukar för att förhindra att skadliga kemikalier från kosmetika, dekorationer och kostymtvätt hamnar i teaterns avloppsvatten. Genom att använda biobaserade och biologiskt nedbrytbara material hjälper Green Curtain till att skydda känsliga ekosystem, främja renare vatten och återanvända stora industriella biprodukter, vilket stöder cirkulär ekonomi.</p>
- </div>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-            <div class="service-item">
-              <div class="img">
-                <img src="assets/img/bc.png" class="img-fluid" alt="">
-              </div>
-              <div class="details position-relative">
-                <div class="icon">
-                  <i class="bi bi-broadcast"></i>
-                </div>
-                
-                  <h3>The Breath of Carbon</h3>
-                </a>
-                <p>The Breath of Carbon-serien bygger på prisbelönta pjäser som förenar vetenskaplig utforskning med känslomässigt stark berättarkonst.
-
-Metarias FoU omvandlar licensierade manus till banbrytande XR-produktioner som förvandlar komplex forskning till en levande, deltagande berättelse. Publiken bjuds in i ett interaktivt scenrum där vetenskapliga idéer blir till pulserande, konkreta upplevelser. Resultatet är en slående kombination av performancekonst och teknologisk innovation som suddar ut gränserna mellan scen och skärm — och gör vetenskapen intim, fantasifull och oförglömlig.
-				</p>
-  </div>
-            </div>
-          </div><!-- End Service Item -->
-        </div>
-
-      </div>
-
-    </section><!-- /Services Section -->
-
-
-	  
-	
-	<section id="services" class="services ">
-
-      <!-- Section Title -->
+    <section id="services" class="services-gallery">
+<!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2></h2>
         <p>Tjänster<br></p>
       </div><!-- End Section Title -->
 
+  <div class="services-track" id="servicesTrack">
+
+    <a href="services.html" class="service-card active" id="service-1">
+<h2>Soundtrack Creation</h2>
+<p>Ljudproduktion från originalkomposition till detaljerad ljuddesign för internationella kreativa projekt.</p>
+</a>
+
+    <a href="services.html#st" class="service-card" id="service-2">
+<h2>SphereTrax</h2>
+<p>Musiklicensiering för en global marknad med högkvalitativa spår via en transparent plattform med skaparna i centrum.</p>
+</a>
+	
+	
+ <a href="services.html#tre" class="service-card" id="service-3">
+<h2>Tension &amp; Trauma Releasing Exercises (TRE®)</h2>
+<p>En självhjälpsmetod utvecklad av Dr. David Berceli.</p>
+</a>
+	
+	
+   <a href="services.html#stage" class="service-card" id="service-4">
+<h2>Building the Stage</h2>
+<p>Metarias workshop i extended reality (XR) för berättande, design och innovation.</p>
+</a>
+
+    <a href="services.html#2d" class="service-card" id="service-5">
+<h2>2D- och 3D-illustration</h2>
+<p>Visualisering med precision, tydlighet och bestående genomslag.</p>
+</a>
+
+  </div>
+
+  <div class="dotnav">
+    <ul>
+      <li><button type="button" aria-label="Visa tjänst 1" data-index="0" class="active"></button></li>
+      <li><button type="button" aria-label="Visa tjänst 2" data-index="1"></button></li>
+      <li><button type="button" aria-label="Visa tjänst 3" data-index="2"></button></li>
+      <li><button type="button" aria-label="Visa tjänst 4" data-index="3"></button></li>
+	  <li><button type="button" aria-label="Visa tjänst 5" data-index="4"></button></li>
+    </ul>
+  </div>
+
+</section>
+
+<!-- Projects Section -->
+<section id="about" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2></h2>
+        <p>Projekt<br></p>
+      </div><!-- End Section Title -->
+
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row gy-5">
 
-
-<div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
             <div class="service-item">
               <div class="img">
-                <img src="assets/img/SC.jpg" class="img-fluid" alt="">
+                <img src="assets/img/lead.jpg" class="img-fluid" alt="">
               </div>
               <div class="details position-relative">
                 <div class="icon">
-                  <i class="bi bi-easel"></i>
+                  <i class="bi bi-activity"></i>
                 </div>
-                
-                  <a href="https://www.soundtrack-creation.com" class="stretched-link">
-                  <h3>Soundtrack Creation</h3>
-               </a>
-               
-                <p>
-Tjänster inom originalmusikkomposition, ljudteknik, ljudmixning och ljuddesign erbjuds av Metarias medlem Soundtrack Creation, vilket ger den bredare kreativa och kulturella sektorn tillgång till högkvalitativa, professionellt genomförda lösningar för ljudproduktion och efterproduktion.			
-				</p>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-
-
-<div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-            <div class="service-item">
-              <div class="img">
-                <img src="assets/img/ST.jfif" class="img-fluid" alt="">
-              </div>
-              <div class="details position-relative">
-                <div class="icon">
-                  <i class="bi bi-easel"></i>
-                </div>
-                
-                  <a href="https://www.spheretrax.com/" class="stretched-link">
-                  <h3>SphereTrax</h3>
-               </a>
-               
-                <p>
-Musiklicensieringstjänster erbjuds av Metarias medlem SphereTrax och ger den bredare kreativa, audiovisuella och digitala sektorn tillgång till högkvalitativ, professionellt licensierad musik via en transparent och skaparfokuserad plattform. SphereTrax gör det även möjligt för musiker och tonsättare att licensiera sina verk globalt på rättvisa och tydligt definierade villkor, vilket stödjer hållbara kreativa karriärer.				
-				</p>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
-			
-
-         <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-            <div class="service-item">
-              <div class="img">
-                <img src="assets/img/BS.jpg" class="img-fluid" alt="">
-              </div>
-              <div class="details position-relative">
-                <div class="icon">
-                  <i class="bi bi-easel"></i>
-                </div>
-                
-                  <h3>XR-berättande och lösningar av Gautam Vishwanath</h3>
-               
-                <p>
-Metarias tredagars workshop hjälper företag att utforska den kreativa och strategiska potentialen hos extended reality (XR) — inklusive VR, AR, MR, AI och gamification — för berättande, design och innovation.
-<br>Deltagarna går från inspiration till praktisk prototypframtagning med hjälp av no-code-verktyg och XR-headset, och utvecklar uppslukande koncept anpassade efter sina mål. Den avslutande sessionen fokuserar på att förfina prototyperna och skapa en tydlig sexmånaders färdplan för fortsatt tillväxt och implementering.
-<br>På grund av hög efterfrågan är bokningar inte längre möjliga för 2025. Kontakta oss nu för att registrera dig till våren 2026.
+                 <a href="leadership.html" class="stretched-link">
+                  <h3>Teaterledarskap</h3>
+                </a>
+                <p class="text-center">
+  
+  Föränderliga arbetssätt och ledarskapsutmaningar vid internationellt välkända teatrar.
 </p>
               </div>
             </div>
           </div><!-- End Service Item -->
 
-         
-
-        <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="service-item">
               <div class="img">
-                <img src="assets/img/2d.jpeg" class="img-fluid" alt="">
+                <img src="assets/img/nw.jpg" class="img-fluid" alt="">
+              </div>
+              <div class="details position-relative">
+                <div class="icon">
+                  <i class="bi bi-broadcast"></i>
+                </div>
+                <a href="new_writing.html" class="stretched-link">
+                  <h3>Ny dramatik</h3>
+                </a>
+                <p>Teater för den digitala tidsåldern. <br><br></p>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="service-item">
+              <div class="img">
+                <img src="assets/img/sos.jpg" class="img-fluid" alt="">
               </div>
               <div class="details position-relative">
                 <div class="icon">
                   <i class="bi bi-easel"></i>
                 </div>
-                
-                  <h3>2D & 3D Illustration och Animation av Ekaterina Osmekhina</h3>
-                <p class="text-center">
-  <a href="https://youtu.be/9bCHgdEa_vM" class="glightbox btn-watch-video d-flex align-items-center justify-content-center"  data-type="video">
-    <i class="bi bi-play-circle"></i><span>Se videon</span>
-  </a>
-                Vi hjälper dig att förvandla din expertis och dina idéer till engagerande konstnärliga upplevelser som fångar uppmärksamhet och förmedlar ditt budskap med tydlighet och genomslag.
-				</p>
+                <a href="science.html" class="stretched-link">
+                  <h3>Vetenskap på scen</h3>
+                </a>
+                <p>Vi bygger broar mellan vetenskap och scenkonst.</p>
               </div>
             </div>
           </div><!-- End Service Item -->
-
         </div>
-
       </div>
+    </section>
 
-    </section><!-- /Services Section -->
-
-
-
-	  <!-- Features Section -->
+<!-- Features Section -->
     <section id="team" class="services-2 section light-background">
 
      <!-- Section Title -->
@@ -763,7 +750,7 @@ Metarias tredagars workshop hjälper företag att utforska den kreativa och stra
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
+          <a href="se.html" class="logo d-flex align-items-center">
             <span class="sitename">Metaria ry</span>
           </a>
           <div class="footer-contact pt-3">
@@ -779,10 +766,10 @@ Metarias tredagars workshop hjälper företag att utforska den kreativa och stra
           <h4></h4>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Hem</a></li>
-<li><i class="bi bi-chevron-right"></i> <a href="#about">Ledarskap</a></li>
-<li><i class="bi bi-chevron-right"></i> <a href="#nw">Ny skrivning</a></li>
-<li><i class="bi bi-chevron-right"></i> <a href="#science">Vetenskap på scen</a></li>
-			  <li><i class="bi bi-chevron-right"></i> <a href="#services">Tjänster</a></li>
+<li><i class="bi bi-chevron-right"></i> <a href="leadership.html">Teaterledarskap</a></li>
+<li><i class="bi bi-chevron-right"></i> <a href="new_writing.html">Ny dramatik</a></li>
+<li><i class="bi bi-chevron-right"></i> <a href="science.html">Vetenskap på scen</a></li>
+			  <li><i class="bi bi-chevron-right"></i> <a href="services.html">Tjänster</a></li>
 <li><i class="bi bi-chevron-right"></i> <a href="#team">Vem vi är</a></li>
 <li><i class="bi bi-chevron-right"></i> <a href="#collab">Patronage</a></li>
 
@@ -818,28 +805,49 @@ Metarias tredagars workshop hjälper företag att utforska den kreativa och stra
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
+<script>
+(() => {
+  document.querySelectorAll('.services-gallery').forEach(gallery => {
+    const track = gallery.querySelector('.services-track');
+    const cards = [...gallery.querySelectorAll('.service-card')];
+    const dots = [...gallery.querySelectorAll('.dotnav button')];
+    if (!track || !cards.length) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function update() {
+      const bounds = track.getBoundingClientRect();
+      const center = bounds.left + bounds.width / 2;
+      let nearest = 0;
+      let distance = Infinity;
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const delta = Math.abs(rect.left + rect.width / 2 - center);
+        if (delta < distance) { distance = delta; nearest = index; }
+      });
+      cards.forEach((card, i) => card.classList.toggle('active', i === nearest));
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === nearest);
+        if (i === nearest) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    }
+    dots.forEach((dot, i) => dot.addEventListener('click', () => {
+      if (!cards[i]) return;
+      const card = cards[i].getBoundingClientRect();
+      const bounds = track.getBoundingClientRect();
+      track.scrollTo({
+        left: track.scrollLeft + card.left + card.width / 2 - bounds.left - bounds.width / 2,
+        behavior: reduced.matches ? 'instant' : 'smooth'
+      });
+    }));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
+    update();
+  });
+})();
+
+</script>
 </body>
 
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
